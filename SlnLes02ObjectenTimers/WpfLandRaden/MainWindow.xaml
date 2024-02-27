@@ -7,11 +7,13 @@
         mc:Ignorable="d"
         Title="Landenkwis" Height="450" Width="800">
     <Grid>
-        <Image Source="Images/canada.png" Margin="606,84,75,227" Tag="Canada" MouseUp="Image_MouseUp"/>
-        <Image Source="Images/argentina.png" Margin="452,84,229,227" Tag="Argentina" MouseUp="Image_MouseUp"/>
-        <Image Source="Images/brazilie.png" Tag="Brazilië" MouseUp="Image_MouseUp" Margin="71,84,610,227"/>
-        <Image Source="Images/finland.png" Margin="330,84,352,227" Tag="Finland" MouseUp="Image_MouseUp"/>
-        <Image Source="Images/india.png" Margin="218,84,463,227" Tag="India" MouseUp="Image_MouseUp"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Image Source="Images/brazilie.png" Width="100" Height="75" Tag="Brazilië" MouseUp="Image_MouseUp"/>
+            <Image Source="Images/argentina.png" Width="100" Height="75" Tag="Argentina" MouseUp="Image_MouseUp"/>
+            <Image Source="Images/canada.png" Width="100" Height="75" Tag="Canada" MouseUp="Image_MouseUp"/>
+            <Image Source="Images/finland.png" Width="100" Height="75" Tag="Finland" MouseUp="Image_MouseUp"/>
+            <Image Source="Images/india.png" Width="100" Height="75" Tag="India" MouseUp="Image_MouseUp"/>
+        </StackPanel>
 
         <Label x:Name="resultLabel" Content="" FontSize="18" Margin="23,273,10,90"/>
         <Button Content="START" Margin="33,324,555,57" Click="StartButton_Click"/>
