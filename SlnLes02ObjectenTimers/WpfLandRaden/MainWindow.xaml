@@ -15,8 +15,8 @@
             <Image Source="Images/india.png" Width="100" Height="75" Tag="India" MouseUp="Image_MouseUp"/>
         </StackPanel>
 
-        <Label x:Name="resultLabel" Content="" FontSize="18" Margin="23,273,10,90"/>
-        <Button Content="START" Margin="33,324,555,57" Click="StartButton_Click"/>
-        <TextBlock x:Name="startText" Text="Raad zo snel mogelijk alle landen! Ben je klaar?" FontSize="16" Margin="33,280,0,110"/>
+        <Label x:Name="resultLabel" Content="" FontSize="18" Margin="25,275,10,90"/>
+        <Button Content="START" Margin="35,325,555,55" Click="StartButton_Click"/>
+        <TextBlock x:Name="startText" Text="Raad zo snel mogelijk alle landen! Ben je klaar?" FontSize="16" Margin="35,280,0,110"/>
     </Grid>
 </Window>

@@ -12,7 +12,7 @@ namespace WpfTaken
     public partial class MainWindow : Window
     {
         private bool _isFormValid;
-        private Stack<object> _memory = new ();
+        private Stack<object> _memory = new();
         private int _count;
 
         public MainWindow()
@@ -29,7 +29,7 @@ namespace WpfTaken
                               rdbBilal.IsChecked == true ? "Bilal" :
                               rdbChelsey.IsChecked == true ? "Chelsey" : "error";
 
-                ListBoxItem item = new ()
+                ListBoxItem item = new()
                 {
                     Content = $"{txbTaak.Text} (deadline: {dtpDeadline.Text}; door: {door})",
                     Background = cmbPrioriteit.SelectedIndex switch
