@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C5DB27F0-6B28-45D2-97EC-5F8F8A03C8A1}</ProjectGuid>
+    <ProjectGuid>{8E97F56C-F7F0-499C-9938-BA160F038A55}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>WpfComplexiteit</RootNamespace>
-    <AssemblyName>WpfComplexiteit</AssemblyName>
+    <RootNamespace>WpfLandRaden</RootNamespace>
+    <AssemblyName>WpfLandRaden</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -86,20 +86,28 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="stylecop.json" />
-    <None Include="stylecop1.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+    <Resource Include="Images\argentina.png" />
+    <Resource Include="Images\brazilie.png" />
+    <Resource Include="Images\canada.png" />
+    <Resource Include="Images\finland.png" />
+    <Resource Include="Images\india.png" />
+    <Resource Include="Images\japan.png" />
+    <Resource Include="Images\marokko.png" />
+    <Resource Include="Images\mexico.png" />
+    <Resource Include="Images\nederland.png" />
+    <Resource Include="Images\nieuwzeeland.png" />
+    <Resource Include="Images\romania.png" />
+    <Resource Include="Images\senegal.png" />
+    <Resource Include="Images\zuidafrika.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -6,6 +6,10 @@ namespace ConsoleComplexiteit
     {
         static void Main(string[] args)
         {
+            if (args is null)
+            {
+                throw new ArgumentNullException(nameof(args));
+            }
 
             while (true)
             {
@@ -73,6 +77,7 @@ namespace ConsoleComplexiteit
 
             double complexiteit = aantalLetters / 3.0 + aantalLettergrepen;
 
+            // Condition spécifique pour certains mots
             if (woord.Contains("x") || woord.Contains("y") || woord.Contains("q"))
             {
                 complexiteit += 1;

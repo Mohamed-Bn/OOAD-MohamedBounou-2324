@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfComplexiteit", "WpfCompl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleComplexiteit", "ConsoleComplexiteit\ConsoleComplexiteit.csproj", "{C3570543-6A30-476E-BA9B-9430AA6293D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTaken", "WpfTaken\WpfTaken.csproj", "{CAA2BAE9-83DF-4F38-9BC2-BDFA5C5717F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,13 +28,13 @@ Global
 		{C3570543-6A30-476E-BA9B-9430AA6293D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3570543-6A30-476E-BA9B-9430AA6293D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3570543-6A30-476E-BA9B-9430AA6293D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAA2BAE9-83DF-4F38-9BC2-BDFA5C5717F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAA2BAE9-83DF-4F38-9BC2-BDFA5C5717F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAA2BAE9-83DF-4F38-9BC2-BDFA5C5717F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAA2BAE9-83DF-4F38-9BC2-BDFA5C5717F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{C5DB27F0-6B28-45D2-97EC-5F8F8A03C8A1} = {7E572ACA-748F-4422-B59B-53A965F601F5}
-		{C3570543-6A30-476E-BA9B-9430AA6293D2} = {7E572ACA-748F-4422-B59B-53A965F601F5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D2057836-93D3-42B2-B417-C462FBD4B347}
