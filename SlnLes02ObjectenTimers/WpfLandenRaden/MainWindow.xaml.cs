@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
-namespace WpfLandRaden
+namespace WpfLandenRaden
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -14,7 +13,7 @@ namespace WpfLandRaden
         private int huidigLandIndex = 0;
         private DateTime startTijd;
         private int juisteAntwoorden = 0;
-        private int kansen = 5; 
+        private int kansen = 5;
 
         public MainWindow()
         {
@@ -40,7 +39,7 @@ namespace WpfLandRaden
             {
                 TimeSpan totaleTijd = DateTime.Now - startTijd;
                 double gemiddeldeTijd = juisteAntwoorden > 0 ? totaleTijd.TotalSeconds / juisteAntwoorden : 0;
-                resultLabel.Content = $"Je had er {juisteAntwoorden}/{landen.Length} juist. Je gemiddelde tijd is {gemiddeldeTijd:F2} seconden";
+                resultLabel.Content = $"Tu as eu {juisteAntwoorden}/{landen.Length} correct. Ton temps moyen est de {gemiddeldeTijd:F2} secondes";
             }
         }
 
@@ -49,14 +48,14 @@ namespace WpfLandRaden
             if (sender is Image geklikteAfbeelding && geklikteAfbeelding.Tag.ToString() == landen[huidigLandIndex - 1])
             {
                 juisteAntwoorden++;
-                resultLabel.Content = "Juist!";
                 geklikteAfbeelding.Opacity = 0.5;
+                resultLabel.Content = "Juist!";
                 ToonVolgendLand();
             }
             else
             {
                 resultLabel.Content = "Fout!";
-                kansen--; 
+                kansen--;
                 if (kansen == 0)
                 {
                     ToonVolgendLand();

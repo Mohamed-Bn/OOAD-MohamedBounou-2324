@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WpfLandRaden.Properties
+namespace WpfLandenRaden.Properties
 {
 
 
