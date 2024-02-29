@@ -39,7 +39,7 @@ namespace WpfLandenRaden
             {
                 TimeSpan totaleTijd = DateTime.Now - startTijd;
                 double gemiddeldeTijd = juisteAntwoorden > 0 ? totaleTijd.TotalSeconds / juisteAntwoorden : 0;
-                resultLabel.Content = $"Tu as eu {juisteAntwoorden}/{landen.Length} correct. Ton temps moyen est de {gemiddeldeTijd:F2} secondes";
+                resultLabel.Content = $"Je had er {juisteAntwoorden}/{landen.Length} juist. Je gemiddelde tijd is {gemiddeldeTijd:F2} secondes";
             }
         }
 
