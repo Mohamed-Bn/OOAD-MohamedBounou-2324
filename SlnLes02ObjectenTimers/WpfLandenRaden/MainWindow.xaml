@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Landenkwis" Height="450" Width="800">
     <Grid>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,-90,0,90">
             <Image Source="Images/brazilie.png" Width="100" Height="75" Tag="Brazilië" MouseUp="Image_MouseUp"/>
             <Image Source="Images/argentina.png" Width="100" Height="75" Tag="Argentina" MouseUp="Image_MouseUp"/>
             <Image Source="Images/canada.png" Width="100" Height="75" Tag="Canada" MouseUp="Image_MouseUp"/>
@@ -16,7 +16,7 @@
         </StackPanel>
 
         <Label x:Name="resultLabel" Content="" FontSize="18" Margin="25,275,10,90"/>
-        <Button Content="START" Margin="35,325,555,55" Click="StartButton_Click"/>
-        <TextBlock x:Name="startText" Text="Raad zo snel mogelijk alle landen! Ben je klaar?" FontSize="16" Margin="35,280,0,110"/>
+        <Button Content="START" Margin="35,370,555,10" Click="StartButton_Click"/>
+        <TextBlock x:Name="startText" Text="Raad zo snel mogelijk alle landen! Ben je klaar?" FontSize="16" Margin="25,290,10,100"/>
     </Grid>
 </Window>
