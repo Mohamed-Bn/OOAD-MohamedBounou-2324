@@ -5,7 +5,9 @@ using System.Windows;
 using Microsoft.Win32;
 
 namespace WpfMinifier
-{
+{/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
     public partial class MainWindow : Window
     {
         private string selectedFolderPath = "";
@@ -41,10 +43,9 @@ namespace WpfMinifier
 
         private void MinifyAs_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new OpenFileDialog
+            var dialog = new SaveFileDialog
             {
                 ValidateNames = false,
-                CheckFileExists = false,
                 CheckPathExists = true,
                 FileName = "Folder Selection."
             };
@@ -77,18 +78,15 @@ namespace WpfMinifier
         {
             try
             {
-                var files = Directory.GetFiles(pathTextBox.Text, "*.*", SearchOption.AllDirectories)
-                    .Where(s => s.EndsWith(".css") || s.EndsWith(".html") || s.EndsWith(".js"));
-                foreach (var file in files)
-                {
-                    var contents = File.ReadAllText(file);
-                    var minified = MinifyFile(contents, Path.GetExtension(file));
-                    var fileName = Path.GetFileNameWithoutExtension(file);
-                    var extension = Path.GetExtension(file);
-                    var minifiedFileName = $"{fileName}.min{extension}";
-                    var minifiedFilePath = Path.Combine(outputPath, minifiedFileName);
-                    File.WriteAllText(minifiedFilePath, minified);
-                }
+                var selectedFile = fileListBox.SelectedItem.ToString();
+                var extension = Path.GetExtension(selectedFile);
+                var contents = File.ReadAllText(selectedFile);
+                var minified = MinifyFile(contents, extension);
+                var fileName = Path.GetFileNameWithoutExtension(selectedFile);
+                var minifiedFileName = $"{fileName}.min{extension}";
+                var minifiedFilePath = Path.Combine(outputPath, minifiedFileName);
+                File.WriteAllText(minifiedFilePath, minified);
+                fileListBox.Items.Add(minifiedFilePath); // Ajoutez le fichier minifié à la liste
             }
             catch (Exception ex)
             {
