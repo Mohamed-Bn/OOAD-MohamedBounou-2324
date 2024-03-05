@@ -31,7 +31,7 @@ namespace WpfMinifier
             if (dialog.ShowDialog() == true)
             {
                 pathTextBox.Text = Path.GetDirectoryName(dialog.FileName);
-                CreateFiles(pathTextBox.Text);  // Créez les fichiers ici
+                CreateFiles(pathTextBox.Text); 
                 UpdateFileList();
             }
         }
@@ -59,54 +59,36 @@ namespace WpfMinifier
         private void UpdateFileList()
         {
             fileListBox.Items.Clear();
-            try
+            var files = Directory.GetFiles(pathTextBox.Text, "*.*", SearchOption.AllDirectories)
+                .Where(s => s.EndsWith(".css") || s.EndsWith(".html") || s.EndsWith(".js"));
+            foreach (var file in files)
             {
-                var files = Directory.GetFiles(pathTextBox.Text, "*.*", SearchOption.AllDirectories)
-                    .Where(s => s.EndsWith(".css") || s.EndsWith(".html") || s.EndsWith(".js"));
-                foreach (var file in files)
-                {
-                    fileListBox.Items.Add(file);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Erreur lors de la lecture du répertoire : {ex.Message}");
+                fileListBox.Items.Add(file);
             }
         }
 
         private void MinifyFiles(string outputPath)
         {
-            try
-            {
-                var selectedFile = fileListBox.SelectedItem.ToString();
-                var extension = Path.GetExtension(selectedFile);
-                var contents = File.ReadAllText(selectedFile);
-                var minified = MinifyFile(contents, extension);
-                var fileName = Path.GetFileNameWithoutExtension(selectedFile);
-                var minifiedFileName = $"{fileName}.min{extension}";
-                var minifiedFilePath = Path.Combine(outputPath, minifiedFileName);
-                File.WriteAllText(minifiedFilePath, minified);
-                fileListBox.Items.Add(minifiedFilePath); // Ajoutez le fichier minifié à la liste
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Erreur lors de la minification des fichiers : {ex.Message}");
-            }
+            var selectedFile = fileListBox.SelectedItem.ToString();
+            var extension = Path.GetExtension(selectedFile);
+            var contents = File.ReadAllText(selectedFile);
+            var minified = MinifyFile(contents, extension);
+            var fileName = Path.GetFileNameWithoutExtension(selectedFile);
+            var minifiedFileName = $"{fileName}.min{extension}";
+            var minifiedFilePath = Path.Combine(outputPath, minifiedFileName);
+            File.WriteAllText(minifiedFilePath, minified);
+            fileListBox.Items.Add(minifiedFilePath);
         }
 
         private string MinifyFile(string input, string fileExtension)
         {
-            switch (fileExtension)
+            return fileExtension switch
             {
-                case ".css":
-                    return MinifyCss(input);
-                case ".html":
-                    return MinifyHtml(input);
-                case ".js":
-                    return MinifyJavaScript(input);
-                default:
-                    return input;
-            }
+                ".css" => MinifyCss(input),
+                ".html" => MinifyHtml(input),
+                ".js" => MinifyJavaScript(input),
+                _ => input,
+            };
         }
 
         private string MinifyCss(string input)
@@ -126,10 +108,9 @@ namespace WpfMinifier
 
         private void CreateFiles(string folderPath)
         {
-            // Créez un fichier .css, .html et .js dans le dossier spécifié
-            File.WriteAllText(Path.Combine(folderPath, "test.css"), "/* Ceci est un fichier CSS de test */");
-            File.WriteAllText(Path.Combine(folderPath, "test.html"), "<!-- Ceci est un fichier HTML de test -->");
-            File.WriteAllText(Path.Combine(folderPath, "test.js"), "// Ceci est un fichier JavaScript de test");
+            File.WriteAllText(Path.Combine(folderPath, "test.css"), "/* css */");
+            File.WriteAllText(Path.Combine(folderPath, "test.html"), "<!-- html -->");
+            File.WriteAllText(Path.Combine(folderPath, "test.js"), "// javascript");
         }
     }
 }
