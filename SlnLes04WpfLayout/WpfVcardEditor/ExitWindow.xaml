@@ -1,0 +1,22 @@
+﻿<Window x:Class="WpfVcardEditor.ExitWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfVcardEditor"
+        mc:Ignorable="d"
+        Title="Toepassing sluiten" Height="150" Width="280"
+        WindowStyle="ToolWindow" ResizeMode="NoResize">
+
+    <DockPanel LastChildFill="True">
+        <StatusBar DockPanel.Dock="Bottom" Height="50">
+            <StatusBarItem HorizontalAlignment="Right" Width="190">
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="btnOK" Height="25" Width="80" Content="OK" Click="OK_Click" />
+                    <Button x:Name="btnCancel" Height="25" Width="80" Content="Cancel" Margin="10,0,10,0" Click="Cancel_Click"/>
+                </StackPanel>
+            </StatusBarItem>
+        </StatusBar>
+        <Label Content="Ben je zeker dat je de applicatie wil afsluiten?" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5"/>
+    </DockPanel>
+</Window>

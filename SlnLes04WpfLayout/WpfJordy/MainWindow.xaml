@@ -1,0 +1,75 @@
+﻿<Window x:Class="WpfJordy.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="950" MinWidth="400" MaxWidth="760">
+    <Grid>
+        <!-- Header -->
+        <Border Background="Beige" Height="140" VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Image Height="105" Width="100" Source="/Images/logo.png"/>
+                <TextBlock Text="redJordy" Foreground="Black" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" Margin="250,0,0,0" HorizontalAlignment="Left"/>
+                <Button Content="LOGIN" HorizontalAlignment="Left" Margin="280,0,0,0" VerticalAlignment="Top"/>
+            </StackPanel>
+        </Border>
+        <!-- Images Section -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,191,0,630">
+            <Image Source="/Images/jordy1.jpg" Width="160" Height="120"/>
+            <Image Source="/Images/jordy2.jpg" Width="160" Height="120" Margin="10,0"/>
+            <Image Source="/Images/jordy3.jpg" Width="160" Height="120" Margin="10,0"/>
+            <Image Source="/Images/jordy4.jpg" Width="160" Height="120" Margin="10,0"/>
+        </StackPanel>
+        <!-- Information and Form Section -->
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Width="122" Margin="51,323,0,0">
+            <Label>
+                <TextBlock>
+                    <Run FontWeight="Bold" Text="Naam:"/>
+                    <Run Text=" Jordy"/>
+                </TextBlock>
+            </Label>
+            <Label>
+                <TextBlock>
+                    <Run FontWeight="Bold" Text="Leeftijd:"/>
+                    <Run Text=" 6 maanden"/>
+                </TextBlock>
+            </Label>
+            <Label>
+                <TextBlock>
+                    <Run FontWeight="Bold" Text="Geslacht:"/>
+                    <Run Text=" mannetje"/>
+                </TextBlock>
+            </Label>
+            <Label Width="640">
+                <TextBlock>
+                <Run FontWeight="Bold" Text="Gewicht:"/>
+                <Run Text=" 12kg"/>
+                </TextBlock>
+            </Label>
+        </StackPanel>
+        <TextBlock Text="Hallo, ik ben Jordy! Ik hou van wandelen, kinderen en andere huisdieren. Ad veertien er al slaagden resident. Waaronder eindelijk schatkist mee men wat britschen visschers. Is om te markten streken en vrouwen." TextWrapping="Wrap" Width="448" Margin="241,341,71,486"/>
+        <!-- Form Section -->
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="500" Margin="0,300,0,0">
+            <TextBlock Text="Wordt Jordy jouw nieuw maatje? Stuur hem een bericht!" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+            <Label Content="Naam:" FontWeight="Bold"/>
+            <TextBox Text="jouw naam" Background="White" Margin="0,0,0,10" Opacity="0.5"/>
+            <Label Content="Straat:" FontWeight="Bold"/>
+            <TextBox Text="jouw straat" Background="White" Margin="0,0,0,10" Opacity="0.5"/>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <StackPanel>
+                    <Label Content="Postcode:" FontWeight="Bold"/>
+                    <TextBox Text="b.v. 2500" Width="120" Background="White" Opacity="0.5"/>
+                </StackPanel>
+                <StackPanel Margin="10,0,0,0">
+                    <Label Content="Gemeente:" FontWeight="Bold"/>
+                    <TextBox Text="b.v. Lier" Width="120" Background="White" Opacity="0.5"/>
+                </StackPanel>
+            </StackPanel>
+            <Label Content="Bericht:" FontWeight="Bold"/>
+            <TextBox Text="b.v. Lier" Background="White" Margin="0,0,0,10" Height="100" VerticalContentAlignment="Center"/>
+        </StackPanel>
+        <!-- Footer -->
+        <Border Background="Beige" Height="25" VerticalAlignment="Bottom">
+            <TextBlock Text="copyright 2024, verbond van dakloze dieren" Foreground="Black" FontSize="10" HorizontalAlignment="Center"/>
+        </Border>
+        <Button Content="VERZENDEN" HorizontalAlignment="Left" Margin="560,782,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
