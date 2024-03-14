@@ -23,7 +23,6 @@ namespace WpfVcardEditor
         {
             InitializeComponent();
         }
-
         private void Sluiten_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

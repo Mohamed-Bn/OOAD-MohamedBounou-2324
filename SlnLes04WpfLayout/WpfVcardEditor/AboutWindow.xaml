@@ -18,7 +18,7 @@
             <RowDefinition Height="30" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Image Grid.Row="0" HorizontalAlignment="Center" Source="/img/odisee.jpg" Width="260"/>
+        <Image Grid.Row="0" HorizontalAlignment="Center" Source="/odisee.jpg" Width="260"/>
         <TextBlock Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Margin="30,0,0,0"><Bold>Gemaakt door:</Bold> Mohamed Bounou</TextBlock>
         <TextBlock Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Margin="30,0,0,0"><Bold>Vak:</Bold> OO Application Development</TextBlock>
         <TextBlock Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Margin="30,0,0,0"><Bold>Academiejaar:</Bold> 2023 - 2024</TextBlock>
