@@ -7,21 +7,12 @@
         mc:Ignorable="d"
         Title="About vCard Editor" Height="400" Width="360"
         WindowStyle="ToolWindow" ResizeMode="NoResize">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="150" />
-            <RowDefinition Height="30" />
-            <RowDefinition Height="30" />
-            <RowDefinition Height="30" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Image Grid.Row="0" HorizontalAlignment="Center" Source="/odisee.jpg" Width="260"/>
-        <TextBlock Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Margin="30,0,0,0"><Bold>Gemaakt door:</Bold> Mohamed Bounou</TextBlock>
-        <TextBlock Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Margin="30,0,0,0"><Bold>Vak:</Bold> OO Application Development</TextBlock>
-        <TextBlock Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Margin="30,0,0,0"><Bold>Academiejaar:</Bold> 2023 - 2024</TextBlock>
-        <Button x:Name="btnSluiten" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16" Width="88" Height="36" Margin="0,45,0,0" Click="Sluiten_Click">SLUITEN</Button>
-    </Grid>
+
+    <StackPanel Orientation="Vertical">
+        <Image HorizontalAlignment="Center" Source="/img/odisee.jpg" Width="260" Margin="0,25"/>
+        <TextBlock HorizontalAlignment="Left" FontSize="16" Margin="30,5,0,5"><Bold>Gemaakt door:</Bold> Mohamed Bounou</TextBlock>
+        <TextBlock HorizontalAlignment="Left" FontSize="16" Margin="30,5,0,5"><Bold>Vak:</Bold> OO Application Development</TextBlock>
+        <TextBlock HorizontalAlignment="Left" FontSize="16" Margin="30,5,0,5"><Bold>Academiejaar:</Bold> 2023 - 2024</TextBlock>
+        <Button x:Name="btnSluiten" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16" Margin="40" Padding="15,5" Click="Sluiten_Click">SLUITEN</Button>
+    </StackPanel>
 </Window>
