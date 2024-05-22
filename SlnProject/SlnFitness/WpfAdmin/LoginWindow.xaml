@@ -1,0 +1,33 @@
+﻿<Window x:Class="WpfAdmin.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAdmin"
+        mc:Ignorable="d"
+        Title="Login" Height="550" Width="900">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Title Label -->
+        <Label x:Name="Title_Label" Content="Welcome to WpfAdmin" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="20" FontSize="24" FontWeight="Bold"/>
+
+        <!-- Login Form -->
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
+            <Label x:Name="email_label" Content="Email" Margin="10"/>
+            <TextBox x:Name="email_textbox" Margin="10" Width="250" Height="30" Text="eg: ab@gmail.com" GotFocus="EmailTextBox_GotFocus" LostFocus="EmailTextBox_LostFocus"/>
+
+            <Label x:Name="label_password" Content="Password" Margin="10"/>
+            <PasswordBox x:Name="password_textbox" Margin="10" Width="250" Height="30" GotFocus="PasswordTextBox_GotFocus" LostFocus="PasswordTextBox_LostFocus"/>
+
+            <Button x:Name="login_button" Content="Login" Margin="10" Width="100" HorizontalAlignment="Center" Click="login_button_click"/>
+        </StackPanel>
+    </Grid>
+</Window>

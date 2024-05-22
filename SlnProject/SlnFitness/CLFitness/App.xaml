@@ -1,7 +1,7 @@
-﻿<Application x:Class="Project_Fitness.App"
+﻿<Application x:Class="CLFitness.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Project_Fitness"
+             xmlns:local="clr-namespace:CLFitness"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

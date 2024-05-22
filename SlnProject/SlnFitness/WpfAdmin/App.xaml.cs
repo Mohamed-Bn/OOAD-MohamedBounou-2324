@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace Project_Fitness
+namespace WpfAdmin
 {
     /// <summary>
     /// Interaction logic for App.xaml
