@@ -20,5 +20,22 @@ namespace WpfCustomer
         {
             InitializeComponent();
         }
+
+        private void StatistiekenButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Navigate to Statistics_Customer page
+            MainFrame.Navigate(new Pages.Statistics_Customer());
+        }
+
+        private void WorkoutsButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Navigate to Workout_Customer page
+            MainFrame.Navigate(new Pages.Workout_Customer());
+        }
+
+        private void MainFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+
+        }
     }
 }

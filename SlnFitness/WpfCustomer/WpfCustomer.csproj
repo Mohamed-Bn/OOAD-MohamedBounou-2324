@@ -9,7 +9,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Pages\exercise.png" />
+    <None Remove="Pages\trash.png" />
+    <None Remove="pfp.png" />
+    <None Remove="pfp2.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Pages\exercise.png" />
+    <Resource Include="Pages\trash.png" />
+    <Resource Include="pfp.png" />
+    <Resource Include="pfp2.png" />
   </ItemGroup>
 
 </Project>

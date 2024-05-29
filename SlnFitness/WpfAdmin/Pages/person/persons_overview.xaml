@@ -8,26 +8,47 @@
       d:DesignHeight="450" d:DesignWidth="700"
       Title="persons_overview">
 
-    <Grid Background="#FFFFFDFD" Width="700">
-        
-        <ScrollViewer x:Name="scrollViewer" Margin="24,29,418,0" Height="387" VerticalAlignment="Top" Background="#FFA09B9B" VerticalScrollBarVisibility="Auto" Width="250">
-            <StackPanel x:Name="stackPanel">
-                
-            </StackPanel>
-            
+    <Border BorderThickness="2" BorderBrush="Black">
+        <Grid Background="#FFFFFDFD" Width="700">
+
+        <ScrollViewer x:Name="scrollViewer" Margin="24,29,418,0" Height="387" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Width="250" BorderThickness="2" BorderBrush="Gray">
+            <Border BorderThickness="1" BorderBrush="LightGray">
+                <StackPanel x:Name="stackPanel">
+                    <!-- Add your content here -->
+                </StackPanel>
+            </Border>
         </ScrollViewer>
 
-        <Label x:Name="login_label" Content="login" HorizontalAlignment="Left" Margin="385,65,0,0" VerticalAlignment="Top" Width="114" FontWeight="Bold" FontSize="14"/>
-        <Label x:Name="Regdotnum_lab" Content="Reg. datnum" HorizontalAlignment="Left" Margin="386,95,0,0" VerticalAlignment="Top" Width="114" FontWeight="Bold" FontSize="14"/>
-        <Label x:Name="is_admin_label" Content="Is Admin" HorizontalAlignment="Left" Margin="385,129,0,0" VerticalAlignment="Top" Width="114" FontWeight="Bold" FontSize="14"/>
-        <Label x:Name="name"  HorizontalAlignment="Left" Margin="541,73,0,0" VerticalAlignment="Top" Width="126"/>
-        <Label x:Name="reg_no" HorizontalAlignment="Left" Margin="538,104,0,0" VerticalAlignment="Top" Width="117"/>
-        <Label x:Name="admin"  HorizontalAlignment="Left" Margin="552,137,0,0" VerticalAlignment="Top"/>
-        <Image x:Name="img_place"  HorizontalAlignment="Left" Height="149" Margin="396,175,0,0" VerticalAlignment="Top" Width="225"/>
+        <!-- Labels in Boxes -->
+        <Border BorderThickness="1" BorderBrush="LightGray" HorizontalAlignment="Left" Margin="385,65,0,0" VerticalAlignment="Top" Width="114" Height="30">
+            <Label x:Name="login_label" Content="Login" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+        </Border>
+        <Border BorderThickness="1" BorderBrush="LightGray" HorizontalAlignment="Left" Margin="386,95,0,0" VerticalAlignment="Top" Width="114" Height="30">
+            <Label x:Name="Regdotnum_lab" Content="Reg. Datum" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+        </Border>
+        <Border BorderThickness="1" BorderBrush="LightGray" HorizontalAlignment="Left" Margin="385,129,0,0" VerticalAlignment="Top" Width="114" Height="30">
+            <Label x:Name="is_admin_label" Content="Is Admin" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+        </Border>
+        <Border BorderThickness="0" BorderBrush="LightGray" HorizontalAlignment="Left" Margin="538,65,0,0" VerticalAlignment="Top" Width="126" Height="30">
+            <Label x:Name="name" Content="Abdullah"  VerticalAlignment="Center"  FontSize="16"/>
+        </Border>
+        <Border BorderThickness="0" BorderBrush="LightGray" HorizontalAlignment="Left" Margin="538,95,0,0" VerticalAlignment="Top" Width="117" Height="30">
+            <Label x:Name="reg_no" Content="No"  VerticalAlignment="Center"  FontSize="16"/>
+        </Border>
+        <Border BorderThickness="0" BorderBrush="LightGray" HorizontalAlignment="Left" Margin="538,129,0,0" VerticalAlignment="Top" Height="30">
+            <Label x:Name="admin" Content="Date"  VerticalAlignment="Center"  FontSize="16"/>
+        </Border>
 
-        <Button x:Name="bewerk_btn" Content="Bewerk" HorizontalAlignment="Left" Margin="463,370,0,0" VerticalAlignment="Top" Click="btn_click_add_person" Height="22" Width="92" BorderThickness="1" BorderBrush="Black"/>
-        <Button x:Name="verwijder_btn" Content="Verwijder" HorizontalAlignment="Left" Margin="579,370,0,0" VerticalAlignment="Top" Click="btn_click_remove_person" Height="22" Width="92" BorderThickness="1" BorderBrush="Black"/>
-        <Button x:Name="NileView_btn" Content="Nileuw" HorizontalAlignment="Left" Margin="341,370,0,0" VerticalAlignment="Top" Click="btn_click_edit_person" Height="22" Width="92" BorderThickness="1" BorderBrush="Black"/>
+        <!-- Image with Border -->
+        <Border BorderThickness="1" BorderBrush="LightGray" HorizontalAlignment="Left" Height="151" Margin="396,175,0,0" VerticalAlignment="Top" Width="227">
+            <Image x:Name="img_place" Source="YourImageSource.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="UniformToFill" />
+        </Border>
+
+        <!-- Buttons -->
+        <Button x:Name="bewerk_btn" Content="Bewerk" HorizontalAlignment="Left" Margin="463,370,0,0" VerticalAlignment="Top" Click="btn_click_add_person" Height="30" Width="100" BorderThickness="2" BorderBrush="Black"/>
+        <Button x:Name="verwijder_btn" Content="Verwijder" HorizontalAlignment="Left" Margin="579,370,0,0" VerticalAlignment="Top" Click="btn_click_remove_person" Height="30" Width="100" BorderThickness="2" BorderBrush="Black"/>
+        <Button x:Name="NileView_btn" Content="Nileuw" HorizontalAlignment="Left" Margin="341,370,0,0" VerticalAlignment="Top" Click="btn_click_edit_person" Height="30" Width="100" BorderThickness="2" BorderBrush="Black"/>
 
     </Grid>
+    </Border>
 </Page>

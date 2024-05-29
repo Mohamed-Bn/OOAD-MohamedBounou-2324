@@ -22,14 +22,12 @@ namespace WpfAdmin.Pages.person
         {
             for (int i = 1; i <= 16; i++)
             {
-                Button newTextBlock = new Button();
-                newTextBlock.Content = "Content Line " + i;
-                newTextBlock.Margin = new Thickness(10);
-                newTextBlock.Background = Brushes.White;
-                newTextBlock.Click +=show_person_info;
-                stackPanel.Children.Add(newTextBlock); 
-                
+                TextBlock newTextBlock = new TextBlock();
+                newTextBlock.Text = i + ".  Content";
+                newTextBlock.Margin = new Thickness(0);
+                stackPanel.Children.Add(newTextBlock);
             }
+
         }
 
 
@@ -43,8 +41,7 @@ namespace WpfAdmin.Pages.person
         }
 
 
-        
-
+      
         private void btn_click_add_person(object sender, RoutedEventArgs e)
         {
             new_person temp = new new_person();

@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfAdmin", "WpfAdmin\WpfAdm
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfCustomer", "WpfCustomer\WpfCustomer.csproj", "{BF956A45-A717-4931-ABF6-A3FCAD495553}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLFitness", "CLFitness\CLFitness.csproj", "{07634E91-CFB5-4113-BAC6-742C7FDCF19E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{BF956A45-A717-4931-ABF6-A3FCAD495553}.Release|x64.Build.0 = Release|Any CPU
 		{BF956A45-A717-4931-ABF6-A3FCAD495553}.Release|x86.ActiveCfg = Release|Any CPU
 		{BF956A45-A717-4931-ABF6-A3FCAD495553}.Release|x86.Build.0 = Release|Any CPU
+		{07634E91-CFB5-4113-BAC6-742C7FDCF19E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07634E91-CFB5-4113-BAC6-742C7FDCF19E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07634E91-CFB5-4113-BAC6-742C7FDCF19E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{07634E91-CFB5-4113-BAC6-742C7FDCF19E}.Debug|x64.Build.0 = Debug|Any CPU
+		{07634E91-CFB5-4113-BAC6-742C7FDCF19E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{07634E91-CFB5-4113-BAC6-742C7FDCF19E}.Debug|x86.Build.0 = Debug|Any CPU
+		{07634E91-CFB5-4113-BAC6-742C7FDCF19E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07634E91-CFB5-4113-BAC6-742C7FDCF19E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07634E91-CFB5-4113-BAC6-742C7FDCF19E}.Release|x64.ActiveCfg = Release|Any CPU
+		{07634E91-CFB5-4113-BAC6-742C7FDCF19E}.Release|x64.Build.0 = Release|Any CPU
+		{07634E91-CFB5-4113-BAC6-742C7FDCF19E}.Release|x86.ActiveCfg = Release|Any CPU
+		{07634E91-CFB5-4113-BAC6-742C7FDCF19E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
