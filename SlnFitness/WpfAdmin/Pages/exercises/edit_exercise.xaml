@@ -12,34 +12,60 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
         <!-- Labels and TextBoxes -->
-        <Label x:Name="name" Content="Exercise Name" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
-        <TextBox x:Name="voorname_box" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="5" Width="200"/>
+        <Label Content="Exercise Name" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <TextBox x:Name="exercise_name" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="5" Width="200"/>
 
-        <Label x:Name="achternaam_label" Content="Total Points" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
-        <TextBox x:Name="AchterName_box" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5" Width="200"/>
+        <Label Content="Total Points" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <TextBox x:Name="points_box" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5" Width="100"/>
 
-        <Label x:Name="login_label" Content="Content" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
-        <TextBox x:Name="login_box" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="5" Width="200" Height="100" TextWrapping="Wrap" AcceptsReturn="True"/>
+        <Label Content="Description" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <TextBox x:Name="description_box" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" Margin="5" Height="55" TextWrapping="Wrap" AcceptsReturn="True" Width="300"/>
+
+        <Label Content="Type" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <ComboBox x:Name="type_exercise" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="5" Width="150"/>
+
+        <Label Content="Body Part" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <TextBox x:Name="body_part" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="5" Width="150"/>
+
+        <Label Content="Pose" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <TextBox x:Name="pose_box" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Margin="5" Width="150"/>
+
+        <Label Content="Instruction" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+
+        <Label Content="NickName" Grid.Row="7" Grid.Column="0" VerticalAlignment="Top" Margin="5"/>
+        <ScrollViewer Grid.Row="7" Grid.Column="1" Margin="5"
+              HorizontalScrollBarVisibility="Auto"
+              VerticalScrollBarVisibility="Auto"
+              Height="100">
+            <TextBox x:Name="instruction_box" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        </ScrollViewer>
+
+
+
 
         <!-- Image and Buttons -->
-        <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" Margin="5" VerticalAlignment="Top">
-            <Image x:Name="exercise_image" Width="114" Height="100"/>
-            <Button x:Name="kies_btn" Content="Kies..." Width="80" Margin="5" HorizontalAlignment="Center"/>
+        <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="7" Margin="5" VerticalAlignment="Top">
+            <Image x:Name="img" Width="114" Height="178" Margin="5"/>
+            <Button x:Name="change_photo_btn" Content="Change" HorizontalAlignment="Center" Margin="5" Click="ChangePhotoButton_Click"/>
         </StackPanel>
 
         <!-- Action Buttons -->
-        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
-            <Button x:Name="Opslaan_btn" Content="Opslaan" Width="80" Height="30" Margin="5"/>
-            <Button x:Name="Annuleren_btn" Content="Annuleren" Width="80" Height="30" Margin="5"/>
+        <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+            <Button x:Name="Opslaan_btn" Content="Opslaan" Width="68" Height="30" Margin="5" Click="SaveButton_Click"/>
+            <Button x:Name="Annuleren_btn" Content="Annuleren" Width="69" Height="30" Margin="5"/>
         </StackPanel>
+        <TextBox x:Name="nickname_box" Grid.Row="6" Grid.Column="1" VerticalAlignment="Top" Margin="46,0,101,0" Height="21" Width="Auto" TextChanged="nickname_box_TextChanged"/>
     </Grid>
 </Page>

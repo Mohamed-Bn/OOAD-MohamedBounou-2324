@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WpfAdmin.Pages.person;
 using WpfAdmin.Pages.exercises;
+using CLFitness.WpfAdmin;
+using CLFitness.WpfCustomer;
 
 
 namespace WpfAdmin.Pages
@@ -44,13 +46,15 @@ namespace WpfAdmin.Pages
         {
             persons_overview person=new persons_overview();
             frame.NavigationService.Navigate(person);
-          //  this.Close();
         }
+
+
 
         private void exercise_btn_Click(object sender, RoutedEventArgs e)
         {
-            exercises_overview exercises = new exercises_overview();
+             exercises_overview exercises = new exercises_overview();
             frame.NavigationService.Navigate(exercises);
+
         }
 
         private void back_btn_Click(object sender , RoutedEventArgs e)

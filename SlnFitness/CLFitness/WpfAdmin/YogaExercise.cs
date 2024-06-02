@@ -1,0 +1,23 @@
+﻿using CLFitness.Central;
+using CLFitness.WpfCustomer;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CLFitness.WpfAdmin
+{
+    public class YogaExercise : Exercise
+    {
+        public string Instruction { get; set; }
+        public string Pose { get; set; }
+        public string Nickname { get; set; }
+
+        protected override string GetInstruction() => Instruction;
+        protected override string GetPose() => Pose;
+        protected override string GetNickname() => Nickname;
+    }
+
+}

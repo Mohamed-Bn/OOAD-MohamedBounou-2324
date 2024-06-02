@@ -1,60 +1,121 @@
-﻿using System;
+﻿using CLFitness.WpfCustomer;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.TextFormatting;
+using System.Drawing;
+using System.IO;
+using System.Xml.Linq;
+using System.Drawing.Imaging;
+
+
 
 namespace WpfAdmin.Pages.person
 {
 
     public partial class persons_overview : Page
     {
+        List<Person_name> persons;
         public persons_overview()
         {
             InitializeComponent();
-            AddDynamicContent();
+            persons = Person_name.GetAllPerson();
+            AddDynamicContent();  
         }
 
-
+        
 
         private void AddDynamicContent()
         {
-            for (int i = 1; i <= 16; i++)
+            for (int i = 0; i < persons.Count; i++)
             {
                 TextBlock newTextBlock = new TextBlock();
-                newTextBlock.Text = i + ".  Content";
-                newTextBlock.Margin = new Thickness(0);
+                newTextBlock.Text = i+1+ ".  "+ persons[i].FirstName + " " + persons[i].LastName;
+                newTextBlock.Margin = new Thickness(2);
+                newTextBlock.MouseLeftButtonUp += show_person_info;
+                newTextBlock.Tag = persons[i].Id;
                 stackPanel.Children.Add(newTextBlock);
             }
 
         }
 
 
-
         private void show_person_info(object sender, RoutedEventArgs e)
         {
-            name.Content = "Abdullah";
-            reg_no.Content = "Nov-22 2022";
-            admin.Content = "No";
-            img_place.Source = new BitmapImage(new Uri("https://www.indiafilings.com/learn/wp-content/uploads/2023/03/Can-a-single-person-own-a-firm-in-India.jpg"));
+            int id = (int)((TextBlock)sender).Tag;
+            Person person = Person.GetPerson(id);
+
+            if (person == null)
+            {
+                MessageBox.Show("Person not found.");
+                return;
+            }
+
+            name.Content = person.FirstName;
+            reg_no.Content = person.RegDate.ToString("MMM-dd yyyy");
+            admin.Content = person.IsAdmin ? "Yes" : "No";
+
+            if (person.ProfilePhoto != null && person.ProfilePhoto.Length > 0)
+            {
+                BitmapImage bitmapImage = ByteArrayToBitmapImage(person.ProfilePhoto);
+                img_place.Source = bitmapImage;
+            }
+            else
+            {
+                img_place.Source = new BitmapImage(new Uri("default_profile_image.png", UriKind.Relative));
+            }
+        }
+
+        public static BitmapImage ByteArrayToBitmapImage(byte[] byteArray)
+        {
+            if (byteArray == null || byteArray.Length == 0)
+                throw new ArgumentException("Byte array is empty or null");
+
+            using (MemoryStream memoryStream = new MemoryStream(byteArray))
+            {
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.StreamSource = memoryStream;
+                bitmapImage.EndInit();
+                return bitmapImage;
+            }
         }
 
 
-      
+
+
+
+
+
         private void btn_click_add_person(object sender, RoutedEventArgs e)
         {
             new_person temp = new new_person();
-            this.Content = temp;
+            NavigationService.Navigate(temp);
         }
 
         private void btn_click_edit_person(object sender, RoutedEventArgs e)
         {
-            Frame frame = FindFrame(this);
-            if (frame != null)
+
+            Button clickedButton = sender as Button;
+            if (clickedButton != null)
             {
-                edit_person temp = new edit_person();
-                frame.NavigationService.Navigate(temp);
+                Border parentBorder = clickedButton.Parent as Border;
+                if (parentBorder != null)
+                {
+                    TextBlock textBlock = parentBorder.Child as TextBlock;
+                    if (textBlock != null)
+                    {
+                        int id = (int)textBlock.Tag;
+                        Person person = Person.GetPerson(id);
+                        {
+                            edit_person editPage = new edit_person(person);
+                            NavigationService.Navigate(editPage);
+                        }
+                    }
+                }
             }
         }
 

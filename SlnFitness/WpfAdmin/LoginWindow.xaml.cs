@@ -15,7 +15,7 @@ using WpfAdmin.Pages;
 
 namespace WpfAdmin
 {
-   
+
     public partial class LoginWindow : Window
     {
         public LoginWindow()
@@ -30,9 +30,9 @@ namespace WpfAdmin
                 email_textbox.Text = "";
             }
         }
-        private void login_button_click( object sender , RoutedEventArgs e )
+        private void login_button_click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();   
+            MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();
 

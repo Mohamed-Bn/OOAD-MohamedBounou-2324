@@ -11,33 +11,15 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
         <Grid>
             <TextBox TextWrapping="Wrap" Text="kies een datum om je workouts van dag te zien" Margin="9,9,527,415"/>
-            <Calendar HorizontalAlignment="Left" Margin="9,40,0,0" VerticalAlignment="Top"/>
-            <Button Content="Voeg workout toe..." HorizontalAlignment="Left" Margin="215,186,0,0" VerticalAlignment="Top" Width="131" Height="22"/>
-            <TextBox TextWrapping="Wrap" Text="3 workouts gevonden op 03 april 2024" Margin="9,225,527,199"/>
+            <Calendar HorizontalAlignment="Left" Margin="9,40,0,0" VerticalAlignment="Top" SelectedDatesChanged="Calendar_SelectedDatesChanged"/>
+            <Button Content="Voeg workout toe..." HorizontalAlignment="Left" Margin="215,186,0,0" VerticalAlignment="Top" Width="131" Height="22" Click="OnAddButtonClicked"/>
+            <TextBox Name="workoutNum" TextWrapping="Wrap" Text="3 " Margin="9,225,1042,199"/>
+            <TextBox TextWrapping="Wrap" Text="workouts gevonden op " Margin="30,225,910,199"/>
+            <TextBox Name="date" TextWrapping="Wrap" Text="03 april 2024" Margin="167,225,799,199"/>
+            <Grid Name="MainGrid">
 
-            <Canvas Margin="10,268,485,93" Background="#FFF0F5">
-                <Image Height="70" Canvas.Left="10" Canvas.Top="10" Width="68" Source="/Pages/exercise.png" />
-                <Label Content="Cycling" Canvas.Left="86" HorizontalAlignment="Left" VerticalAlignment="Center" Width="153" FontSize="20"/>
-                <Label Content="5km" Canvas.Left="86" Canvas.Top="31" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Label Content="75 punten" Canvas.Left="86" Canvas.Top="53" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Image Height="36" Canvas.Left="249" Canvas.Top="43" Width="30" HorizontalAlignment="Center" VerticalAlignment="Top" Source="/Pages/trash.png"/>
-            </Canvas>
-
-            <Canvas Margin="329,268,166,93" Background="#FFF0F5">
-                <Image Height="70" Canvas.Left="10" Canvas.Top="10" Width="68" Source="/Pages/exercise.png" />
-                <Label Content="Cycling" Canvas.Left="86" HorizontalAlignment="Left" VerticalAlignment="Center" Width="153" FontSize="20"/>
-                <Label Content="5km" Canvas.Left="86" Canvas.Top="31" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Label Content="75 punten" Canvas.Left="86" Canvas.Top="53" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Image Height="36" Canvas.Left="249" Canvas.Top="43" Width="30" HorizontalAlignment="Center" VerticalAlignment="Top" Source="/Pages/trash.png"/>
-            </Canvas>
-
-            <Canvas Margin="10,369,485,-8" Background="#FFF0F5">
-                <Image Height="70" Canvas.Left="10" Canvas.Top="10" Width="68" Source="/Pages/exercise.png" />
-                <Label Content="Cycling" Canvas.Left="86" HorizontalAlignment="Left" VerticalAlignment="Center" Width="153" FontSize="20"/>
-                <Label Content="5km" Canvas.Left="86" Canvas.Top="31" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Label Content="75 punten" Canvas.Left="86" Canvas.Top="53" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Image Height="36" Canvas.Left="249" Canvas.Top="43" Width="30" HorizontalAlignment="Center" VerticalAlignment="Top" Source="/Pages/trash.png"/>
-            </Canvas>
+            </Grid>
         </Grid>
+        
     </ScrollViewer>
 </Page>

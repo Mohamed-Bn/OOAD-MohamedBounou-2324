@@ -30,13 +30,13 @@
             <Label x:Name="is_admin_label" Content="Is Admin" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="14"/>
         </Border>
         <Border BorderThickness="0" BorderBrush="LightGray" HorizontalAlignment="Left" Margin="538,65,0,0" VerticalAlignment="Top" Width="126" Height="30">
-            <Label x:Name="name" Content="Abdullah"  VerticalAlignment="Center"  FontSize="16"/>
+            <Label x:Name="name" Content=""  VerticalAlignment="Center"  FontSize="16"/>
         </Border>
         <Border BorderThickness="0" BorderBrush="LightGray" HorizontalAlignment="Left" Margin="538,95,0,0" VerticalAlignment="Top" Width="117" Height="30">
-            <Label x:Name="reg_no" Content="No"  VerticalAlignment="Center"  FontSize="16"/>
+            <Label x:Name="reg_no" Content=""  VerticalAlignment="Center"  FontSize="16" HorizontalAlignment="Right" Width="117"/>
         </Border>
         <Border BorderThickness="0" BorderBrush="LightGray" HorizontalAlignment="Left" Margin="538,129,0,0" VerticalAlignment="Top" Height="30">
-            <Label x:Name="admin" Content="Date"  VerticalAlignment="Center"  FontSize="16"/>
+            <Label x:Name="admin" Content=""  VerticalAlignment="Center"  FontSize="16"/>
         </Border>
 
         <!-- Image with Border -->

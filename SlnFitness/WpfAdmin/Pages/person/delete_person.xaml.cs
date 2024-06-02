@@ -1,28 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CLFitness.WpfCustomer;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WpfAdmin.Pages.person
 {
-    /// <summary>
-    /// Interaction logic for edit.xaml
-    /// </summary>
     public partial class delete_person : Page
     {
-        public delete_person()
+        public Person Person { get; set; }
+
+        public delete_person(Person person)
         {
             InitializeComponent();
+            Person = person;
+            DataContext = Person;
+            name.Text=person.FirstName+" "+person.LastName;
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            string deleteWorkoutResult = Person.DeleteWorkoutsForPerson(Person.Id);
+            if (deleteWorkoutResult != "true")
+            {
+                MessageBox.Show($"Failed to delete workouts for person: {deleteWorkoutResult}");
+                return;
+            }
+
+            string deletePersonResult = Person.DeletePerson(Person);
+            if (deletePersonResult == "true")
+            {
+                MessageBox.Show("Person deleted successfully.");
+                NavigationService.GoBack();
+            }
+            else
+            {
+                MessageBox.Show($"Failed to delete person: {deletePersonResult}");
+            }
         }
     }
 }

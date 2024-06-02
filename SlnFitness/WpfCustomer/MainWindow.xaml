@@ -9,8 +9,8 @@
     <Grid>
         <Button Content="Statistieken" HorizontalAlignment="Left" Margin="25,29,0,0" VerticalAlignment="Top" Height="24" Width="100" Click="StatistiekenButton_Click"/>
         <Button Content="Workouts" HorizontalAlignment="Left" Margin="25,72,0,0" VerticalAlignment="Top" Height="24" Width="100" Click="WorkoutsButton_Click"/>
-        <Button Content="Uitloggen" HorizontalAlignment="Left" Margin="25,114,0,0" VerticalAlignment="Top" Height="24" Width="100"/>
-        <Image x:Name="foto_abdel" HorizontalAlignment="Left" Height="100" Margin="25,279,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.12,0.91" Source="/pfp2.png"/>
+        <Button Content="Uitloggen" HorizontalAlignment="Left" Margin="25,114,0,0" VerticalAlignment="Top" Height="24" Width="100" Click="logout"/>
+        <Image x:Name="foto_abdel" HorizontalAlignment="Left" Height="100" Margin="25,279,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.12,0.91"/>
         <Frame x:Name="MainFrame" Margin="148,10,10,55" Navigated="MainFrame_Navigated"/>
     </Grid>
 </Window>

@@ -1,13 +1,10 @@
-﻿using System.Text;
+﻿using CLFitness.WpfCustomer;
+using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WpfCustomer
 {
@@ -16,21 +13,50 @@ namespace WpfCustomer
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private Person loggedInPerson;
+
+        public MainWindow(Person loggedInVal)
         {
             InitializeComponent();
+            loggedInPerson = loggedInVal;
+            SetProfileImage(loggedInPerson.ProfilePhoto);
+        }
+
+        private void SetProfileImage(byte[] profilePhoto)
+        {
+            if (profilePhoto == null || profilePhoto.Length == 0)
+            {
+                return;
+            }
+
+            BitmapImage bitmap = new BitmapImage();
+            using (MemoryStream stream = new MemoryStream(profilePhoto))
+            {
+                stream.Seek(0, SeekOrigin.Begin);
+                bitmap.BeginInit();
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.StreamSource = stream;
+                bitmap.EndInit();
+            }
+
+            foto_abdel.Source = bitmap;
         }
 
         private void StatistiekenButton_Click(object sender, RoutedEventArgs e)
         {
-            // Navigate to Statistics_Customer page
-            MainFrame.Navigate(new Pages.Statistics_Customer());
+            MainFrame.Navigate(new Pages.Statistics_Customer(loggedInPerson));
         }
 
         private void WorkoutsButton_Click(object sender, RoutedEventArgs e)
         {
-            // Navigate to Workout_Customer page
-            MainFrame.Navigate(new Pages.Workout_Customer());
+            MainFrame.Navigate(new Pages.Workout_Customer(loggedInPerson));
+        }
+
+        private void logout(object sender, RoutedEventArgs e)
+        {
+            LoginWindow login = new LoginWindow();
+            login.Show();
+            this.Close();
         }
 
         private void MainFrame_Navigated(object sender, NavigationEventArgs e)

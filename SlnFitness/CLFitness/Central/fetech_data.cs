@@ -124,7 +124,7 @@ namespace CLFitness.Central
                             Id = (int)reader["id"],
                             Name = (string)reader["name"],
                             Description = (string)reader["description"],
-                            Type = (ExerciseType)(int)reader["type"],
+                            TypeNum = (int)reader["type"],
                             Instruction = reader["instruction"] as string,
                             BodyPart = reader["bodypart"] as string,
                             Pose = reader["pose"] as string,

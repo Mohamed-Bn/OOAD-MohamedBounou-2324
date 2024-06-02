@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CLFitness\CLFitness.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Pages\person\delete_person.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

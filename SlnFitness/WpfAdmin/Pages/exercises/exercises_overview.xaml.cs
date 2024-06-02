@@ -1,161 +1,175 @@
-﻿using System;
+﻿using CLFitness.WpfAdmin;
+using CLFitness.WpfCustomer;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using WpfAdmin.Pages.exercises;
-using WpfAdmin.Pages.person;
-
 
 namespace WpfAdmin.Pages.exercises
 {
-    /// <summary>
-    /// Interaction logic for exercises_overview.xaml
-    /// </summary>
     public partial class exercises_overview : Page
     {
-        Button[] exercise;
+        private Button[] exerciseButtons;
 
         public exercises_overview()
         {
             InitializeComponent();
-            exercise = new Button[4];
-            add_exercise_name();
-            AddRectangles();
-
+            exerciseButtons = new Button[3];
+            AddExerciseTypeButtons();
         }
 
-
-        private void add_exercise_name()
+        private void AddExerciseTypeButtons()
         {
+            string[] exerciseTypes = { "Cardio", "Dumbbell", "Yoga" };
 
-            string[] exerciseNames = { "Cardio", "Dumbell", "Yoga" };
-
-            for (int i = 0; i < exerciseNames.Length; i++)
+            for (int i = 0; i < exerciseTypes.Length; i++)
             {
-                exercise[i] = new Button();
-                exercise[i].Content = exerciseNames[i];
-                exercise[i].Margin = new Thickness(10);
-                exercise_name_panel.Children.Add(exercise[i]);
+                exerciseButtons[i] = new Button
+                {
+                    Content = exerciseTypes[i],
+                    Margin = new Thickness(10),
+                    Tag = exerciseTypes[i],
+                    Padding = new Thickness(20, 10, 20, 10), 
+                    BorderThickness = new Thickness(1),
+                    BorderBrush = Brushes.Black
+                };
+
+                if (i == 0)
+                    exerciseButtons[i].Margin = new Thickness(0, 10, 10, 10);
+
+                if (i == exerciseTypes.Length - 1) 
+                    exerciseButtons[i].Margin = new Thickness(10, 10, 0, 10);
+
+                exerciseButtons[i].Click += ExerciseTypeButton_Click;
+                exercise_name_panel.Children.Add(exerciseButtons[i]);
             }
         }
 
-        private void AddRectangles()
+        private void ExerciseTypeButton_Click(object sender, RoutedEventArgs e)
         {
-            int numberOfRectangles = 7;
+            Button clickedButton = sender as Button;
+            string exerciseType = clickedButton.Tag.ToString();
+
+            if (exerciseType == "Cardio")
+                DisplayExercises(1);
+            else if (exerciseType == "Dumbbell")
+                DisplayExercises(2);
+            else if (exerciseType == "Yoga")
+                DisplayExercises(3);
+        }
+
+        private void DisplayExercises(int type)
+        {
+            List<Exercise> exercises = Exercise.GetExercise(type);
+
+            int numberOfRectangles = exercises.Count;
             int columnsPerRow = 3;
             int numRows = (int)Math.Ceiling((double)numberOfRectangles / columnsPerRow);
 
-            // Clear any existing row and column definitions and children
-            rectangleGrid.RowDefinitions.Clear();
-            rectangleGrid.ColumnDefinitions.Clear();
-            rectangleGrid.Children.Clear();
+            exercisesGrid.RowDefinitions.Clear();
+            exercisesGrid.ColumnDefinitions.Clear();
+            exercisesGrid.Children.Clear();
 
-            // Create the necessary RowDefinitions
             for (int i = 0; i < numRows; i++)
             {
-                rectangleGrid.RowDefinitions.Add(new RowDefinition());
+                exercisesGrid.RowDefinitions.Add(new RowDefinition());
             }
 
-            // Create the necessary ColumnDefinitions
             for (int j = 0; j < columnsPerRow; j++)
             {
-                rectangleGrid.ColumnDefinitions.Add(new ColumnDefinition());
+                exercisesGrid.ColumnDefinitions.Add(new ColumnDefinition());
             }
 
             for (int i = 0; i < numberOfRectangles; i++)
             {
-                // Create a Border to mimic a Rectangle with inner content
+                Exercise exercise = exercises[i];
+
                 Border border = new Border
                 {
-                    Width = 194,
-                    Height = 168,
-                    Margin = new Thickness(10),
+                    Width = 200,
+                    Height = 290,
+                    Margin = new Thickness(5),
                     BorderBrush = Brushes.Black,
                     BorderThickness = new Thickness(1),
                     Background = Brushes.Beige,
-                    CornerRadius = new CornerRadius(5)
+                    CornerRadius = new CornerRadius(5),
+                     Tag = exercise
                 };
 
-                // Create the inner Grid for the content
                 Grid contentGrid = new Grid();
                 contentGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
                 contentGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+                contentGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
                 contentGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-                contentGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
                 contentGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-                contentGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+                contentGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) });
 
-                // Add Image
                 Image image = new Image
                 {
-                    Source = new BitmapImage(new Uri("exercise.PNG", UriKind.Relative)), // Change to your image path
-                    Width = 50,
-                    Height = 50,
-                    Margin = new Thickness(5)
+                    Source = ByteArrayToBitmapImage(exercise.Photo),
+                    Width = 90,
+                    Height = 100,
+                    Margin = new Thickness(3, 0, 0, 0), 
+                    VerticalAlignment = VerticalAlignment.Top,
+                    HorizontalAlignment = HorizontalAlignment.Left
                 };
                 Grid.SetRow(image, 0);
-                Grid.SetRowSpan(image, 3);
                 Grid.SetColumn(image, 0);
+                Grid.SetColumnSpan(image, 2); 
                 contentGrid.Children.Add(image);
 
-                // Add Exercise Name
                 TextBlock exerciseName = new TextBlock
                 {
-                    Text = "Exercise Name",
+                    Text = exercise.Name,
                     FontWeight = FontWeights.Bold,
                     FontSize = 16,
-                    Margin = new Thickness(5, 0, 0, 0)
+                    Margin = new Thickness(5, 3, 0, 0),
+                    TextWrapping = TextWrapping.Wrap
                 };
-                Grid.SetRow(exerciseName, 0);
-                Grid.SetColumn(exerciseName, 1);
+                Grid.SetRow(exerciseName, 1);
+                Grid.SetColumn(exerciseName, 0);
+                Grid.SetColumnSpan(exerciseName, 2);
                 contentGrid.Children.Add(exerciseName);
 
-                // Add Points
                 TextBlock points = new TextBlock
                 {
-                    Text = "10 points",
+                    Text = $"{exercise.Points} points",
                     FontSize = 14,
-                    Margin = new Thickness(5, 5, 0, 0)
+                    Margin = new Thickness(5, 3, 0, 0), 
                 };
-                Grid.SetRow(points, 1);
-                Grid.SetColumn(points, 1);
+                Grid.SetRow(points, 2); 
+                Grid.SetColumn(points, 0);
+                Grid.SetColumnSpan(points, 2);
                 contentGrid.Children.Add(points);
 
-                // Add Description
                 TextBlock description = new TextBlock
                 {
-                    Text = "The sumo squat is a variation of the traditional squat that focuses on a wider stance and different toe positioning.",
+                    Text = exercise.Description,
                     FontSize = 12,
                     TextWrapping = TextWrapping.Wrap,
-                    Margin = new Thickness(5, 5, 0, 0)
+                    Margin = new Thickness(5, 3, 0, 0),
                 };
-                Grid.SetRow(description, 2);
-                Grid.SetColumn(description, 1);
+                Grid.SetRow(description, 3); 
+                Grid.SetColumn(description, 0);
+                Grid.SetColumnSpan(description, 2);
                 contentGrid.Children.Add(description);
 
-                // Add Icon Buttons
                 StackPanel iconsPanel = new StackPanel
                 {
                     Orientation = Orientation.Vertical,
+                    VerticalAlignment = VerticalAlignment.Top,
                     HorizontalAlignment = HorizontalAlignment.Right,
-                    Margin = new Thickness(0, 5, 5, 5)
+                    Margin = new Thickness(0, 5, 5, 0),
                 };
 
                 Button editButton = new Button { Content = "✏️", Width = 30, Height = 30, Margin = new Thickness(2) };
                 editButton.Click += load_edit_page;
 
                 Button deleteButton = new Button { Content = "🗑️", Width = 30, Height = 30, Margin = new Thickness(2) };
-              
+
                 Button otherButton = new Button { Content = "📄", Width = 30, Height = 30, Margin = new Thickness(2) };
                 otherButton.Click += new_edit_page;
 
@@ -164,8 +178,7 @@ namespace WpfAdmin.Pages.exercises
                 iconsPanel.Children.Add(otherButton);
 
                 Grid.SetRow(iconsPanel, 0);
-                Grid.SetRowSpan(iconsPanel, 3);
-                Grid.SetColumn(iconsPanel, 2);
+                Grid.SetColumn(iconsPanel, 1);
                 contentGrid.Children.Add(iconsPanel);
 
                 border.Child = contentGrid;
@@ -173,30 +186,55 @@ namespace WpfAdmin.Pages.exercises
                 int row = i / columnsPerRow;
                 int column = i % columnsPerRow;
 
-                rectangleGrid.Children.Add(border);
+                exercisesGrid.Children.Add(border);
                 Grid.SetRow(border, row);
                 Grid.SetColumn(border, column);
             }
         }
 
 
-        
 
-        private void load_edit_page(object sender, EventArgs e)
+
+
+        public static BitmapImage ByteArrayToBitmapImage(byte[] byteArray)
         {
-            edit_exercise temp_edit_exercise = new edit_exercise();
-            temp_edit_exercise.ShowsNavigationUI = true;
-            
+            if (byteArray == null || byteArray.Length == 0)
+                throw new ArgumentException("Byte array is empty or null");
+
+            using (MemoryStream memoryStream = new MemoryStream(byteArray))
+            {
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.StreamSource = memoryStream;
+                bitmapImage.EndInit();
+                return bitmapImage;
+            }
         }
 
-        private void new_edit_page(object sender, EventArgs e)
+        private void load_edit_page(object sender, RoutedEventArgs e)
         {
-            add_exercise temp=new add_exercise();
-            temp.ShowsNavigationUI = true;
-            this.Content = temp;
 
+            Button clickedButton = sender as Button;
+            if (clickedButton != null)
+            {
+                Border parentBorder = clickedButton.Parent as Border;
+                if (parentBorder != null)
+                {
+                    Exercise selectedExercise = parentBorder.Tag as Exercise;
+                    if (selectedExercise != null)
+                    {
+                        edit_exercise editPage = new edit_exercise(selectedExercise);
+                        NavigationService.Navigate(editPage);
+                    }
+                }
+            }
         }
 
+
+        private void new_edit_page(object sender, RoutedEventArgs e)
+        {
+           
+        }
     }
-
 }
