@@ -1,4 +1,5 @@
-﻿using CLFitness.WpfAdmin;
+﻿using CLFitness.Connection_data;
+using CLFitness.WpfAdmin;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -8,17 +9,20 @@ namespace CLFitness.WpfCustomer
 {
     public class Workout
     {
-        private static string connString = "Data Source=DESKTOP-OU69G6L\\SQLEXPRESS;Initial Catalog=FitnessDB;Integrated Security=True;Encrypt=False";
-        // ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        private static string connString= Connection.GetConnectionString();
 
         public int Id { get; set; }
         public DateTime Date { get; set; }
-        public float? Distance { get; set; } // Nullable
+        public float? Distance { get; set; }
         public int CustomerId { get; set; }
         public int ExerciseId { get; set; }
         public Person Customer { get; set; }
         public Exercise Exercise { get; set; }
 
+        public Workout()
+        {
+
+        }
         public static List<Workout> GetAllWorkouts()
         {
             List<Workout> workouts = new List<Workout>();
@@ -121,7 +125,6 @@ namespace CLFitness.WpfCustomer
                 }
                 catch (Exception ex)
                 {
-                    //MessageBox.Show($"Er is een fout opgetreden bij het toevoegen van de workout: {ex.Message}");
                 }
             }
         }
@@ -168,6 +171,7 @@ namespace CLFitness.WpfCustomer
 
             return workouts;
         }
+
 
         public static bool RemoveWorkout(Workout workout)
         {

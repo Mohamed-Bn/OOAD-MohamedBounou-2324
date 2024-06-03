@@ -48,7 +48,7 @@
         <!-- Action Buttons -->
         <StackPanel Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
             <Button x:Name="Opslaan_btn" Content="Opslaan" Width="80" Height="30" Margin="5" Click="Opslaan_btn_Click"/>
-            <Button x:Name="Annuleren_btn" Content="Annuleren" Width="80" Height="30" Margin="5" />
+            <Button x:Name="Annuleren_btn" Content="Annuleren" Width="80" Height="30" Margin="5" Click="Annuleren_btn_Click" />
         </StackPanel>
     </Grid>
 </Page>

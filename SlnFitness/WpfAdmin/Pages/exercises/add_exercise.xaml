@@ -26,7 +26,6 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Labels and TextBoxes -->
         <Label Content="Exercise Name" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
         <TextBox x:Name="exercise_name" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="5" Width="200"/>
 
@@ -39,15 +38,15 @@
         <Label Content="Type" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
         <ComboBox x:Name="type_exercise" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="5" Width="150" SelectionChanged="TypeExercise_SelectionChanged"/>
 
-        <Label Content="Body Part" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <Label x:Name="body_part_label" Content="Body Part" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
         <TextBox x:Name="body_part" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="5" Width="150"/>
 
-        <Label Content="Pose" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <Label x:Name="pose_label" Content="Pose" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
         <TextBox x:Name="pose_box" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Margin="5" Width="150"/>
 
-        <Label Content="Instruction" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <Label x:Name="nickname_label"  Content="NickName" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
 
-        <Label Content="NickName" Grid.Row="7" Grid.Column="0" VerticalAlignment="Top" Margin="5"/>
+        <Label  x:Name="instruction_label" Content="Instruction" Grid.Row="7" Grid.Column="0" VerticalAlignment="Top" Margin="5"/>
         <ScrollViewer Grid.Row="7" Grid.Column="1" Margin="5"
               HorizontalScrollBarVisibility="Auto"
               VerticalScrollBarVisibility="Auto"
@@ -55,17 +54,15 @@
             <TextBox x:Name="instruction_box" TextWrapping="Wrap" VerticalAlignment="Top"/>
         </ScrollViewer>
 
-        <!-- Image and Buttons -->
         <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="7" Margin="5" VerticalAlignment="Top">
             <Image x:Name="img" Width="114" Height="178" Margin="5"/>
             <Button x:Name="change_photo_btn" Content="Change" HorizontalAlignment="Center" Margin="5" Click="ChangePhotoButton_Click"/>
         </StackPanel>
 
-        <!-- Action Buttons -->
         <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
             <Button x:Name="Opslaan_btn" Content="Save" Width="68" Height="30" Margin="5" Click="SaveButton_Click"/>
             <Button x:Name="Annuleren_btn" Content="Cancel" Width="69" Height="30" Margin="5"/>
         </StackPanel>
-        <TextBox x:Name="nickname_box" Grid.Row="6" Grid.Column="1" VerticalAlignment="Top" Margin="46,0,101,0" Height="21" Width="Auto" TextChanged="nickname_box_TextChanged"/>
+        <TextBox x:Name="nickname_box" Grid.Row="6" Grid.Column="1" VerticalAlignment="Top" Margin="0,20,101,0" Height="21" Width="183" TextChanged="nickname_box_TextChanged" HorizontalAlignment="Right"/>
     </Grid>
 </Page>

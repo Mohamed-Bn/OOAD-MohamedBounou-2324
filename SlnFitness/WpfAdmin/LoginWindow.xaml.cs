@@ -18,18 +18,19 @@ namespace WpfAdmin
 
     public partial class LoginWindow : Window
     {
+        private bool isPasswordSet;
         public LoginWindow()
         {
             InitializeComponent();
+            SetInitialPassword("admin123");
         }
 
-        private void EmailTextBox_GotFocus(object sender, RoutedEventArgs e)
+        private void SetInitialPassword(string password)
         {
-            if (email_textbox.Text == "eg: ab@gmail.com")
-            {
-                email_textbox.Text = "";
-            }
+            password_textbox.Password = password;
+            isPasswordSet = true;
         }
+     
         private void login_button_click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
@@ -40,29 +41,6 @@ namespace WpfAdmin
         }
 
 
-        private void EmailTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(email_textbox.Text))
-            {
-                email_textbox.Text = "eg: ab@gmail.com";
-            }
-        }
-
-        private void PasswordTextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (password_textbox.Password == "password")
-            {
-                password_textbox.Password = "";
-            }
-        }
-
-        private void PasswordTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(password_textbox.Password))
-            {
-                password_textbox.Password = "password";
-            }
-        }
 
     }
 }

@@ -35,7 +35,8 @@ namespace WpfAdmin.Pages.person
             if (deletePersonResult == "true")
             {
                 MessageBox.Show("Person deleted successfully.");
-                NavigationService.GoBack();
+                persons_overview temp = new persons_overview();
+                NavigationService.Navigate(temp);
             }
             else
             {

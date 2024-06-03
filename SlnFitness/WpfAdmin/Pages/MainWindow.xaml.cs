@@ -15,13 +15,12 @@ using WpfAdmin.Pages.person;
 using WpfAdmin.Pages.exercises;
 using CLFitness.WpfAdmin;
 using CLFitness.WpfCustomer;
+using System.Windows.Navigation;
 
 
 namespace WpfAdmin.Pages
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -63,5 +62,12 @@ namespace WpfAdmin.Pages
             login_window.Show();
             this.Close();
         }
-}
+
+        private void Ultoggen_btn_Click(object sender, RoutedEventArgs e)
+        {
+           LoginWindow  temp = new LoginWindow();
+            temp.Show();
+            this.Close();
+        }
+    }
 }

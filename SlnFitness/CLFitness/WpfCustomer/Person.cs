@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CLFitness.Connection_data;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -9,7 +10,10 @@ namespace CLFitness.WpfCustomer
 {
     public class Person
     {
-        private static string connString = "Data Source=DESKTOP-OU69G6L\\SQLEXPRESS;Initial Catalog=FitnessDB;Integrated Security=True;\r\n\t\t\t Encrypt=False";
+        private static string connString= Connection.GetConnectionString();
+        public Person()
+        {
+        }
 
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -61,8 +65,6 @@ namespace CLFitness.WpfCustomer
                 }
             }
 
-
-
             return people;
         }
 
@@ -75,12 +77,9 @@ namespace CLFitness.WpfCustomer
                 try
                 {
                     connection.Open();
-
-                    // Use parameterized query to prevent SQL injection
                     string query = "SELECT * FROM Person WHERE id=@id";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        // Add the id parameter
                         command.Parameters.AddWithValue("@id", id_);
 
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -142,6 +141,7 @@ namespace CLFitness.WpfCustomer
             }
         }
 
+
         public static string UpdatePersonInDatabase(Person person)
         {
             try
@@ -173,6 +173,7 @@ namespace CLFitness.WpfCustomer
         }
 
 
+
         public static string DeleteWorkoutsForPerson(int personId)
         {
             try
@@ -195,6 +196,7 @@ namespace CLFitness.WpfCustomer
             }
         }
 
+
         public static string DeletePerson(Person person)
         {
             try
@@ -216,5 +218,6 @@ namespace CLFitness.WpfCustomer
                 return ex.Message;
             }
         }
+
     }
 }

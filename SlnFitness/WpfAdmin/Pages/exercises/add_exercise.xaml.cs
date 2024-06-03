@@ -54,6 +54,11 @@ namespace WpfAdmin.Pages.exercises
             instruction_box.Visibility = instructionVisible ? Visibility.Visible : Visibility.Collapsed;
             nickname_box.Visibility = poseVisible ? Visibility.Visible : Visibility.Collapsed;
 
+            body_part_label.Visibility = bodyPartVisible ? Visibility.Visible : Visibility.Collapsed;
+            pose_label.Visibility = poseVisible ? Visibility.Visible : Visibility.Collapsed;
+            instruction_label.Visibility = instructionVisible ? Visibility.Visible : Visibility.Collapsed;
+            nickname_label.Visibility = poseVisible ? Visibility.Visible : Visibility.Collapsed;
+
             body_part.IsEnabled = bodyPartVisible;
             pose_box.IsEnabled = poseVisible;
             instruction_box.IsEnabled = instructionVisible;
@@ -62,6 +67,27 @@ namespace WpfAdmin.Pages.exercises
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(exercise_name.Text))
+            {
+                MessageBox.Show("Name must be provided.");
+                return;
+            }
+            else if (string.IsNullOrWhiteSpace(description_box.Text))
+            {
+                MessageBox.Show("Description must be provided.");
+                return;
+            }
+            else if (string.IsNullOrWhiteSpace(points_box.Text))
+            {
+                MessageBox.Show("Points must be provided.");
+                return;
+            }
+            else if (img.Source == null)
+            {
+                MessageBox.Show("Photo must be provided.");
+                return;
+            }
+
             Exercise newExercise = null;
             string selectedType = type_exercise.SelectedItem?.ToString();
 
@@ -97,22 +123,22 @@ namespace WpfAdmin.Pages.exercises
 
                     if (newExercise != null)
                     {
-
-                        if (exercise_name.Text == null)
-                            MessageBox.Show("Name must require");
-                        else if (description_box.Text == null)
-                            MessageBox.Show("Description must require");
-                        else if (points_box.Text == null)
-                            MessageBox.Show("Points must require");
-
-                        else if (exercise_name.Text == null)
-                            MessageBox.Show("Name must require");
-
+                        if (int.TryParse(points_box.Text, out int points))
+                        {
+                            newExercise.Points = points;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please enter a valid integer for points.", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
 
                         newExercise.Name = exercise_name.Text;
                         newExercise.Description = description_box.Text;
                         newExercise.Points = int.Parse(points_box.Text);
                         newExercise.Type = exerciseType;
+
+                        
                         byte[] imageData;
                         BitmapEncoder encoder = new PngBitmapEncoder();
                         encoder.Frames.Add(BitmapFrame.Create((BitmapSource)img.Source));
@@ -124,14 +150,6 @@ namespace WpfAdmin.Pages.exercises
                         }
 
                         newExercise.Photo = imageData;
-
-
-
-                        if (newExercise.Photo== null)
-                        {
-                            MessageBox.Show("Photo must required");
-                            return;
-                        }
                         string mess = newExercise.SaveNew();
                         if (mess == "true")
                         {
@@ -158,6 +176,7 @@ namespace WpfAdmin.Pages.exercises
                 MessageBox.Show("Please select exercise type");
             }
         }
+
 
         private void nickname_box_TextChanged(object sender, TextChangedEventArgs e)
         {

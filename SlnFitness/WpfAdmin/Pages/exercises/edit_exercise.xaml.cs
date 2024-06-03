@@ -8,6 +8,7 @@ using CLFitness.WpfAdmin;
 using Microsoft.Win32;
 using System.IO;
 using System.Data.SqlClient;
+using WpfAdmin.Pages.person;
 
 namespace WpfAdmin.Pages.exercises
 {
@@ -32,12 +33,17 @@ namespace WpfAdmin.Pages.exercises
             if (exercise is YogaExercise yoga)
             {
                 pose_box.Text = yoga.Pose;
+                setUI(3);
             }
             else if (exercise is DumbbellExercise dumbbell)
             {
                 body_part.Text = dumbbell.BodyPart;
+                setUI(2);
             }
-
+            else
+            {
+                setUI(1);
+            }
 
             type_exercise.Items.Clear();
 
@@ -81,11 +87,39 @@ namespace WpfAdmin.Pages.exercises
                     break;
             }
 
-
-
         }
 
-        
+
+        private void setUI(int type)
+        {           
+            switch (type)
+            {
+                case 1:
+                    instruction_box.Visibility = Visibility.Collapsed;
+                    instruction_label.Visibility = Visibility.Collapsed;
+
+                    body_part.Visibility = Visibility.Collapsed;
+                    body_part_l.Visibility = Visibility.Collapsed;
+
+                    pose_label.Visibility = Visibility.Collapsed;
+                    pose_box.Visibility = Visibility.Collapsed;
+                    nickname.Visibility = Visibility.Collapsed;
+                    nickname_box.Visibility = Visibility.Collapsed;
+                    break;
+                case 2:
+                    pose_label.Visibility = Visibility.Collapsed;
+                    pose_box.Visibility = Visibility.Collapsed;
+                    nickname.Visibility = Visibility.Collapsed;
+                    nickname_box.Visibility = Visibility.Collapsed;
+                    break;
+                case 3: 
+                    body_part.Visibility = Visibility.Collapsed;
+                    body_part_l.Visibility = Visibility.Collapsed;
+                    break;
+                default:
+                    break;
+            }
+        }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
@@ -154,11 +188,22 @@ namespace WpfAdmin.Pages.exercises
                     newExercise.Type = exerciseType;
                     newExercise.Photo = currentExercise.Photo;
 
+                    if (int.TryParse(points_box.Text, out int points))
+                    {
+                        newExercise.Points = points;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please enter a valid integer for points.", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
                     string mess = newExercise.Save();
                     if (mess == "true")
                     {
                         MessageBox.Show("Exercise updated");
-                        NavigationService.GoBack();
+                        exercises_overview temp = new exercises_overview();
+                        NavigationService.Navigate(temp);
                     }
                     else
                     {
@@ -171,8 +216,6 @@ namespace WpfAdmin.Pages.exercises
                 }
             }
         }
-
-
 
 
 

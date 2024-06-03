@@ -1,0 +1,60 @@
+﻿<Page x:Class="WpfAdmin.Pages.exercises.view"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:WpfAdmin.Pages.exercises"
+      mc:Ignorable="d"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="View Exercise">
+
+    <Grid Background="White" Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Labels and TextBoxes -->
+        <Label Content="Exercise Name" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <TextBox x:Name="exercise_name" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="5" Width="200" IsReadOnly="True"/>
+
+        <Label Content="Total Points" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <TextBox x:Name="points_box" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5" Width="100" IsReadOnly="True"/>
+
+        <Label Content="Description" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <TextBox x:Name="description_box" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" Margin="5" Height="55" TextWrapping="Wrap" AcceptsReturn="True" Width="300" IsReadOnly="True"/>
+
+        <Label Content="Type" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <ComboBox x:Name="type_exercise" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="5" Width="150" IsEnabled="False"/>
+
+        <Label x:Name="body_part_l" Content="Body Part" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <TextBox x:Name="body_part" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="5" Width="150" IsReadOnly="True"/>
+
+        <Label x:Name="pose_label" Content="Pose" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <TextBox x:Name="pose_box" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Margin="5" Width="150" IsReadOnly="True"/>
+
+        <Label x:Name="instruction_label" Content="Instruction" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <TextBox x:Name="instruction_box" Grid.Row="6" Grid.Column="1" VerticalAlignment="Top" Margin="5,42,129,0" Height="93" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True" Grid.ColumnSpan="2"/>
+
+        <Label x:Name="nickname" Content="Nickname" Grid.Row="7" Grid.Column="0" VerticalAlignment="Top" Margin="5"/>
+        <TextBox x:Name="nickname_box" Grid.Row="7" Grid.Column="1" VerticalAlignment="Top" Margin="5" Height="21" Width="Auto" IsReadOnly="True"/>
+
+        <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="7" Margin="5" VerticalAlignment="Top">
+            <Image x:Name="img" Width="114" Height="178" Margin="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="6" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,116,5,5" RenderTransformOrigin="0.115,0.532">
+            <Button x:Name="Back" Content="Back" Width="69" Height="30" Click="move_back"/>
+        </StackPanel>
+    </Grid>
+</Page>

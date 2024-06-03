@@ -14,12 +14,10 @@
         <ScrollViewer x:Name="scrollViewer" Margin="24,29,418,0" Height="387" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" Width="250" BorderThickness="2" BorderBrush="Gray">
             <Border BorderThickness="1" BorderBrush="LightGray">
                 <StackPanel x:Name="stackPanel">
-                    <!-- Add your content here -->
                 </StackPanel>
             </Border>
         </ScrollViewer>
 
-        <!-- Labels in Boxes -->
         <Border BorderThickness="1" BorderBrush="LightGray" HorizontalAlignment="Left" Margin="385,65,0,0" VerticalAlignment="Top" Width="114" Height="30">
             <Label x:Name="login_label" Content="Login" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="14"/>
         </Border>
@@ -45,9 +43,9 @@
         </Border>
 
         <!-- Buttons -->
-        <Button x:Name="bewerk_btn" Content="Bewerk" HorizontalAlignment="Left" Margin="463,370,0,0" VerticalAlignment="Top" Click="btn_click_add_person" Height="30" Width="100" BorderThickness="2" BorderBrush="Black"/>
+            <Button x:Name="bewerk_btn" Content="Bewerk" HorizontalAlignment="Left" Margin="463,370,0,0" VerticalAlignment="Top" Click="btn_click_edit_person" Height="30" Width="100" BorderThickness="2" BorderBrush="Black"/>
         <Button x:Name="verwijder_btn" Content="Verwijder" HorizontalAlignment="Left" Margin="579,370,0,0" VerticalAlignment="Top" Click="btn_click_remove_person" Height="30" Width="100" BorderThickness="2" BorderBrush="Black"/>
-        <Button x:Name="NileView_btn" Content="Nileuw" HorizontalAlignment="Left" Margin="341,370,0,0" VerticalAlignment="Top" Click="btn_click_edit_person" Height="30" Width="100" BorderThickness="2" BorderBrush="Black"/>
+            <Button x:Name="NileView_btn" Content="Nileuw" HorizontalAlignment="Left" Margin="341,370,0,0" VerticalAlignment="Top" Click="btn_click_add_person" Height="30" Width="100" BorderThickness="2" BorderBrush="Black"/>
 
     </Grid>
     </Border>

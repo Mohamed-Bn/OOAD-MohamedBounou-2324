@@ -1,62 +1,68 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.IO;
+using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using CLFitness.WpfCustomer;
 using Microsoft.Win32;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace WpfAdmin.Pages.person
 {
     public partial class new_person : Page
     {
+        BitmapImage image;
         public new_person()
         {
             InitializeComponent();
         }
-        BitmapImage image;
+
         private void Opslaan_btn_Click(object sender, RoutedEventArgs e)
         {
+            if (!ValidateInput())
+                return;
+
             Person newPerson = new Person
             {
                 FirstName = voorname_box.Text,
                 LastName = AchterName_box.Text,
                 Login = login_box.Text,
-                Password = password_box.Text,
+                Password = HashPassword(password_box.Text),
                 IsAdmin = is_admin_chk_box.IsChecked ?? false,
                 ProfilePhoto = ConvertBitmapImageToByteArray(image)
+            };
 
-        };
-
-            if (voorname_box.Text == null || AchterName_box.Text==null || password_box.Text==null || image==null)
-                MessageBox.Show("All field must be required to fill");
-            string mess = Person.InsertPersonIntoDatabase(newPerson);
-            if (mess=="true")
+            try
             {
-                MessageBox.Show("Person added successfully.");
-                voorname_box.Clear();
-                AchterName_box.Clear();
-                login_box.Clear();
-                password_box.Clear();
-                is_admin_chk_box.IsChecked = false;
+                string message = Person.InsertPersonIntoDatabase(newPerson);
+                if (message == "true")
+                {
+                    MessageBox.Show("Person added successfully.");
+                    ClearFields();
+                }
+                else
+                {
+                    MessageBox.Show("Error: " + message);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show(mess);
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
 
         private void kies_btn_Click(object sender, RoutedEventArgs e)
-         {
+        {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.png)|*.jpg;*.jpeg;*.png";
-            if (openFileDialog.ShowDialog() == true) {
-                 image = new BitmapImage(new Uri(openFileDialog.FileName));
+            if (openFileDialog.ShowDialog() == true)
+            {
+                image = new BitmapImage(new Uri(openFileDialog.FileName));
                 person_image.Source = image;
-              }
-         }
+            }
+        }
+
         private byte[] ConvertBitmapImageToByteArray(BitmapImage image)
         {
             byte[] imageData;
@@ -70,5 +76,69 @@ namespace WpfAdmin.Pages.person
             return imageData;
         }
 
+        private bool ValidateInput()
+        {
+            if (string.IsNullOrWhiteSpace(voorname_box.Text) ||
+                string.IsNullOrWhiteSpace(AchterName_box.Text) ||
+                string.IsNullOrWhiteSpace(password_box.Text) ||
+                image == null)
+            {
+                MessageBox.Show("All fields must be filled.");
+                return false;
+            }
+
+            if (password_box.Text.Length < 8)
+            {
+                MessageBox.Show("Password must be at least 8 characters long.");
+                return false;
+            }
+
+            return true;
+        }
+
+
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private string HashPassword(string password)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+
+                System.Text.StringBuilder builder = new System.Text.StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2")); 
+                }
+                return builder.ToString();
+            }
+        }
+
+        private void ClearFields()
+        {
+            voorname_box.Clear();
+            AchterName_box.Clear();
+            login_box.Clear();
+            password_box.Clear();
+            is_admin_chk_box.IsChecked = false;
+            person_image.Source = null;
+        }
+
+        private void Annuleren_btn_Click(object sender, RoutedEventArgs e)
+        {
+            persons_overview temp = new persons_overview();
+            NavigationService.Navigate(temp);
+        }
     }
 }

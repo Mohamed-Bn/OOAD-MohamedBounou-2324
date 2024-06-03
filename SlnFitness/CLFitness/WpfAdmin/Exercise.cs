@@ -1,4 +1,5 @@
-﻿using CLFitness.WpfCustomer;
+﻿using CLFitness.Connection_data;
+using CLFitness.WpfCustomer;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -8,20 +9,24 @@ namespace CLFitness.WpfAdmin
 {
     public class Exercise
     {
-        private static string connString = "Data Source=DESKTOP-OU69G6L\\SQLEXPRESS;Initial Catalog=FitnessDB;Integrated Security=True;Encrypt=False";
-        // ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        private static string connString= Connection.GetConnectionString();
 
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public int TypeNum { get; set; }
         public ExerciseType Type { get; set; }
-        public string Instruction { get; set; } // Nullable
-        public string BodyPart { get; set; } // Nullable
-        public string Pose { get; set; } // Nullable
-        public string Nickname { get; set; } // Nullable
+        public string Instruction { get; set; }
+        public string BodyPart { get; set; } 
+        public string Pose { get; set; } 
+        public string Nickname { get; set; }
         public byte[] Photo { get; set; }
         public int Points { get; set; }
+
+        public Exercise()
+        {
+        }
+
 
         public static List<Exercise> GetAllExercises()
         {
@@ -69,6 +74,8 @@ namespace CLFitness.WpfAdmin
 
             return exercises;
         }
+
+
         public static Exercise GetExerciseById(int exerciseId)
         {
             Exercise exercise = null;
@@ -114,6 +121,7 @@ namespace CLFitness.WpfAdmin
 
             return exercise;
         }
+
 
         public static List<Exercise> GetExercise(int type)
         {
@@ -181,9 +189,9 @@ namespace CLFitness.WpfAdmin
                     Console.WriteLine($"An error occurred: {ex.Message}");
                 }
             }
-
             return exercises;
         }
+
 
 
         public string Save()

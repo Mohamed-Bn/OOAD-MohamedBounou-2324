@@ -8,15 +8,20 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using CLFitness.Connection_data;
 
 
 namespace CLFitness.WpfCustomer
 {
     public class Person_name
     {
-        private static string connString =       "Data Source=DESKTOP-OU69G6L\\SQLEXPRESS;Initial Catalog=FitnessDB;Integrated Security=True;\r\n\t\t\t Encrypt=False";
+        private static string connString= Connection.GetConnectionString();
 
-            public int Id { get; set; }
+        public Person_name()
+        {
+
+        }
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
@@ -54,8 +59,6 @@ namespace CLFitness.WpfCustomer
                     Console.WriteLine($"An error occurred: {ex.Message}");
                 }
             }
-
-
 
             return people;
         }

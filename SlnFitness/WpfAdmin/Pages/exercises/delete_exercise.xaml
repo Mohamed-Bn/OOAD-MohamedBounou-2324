@@ -15,15 +15,12 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Exercise Name -->
         <Label Content="Exercise Name:" Grid.Row="0" Margin="5" VerticalAlignment="Center"/>
 
         <TextBlock x:Name="name" Text="{Binding }" Grid.Row="0" Margin="138,5,348,5"/>
 
-        <!-- Prompt Message -->
         <TextBlock Text="Are you sure you want to delete this exercise? This will lead to delete all workout record also !" Grid.Row="1" Margin="5"/>
 
-        <!-- Action Buttons -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
             <Button Content="Cancel" Width="100" Margin="5" Click="CancelButton_Click" Height="47"/>
             <Button Content="Delete" Width="100" Margin="5" Click="DeleteButton_Click" Height="51"/>

@@ -41,7 +41,8 @@ namespace WpfAdmin.Pages.exercises
                 MessageBox.Show($"Failed to delete exercise: {deleteResult}");
             }
 
-            NavigationService.GoBack();
+            exercises_overview temp = new exercises_overview();
+            NavigationService.Navigate(temp);
         }
     }
 }

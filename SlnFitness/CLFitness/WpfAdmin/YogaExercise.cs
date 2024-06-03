@@ -1,5 +1,4 @@
-﻿using CLFitness.Central;
-using CLFitness.WpfCustomer;
+﻿using CLFitness.WpfCustomer;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;

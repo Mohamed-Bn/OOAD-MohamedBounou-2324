@@ -16,11 +16,9 @@
             </Grid.RowDefinitions>
 
             <StackPanel x:Name="exercise_name_panel" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,10">
-                <!-- Buttons for exercise names will be added dynamically -->
             </StackPanel>
 
             <Grid Grid.Row="1" x:Name="exercisesGrid">
-                <!-- Dynamic exercise content goes here -->
             </Grid>
             <Frame Grid.Row="1" x:Name="ChildFrame"/>
         </Grid>

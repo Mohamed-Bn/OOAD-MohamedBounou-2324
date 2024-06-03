@@ -18,6 +18,9 @@ namespace WpfAdmin.Pages.person
     public partial class persons_overview : Page
     {
         List<Person_name> persons;
+        private Person selectedPerson;
+
+
         public persons_overview()
         {
             InitializeComponent();
@@ -25,27 +28,24 @@ namespace WpfAdmin.Pages.person
             AddDynamicContent();  
         }
 
-        
-
         private void AddDynamicContent()
         {
             for (int i = 0; i < persons.Count; i++)
             {
                 TextBlock newTextBlock = new TextBlock();
-                newTextBlock.Text = i+1+ ".  "+ persons[i].FirstName + " " + persons[i].LastName;
+                newTextBlock.Text = i + 1 + ".  " + persons[i].FirstName + " " + persons[i].LastName;
                 newTextBlock.Margin = new Thickness(2);
                 newTextBlock.MouseLeftButtonUp += show_person_info;
                 newTextBlock.Tag = persons[i].Id;
                 stackPanel.Children.Add(newTextBlock);
             }
-
         }
-
 
         private void show_person_info(object sender, RoutedEventArgs e)
         {
             int id = (int)((TextBlock)sender).Tag;
             Person person = Person.GetPerson(id);
+            selectedPerson = Person.GetPerson(id);
 
             if (person == null)
             {
@@ -68,6 +68,7 @@ namespace WpfAdmin.Pages.person
             }
         }
 
+
         public static BitmapImage ByteArrayToBitmapImage(byte[] byteArray)
         {
             if (byteArray == null || byteArray.Length == 0)
@@ -85,11 +86,6 @@ namespace WpfAdmin.Pages.person
         }
 
 
-
-
-
-
-
         private void btn_click_add_person(object sender, RoutedEventArgs e)
         {
             new_person temp = new new_person();
@@ -98,25 +94,14 @@ namespace WpfAdmin.Pages.person
 
         private void btn_click_edit_person(object sender, RoutedEventArgs e)
         {
-
-            Button clickedButton = sender as Button;
-            if (clickedButton != null)
+            if (selectedPerson == null)
             {
-                Border parentBorder = clickedButton.Parent as Border;
-                if (parentBorder != null)
-                {
-                    TextBlock textBlock = parentBorder.Child as TextBlock;
-                    if (textBlock != null)
-                    {
-                        int id = (int)textBlock.Tag;
-                        Person person = Person.GetPerson(id);
-                        {
-                            edit_person editPage = new edit_person(person);
-                            NavigationService.Navigate(editPage);
-                        }
-                    }
-                }
+                MessageBox.Show("Please select a person.");
+                return;
             }
+
+            edit_person temp = new edit_person(selectedPerson);
+            NavigationService.Navigate(temp);
         }
 
         private Frame FindFrame(DependencyObject parent)
@@ -143,7 +128,14 @@ namespace WpfAdmin.Pages.person
 
         private void btn_click_remove_person(object sender, RoutedEventArgs e)
         {
+            if (selectedPerson == null)
+            {
+                MessageBox.Show("Please select a person.");
+                return;
+            }
 
+            delete_person temp = new delete_person(selectedPerson);
+            NavigationService.Navigate(temp);
         }
     }
 }

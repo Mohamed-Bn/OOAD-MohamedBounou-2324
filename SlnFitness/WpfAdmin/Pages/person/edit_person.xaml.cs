@@ -1,19 +1,11 @@
 ﻿using CLFitness.WpfCustomer;
+using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WpfAdmin.Pages.person
 {
@@ -33,7 +25,6 @@ namespace WpfAdmin.Pages.person
             voorname_box.Text = person.FirstName;
             AchterName_box.Text = person.LastName;
             login_box.Text = person.Login;
-            password_box.Text = person.Password;
             is_admin_chk_box.IsChecked = person.IsAdmin;
 
             if (person.ProfilePhoto != null)
@@ -55,14 +46,25 @@ namespace WpfAdmin.Pages.person
             person.FirstName = voorname_box.Text;
             person.LastName = AchterName_box.Text;
             person.Login = login_box.Text;
-            person.Password = password_box.Text;
-            person.IsAdmin = is_admin_chk_box.IsChecked ?? false; 
+            person.IsAdmin = is_admin_chk_box.IsChecked ?? false;
+
+            if (!string.IsNullOrWhiteSpace(password_box.Text))
+            {
+                if (password_box.Text.Length < 8)
+                {
+                    MessageBox.Show("Password must be at least 8 characters long.");
+                    return;
+                }
+
+                person.Password = HashPassword(password_box.Text);
+            }
 
             string result = Person.UpdatePersonInDatabase(person);
             if (result == "true")
             {
                 MessageBox.Show("Person updated successfully.");
-                NavigationService.GoBack();
+                persons_overview temp = new persons_overview();
+                NavigationService.Navigate(temp);
             }
             else
             {
@@ -70,17 +72,62 @@ namespace WpfAdmin.Pages.person
             }
         }
 
-       
+
+        private string HashPassword(string password)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+
+                System.Text.StringBuilder builder = new System.Text.StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
+        }
+
 
         private void Annuleren_btn_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            persons_overview temp = new persons_overview();
+            NavigationService.Navigate(temp);
         }
+
 
         private void kies_btn_Click(object sender, RoutedEventArgs e)
         {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.png)|*.jpg;*.jpeg;*.png";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                try
+                {
+                    using (Stream fileStream = openFileDialog.OpenFile())
+                    {
+                        BitmapImage newImage = new BitmapImage();
+                        newImage.BeginInit();
+                        newImage.StreamSource = fileStream;
+                        newImage.CacheOption = BitmapCacheOption.OnLoad;
+                        newImage.EndInit();
 
+                        person_image.Source = newImage;
+
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            BitmapEncoder encoder = new PngBitmapEncoder();
+                            encoder.Frames.Add(BitmapFrame.Create(newImage));
+                            encoder.Save(ms);
+                            person.ProfilePhoto = ms.ToArray();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}");
+                }
+            }
         }
     }
 }
-

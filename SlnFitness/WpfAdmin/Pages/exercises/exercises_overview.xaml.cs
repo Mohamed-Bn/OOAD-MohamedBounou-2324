@@ -1,5 +1,4 @@
 ﻿using CLFitness.WpfAdmin;
-using CLFitness.WpfCustomer;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,13 +16,14 @@ namespace WpfAdmin.Pages.exercises
         public exercises_overview()
         {
             InitializeComponent();
-            exerciseButtons = new Button[3];
+            exerciseButtons = new Button[4];
             AddExerciseTypeButtons();
         }
 
+
         private void AddExerciseTypeButtons()
         {
-            string[] exerciseTypes = { "Cardio", "Dumbbell", "Yoga" };
+            string[] exerciseTypes = { "Cardio", "Dumbbell", "Yoga" , "Add exercise" };
 
             for (int i = 0; i < exerciseTypes.Length; i++)
             {
@@ -32,21 +32,29 @@ namespace WpfAdmin.Pages.exercises
                     Content = exerciseTypes[i],
                     Margin = new Thickness(10),
                     Tag = exerciseTypes[i],
-                    Padding = new Thickness(20, 10, 20, 10), 
-                    BorderThickness = new Thickness(1),
-                    BorderBrush = Brushes.Black
+                    Padding = new Thickness(20, 10, 20, 10),
+                    BorderThickness = new Thickness(1), 
+                    BorderBrush = Brushes.Black 
                 };
 
-                if (i == 0)
-                    exerciseButtons[i].Margin = new Thickness(0, 10, 10, 10);
+                if (i == 0) 
+                    exerciseButtons[i].Margin = new Thickness(0, 10, 10, 10); 
 
                 if (i == exerciseTypes.Length - 1) 
-                    exerciseButtons[i].Margin = new Thickness(10, 10, 0, 10);
+                    exerciseButtons[i].Margin = new Thickness(10, 10, 0, 10); 
 
-                exerciseButtons[i].Click += ExerciseTypeButton_Click;
+                if (i == 3)
+                {
+                    exerciseButtons[i].Click += add_exercise;
+                }
+                else
+                {
+                    exerciseButtons[i].Click += ExerciseTypeButton_Click;
+                }
                 exercise_name_panel.Children.Add(exerciseButtons[i]);
             }
         }
+
 
         private void ExerciseTypeButton_Click(object sender, RoutedEventArgs e)
         {
@@ -60,6 +68,14 @@ namespace WpfAdmin.Pages.exercises
             else if (exerciseType == "Yoga")
                 DisplayExercises(3);
         }
+
+
+        private void add_exercise(object sender, RoutedEventArgs e)
+        {
+            add_exercise temp = new add_exercise();
+            NavigationService.Navigate(temp);
+        }
+
 
         private void DisplayExercises(int type)
         {
@@ -90,14 +106,14 @@ namespace WpfAdmin.Pages.exercises
                 Border border = new Border
                 {
                     Width = 200,
-                    Height = 290,
+                    Height = 290, 
                     Margin = new Thickness(5),
                     BorderBrush = Brushes.Black,
                     BorderThickness = new Thickness(1),
                     Background = Brushes.Beige,
-                    CornerRadius = new CornerRadius(5),
-                     Tag = exercise
+                    CornerRadius = new CornerRadius(5)
                 };
+                border.Tag = exercise;
 
                 Grid contentGrid = new Grid();
                 contentGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
@@ -112,7 +128,7 @@ namespace WpfAdmin.Pages.exercises
                     Source = ByteArrayToBitmapImage(exercise.Photo),
                     Width = 90,
                     Height = 100,
-                    Margin = new Thickness(3, 0, 0, 0), 
+                    Margin = new Thickness(3, 0, 0, 0),
                     VerticalAlignment = VerticalAlignment.Top,
                     HorizontalAlignment = HorizontalAlignment.Left
                 };
@@ -131,14 +147,14 @@ namespace WpfAdmin.Pages.exercises
                 };
                 Grid.SetRow(exerciseName, 1);
                 Grid.SetColumn(exerciseName, 0);
-                Grid.SetColumnSpan(exerciseName, 2);
+                Grid.SetColumnSpan(exerciseName, 2); 
                 contentGrid.Children.Add(exerciseName);
 
                 TextBlock points = new TextBlock
                 {
                     Text = $"{exercise.Points} points",
                     FontSize = 14,
-                    Margin = new Thickness(5, 3, 0, 0), 
+                    Margin = new Thickness(5, 3, 0, 0),
                 };
                 Grid.SetRow(points, 2); 
                 Grid.SetColumn(points, 0);
@@ -150,11 +166,11 @@ namespace WpfAdmin.Pages.exercises
                     Text = exercise.Description,
                     FontSize = 12,
                     TextWrapping = TextWrapping.Wrap,
-                    Margin = new Thickness(5, 3, 0, 0),
+                    Margin = new Thickness(5, 3, 0, 0)
                 };
-                Grid.SetRow(description, 3); 
+                Grid.SetRow(description, 3);
                 Grid.SetColumn(description, 0);
-                Grid.SetColumnSpan(description, 2);
+                Grid.SetColumnSpan(description, 2); 
                 contentGrid.Children.Add(description);
 
                 StackPanel iconsPanel = new StackPanel
@@ -162,16 +178,16 @@ namespace WpfAdmin.Pages.exercises
                     Orientation = Orientation.Vertical,
                     VerticalAlignment = VerticalAlignment.Top,
                     HorizontalAlignment = HorizontalAlignment.Right,
-                    Margin = new Thickness(0, 5, 5, 0),
+                    Margin = new Thickness(0, 5, 5, 0), 
                 };
 
                 Button editButton = new Button { Content = "✏️", Width = 30, Height = 30, Margin = new Thickness(2) };
                 editButton.Click += load_edit_page;
 
                 Button deleteButton = new Button { Content = "🗑️", Width = 30, Height = 30, Margin = new Thickness(2) };
-
+                deleteButton.Click += delete_edit_page;
                 Button otherButton = new Button { Content = "📄", Width = 30, Height = 30, Margin = new Thickness(2) };
-                otherButton.Click += new_edit_page;
+                otherButton.Click += view_page;
 
                 iconsPanel.Children.Add(editButton);
                 iconsPanel.Children.Add(deleteButton);
@@ -212,29 +228,143 @@ namespace WpfAdmin.Pages.exercises
             }
         }
 
-        private void load_edit_page(object sender, RoutedEventArgs e)
-        {
 
+        private T FindParent<T>(DependencyObject child) where T : DependencyObject
+        {
+            DependencyObject parentObject = VisualTreeHelper.GetParent(child);
+
+            if (parentObject == null)
+            {
+                return null;
+            }
+
+            if (parentObject is T parent)
+            {
+                return parent;
+            }
+            else
+            {
+                return FindParent<T>(parentObject);
+            }
+        }
+
+        
+        private void delete_edit_page(object sender, RoutedEventArgs e)
+        {
             Button clickedButton = sender as Button;
             if (clickedButton != null)
             {
-                Border parentBorder = clickedButton.Parent as Border;
+                Border parentBorder = FindParent<Border>(clickedButton);
                 if (parentBorder != null)
                 {
-                    Exercise selectedExercise = parentBorder.Tag as Exercise;
-                    if (selectedExercise != null)
+                    if (parentBorder.Tag != null)
                     {
-                        edit_exercise editPage = new edit_exercise(selectedExercise);
-                        NavigationService.Navigate(editPage);
+                        Exercise selectedExercise = parentBorder.Tag as Exercise;
+                        if (selectedExercise != null)
+                        {
+                            delete_exercise temp = new delete_exercise(selectedExercise);
+                            NavigationService.Navigate(temp);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Selected exercise is null.");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Tag property of the parent border is null.");
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Parent border not found.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Clicked element is not a button.");
             }
         }
 
 
-        private void new_edit_page(object sender, RoutedEventArgs e)
+
+        private void load_edit_page(object sender, RoutedEventArgs e)
         {
-           
+            Button clickedButton = sender as Button;
+            if (clickedButton != null)
+            {
+                Border parentBorder = FindParent<Border>(clickedButton);
+                if (parentBorder != null)
+                {
+                    if (parentBorder.Tag != null)
+                    {
+                        Exercise selectedExercise = parentBorder.Tag as Exercise;
+                        if (selectedExercise != null)
+                        {
+                            edit_exercise editPage = new edit_exercise(selectedExercise);
+                            NavigationService.Navigate(editPage);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Selected exercise is null.");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Tag property of the parent border is null.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Parent border not found.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Clicked element is not a button.");
+            }
         }
+
+
+
+
+
+        private void view_page(object sender, RoutedEventArgs e)
+        {
+            Button clickedButton = sender as Button;
+            if (clickedButton != null)
+            {
+                Border parentBorder = FindParent<Border>(clickedButton);
+                if (parentBorder != null)
+                {
+                    if (parentBorder.Tag != null)
+                    {
+                        Exercise selectedExercise = parentBorder.Tag as Exercise;
+                        if (selectedExercise != null)
+                        {
+                            view temp = new view(selectedExercise);
+                            NavigationService.Navigate(temp);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Selected exercise is null.");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Tag property of the parent border is null.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Parent border not found.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Clicked element is not a button.");
+            }
+        }
+
     }
 }

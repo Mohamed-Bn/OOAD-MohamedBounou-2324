@@ -21,13 +21,14 @@
 
         <!-- Login Form -->
         <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
-            <Label x:Name="email_label" Content="Email" Margin="10"/>
-            <TextBox x:Name="email_textbox" Margin="10" Width="250" Height="30" Text="eg: ab@gmail.com" GotFocus="EmailTextBox_GotFocus" LostFocus="EmailTextBox_LostFocus"/>
+            <Label x:Name="email_label" Content="Email" Margin="10" FontWeight="Bold"/>
+            <TextBox x:Name="email_textbox" Margin="10" Width="250" Height="30" Text="abcde"  />
 
-            <Label x:Name="label_password" Content="Password" Margin="10"/>
-            <PasswordBox x:Name="password_textbox" Margin="10" Width="250" Height="30" GotFocus="PasswordTextBox_GotFocus" LostFocus="PasswordTextBox_LostFocus"/>
+            <Label x:Name="label_password" Content="Password" Margin="10" FontWeight="Bold"/>
+            <PasswordBox x:Name="password_textbox" Margin="10" Width="250" Height="30" 
+            />
 
-            <Button x:Name="login_button" Content="Login" Margin="10" Width="100" HorizontalAlignment="Center" Click="login_button_click"/>
+            <Button x:Name="login_button" Content="Login" Margin="10" Width="158" HorizontalAlignment="Center" Click="login_button_click" Height="33" FontSize="16" FontWeight="Bold"/>
         </StackPanel>
     </Grid>
 </Window>
