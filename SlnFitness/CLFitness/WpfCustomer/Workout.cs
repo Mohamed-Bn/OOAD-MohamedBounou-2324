@@ -9,7 +9,11 @@ namespace CLFitness.WpfCustomer
 {
     public class Workout
     {
+        // Statische variabele voor de database connectiestring.
+
         private static string connString= Connection.GetConnectionString();
+
+        // Eigenschappen van de Workout klasse.
 
         public int Id { get; set; }
         public DateTime Date { get; set; }
@@ -23,6 +27,9 @@ namespace CLFitness.WpfCustomer
         {
 
         }
+
+        // Methode om alle workouts op te halen.
+        // chatgpt
         public static List<Workout> GetAllWorkouts()
         {
             List<Workout> workouts = new List<Workout>();
@@ -64,6 +71,8 @@ namespace CLFitness.WpfCustomer
             return workouts;
         }
 
+        // Methode om de workouts van een bepaalde klant op te halen.
+        // chatgpt
         public static List<Workout> GetPersonWorkout(int customerId)
         {
             List<Workout> workouts = new List<Workout>();
@@ -107,6 +116,9 @@ namespace CLFitness.WpfCustomer
             return workouts;
         }
 
+        // Methode om een nieuwe workout toe te voegen.
+        //chatgpt
+
         public static void AddWorkout(Workout workout)
         {
             using (SqlConnection connection = new SqlConnection(connString))
@@ -129,6 +141,8 @@ namespace CLFitness.WpfCustomer
             }
         }
 
+        // Methode om workouts van een klant op te halen op basis van datum.
+        // chatgpt
         public static List<Workout> GetPersonWorkoutsByDate(int customerId, DateTime date)
         {
             List<Workout> workouts = new List<Workout>();
@@ -168,11 +182,11 @@ namespace CLFitness.WpfCustomer
                     Console.WriteLine($"An error occurred: {ex.Message}");
                 }
             }
-
             return workouts;
         }
 
-
+        // Methode om een workout te verwijderen.
+        // chatgpt
         public static bool RemoveWorkout(Workout workout)
         {
             using (SqlConnection connection = new SqlConnection(connString))
@@ -192,8 +206,12 @@ namespace CLFitness.WpfCustomer
                    return false;
                 }
             }
-
             return false;
         }
     }
+    // https://www.jbvigneron.fr/parlons-dev/csharp-interagir-avec-une-base-de-donnees-sql/
+    // https://learn.microsoft.com/nl-nl/dotnet/framework/data/adonet/retrieving-data-using-a-datareader
+    // https://stackoverflow.com/questions/6003480/reading-values-from-sql-database-in-c-sharp
+    // https://stackoverflow.com/questions/57448296/how-to-insert-data-to-a-database-in-c-sharp
+    // https://stackoverflow.com/questions/72334966/how-to-delete-a-data-in-database-table
 }

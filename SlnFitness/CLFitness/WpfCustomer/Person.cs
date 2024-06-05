@@ -10,7 +10,12 @@ namespace CLFitness.WpfCustomer
 {
     public class Person
     {
+        // Statische variabele voor de database connectiestring.
+
         private static string connString= Connection.GetConnectionString();
+        
+        // Constructor en eigenschappen van de persoon.
+
         public Person()
         {
         }
@@ -25,7 +30,8 @@ namespace CLFitness.WpfCustomer
         public bool IsAdmin { get; set; }
 
 
-
+        // Methode om alle personen uit de database op te halen.
+        // chatgpt
         public static List<Person> GetAllPerson()
         {
             List<Person> people = new List<Person>();
@@ -68,6 +74,8 @@ namespace CLFitness.WpfCustomer
             return people;
         }
 
+        // Methode om een specifieke personen op te halen op basis van ID.
+        // chatgpt
         public static Person GetPerson(int id_)
         {
             Person person = null;
@@ -110,7 +118,8 @@ namespace CLFitness.WpfCustomer
             return person;
         }
 
-
+        // Methode om personen toe te voegen aan database
+        // chatgpt
         public static string InsertPersonIntoDatabase(Person person)
         {
             try
@@ -141,7 +150,8 @@ namespace CLFitness.WpfCustomer
             }
         }
 
-
+        // Methode om een update te maken van informatie van persoon
+        // chatgpt
         public static string UpdatePersonInDatabase(Person person)
         {
             try
@@ -173,7 +183,8 @@ namespace CLFitness.WpfCustomer
         }
 
 
-
+        // Methode om oefening van personen te verwijderen van de database
+        // chatgpt
         public static string DeleteWorkoutsForPerson(int personId)
         {
             try
@@ -196,7 +207,8 @@ namespace CLFitness.WpfCustomer
             }
         }
 
-
+        // Methode om personen te verwijderen van database
+        // chatpgt
         public static string DeletePerson(Person person)
         {
             try
@@ -218,6 +230,10 @@ namespace CLFitness.WpfCustomer
                 return ex.Message;
             }
         }
-
     }
+    // https://www.jbvigneron.fr/parlons-dev/csharp-interagir-avec-une-base-de-donnees-sql/
+    // https://learn.microsoft.com/nl-nl/dotnet/framework/data/adonet/retrieving-data-using-a-datareader
+    // https://stackoverflow.com/questions/6003480/reading-values-from-sql-database-in-c-sharp
+    // https://stackoverflow.com/questions/57448296/how-to-insert-data-to-a-database-in-c-sharp
+    // https://stackoverflow.com/questions/72334966/how-to-delete-a-data-in-database-table
 }

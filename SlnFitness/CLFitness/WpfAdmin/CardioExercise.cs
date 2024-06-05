@@ -12,6 +12,4 @@ namespace CLFitness.WpfAdmin
     {
         // No specific fields for CardioExercise
     }
-
-    
 }

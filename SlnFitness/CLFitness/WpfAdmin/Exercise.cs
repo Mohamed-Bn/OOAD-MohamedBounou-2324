@@ -9,7 +9,11 @@ namespace CLFitness.WpfAdmin
 {
     public class Exercise
     {
+        // Statische variabele voor de database connectiestring.
+
         private static string connString= Connection.GetConnectionString();
+
+        // Eigenschappen van de oefening.
 
         public int Id { get; set; }
         public string Name { get; set; }
@@ -27,7 +31,8 @@ namespace CLFitness.WpfAdmin
         {
         }
 
-
+        // Methode om alle oefeningen uit de database op te halen.
+        //chatgpt
         public static List<Exercise> GetAllExercises()
         {
             List<Exercise> exercises = new List<Exercise>();
@@ -75,7 +80,8 @@ namespace CLFitness.WpfAdmin
             return exercises;
         }
 
-
+        // Methode om een specifieke oefening op te halen op basis van ID.
+        //chatgpt
         public static Exercise GetExerciseById(int exerciseId)
         {
             Exercise exercise = null;
@@ -122,7 +128,8 @@ namespace CLFitness.WpfAdmin
             return exercise;
         }
 
-
+        // Methode om oefeningen op te halen op basis van type.
+        //chatgpt
         public static List<Exercise> GetExercise(int type)
         {
             List<Exercise> exercises = new List<Exercise>();
@@ -193,6 +200,7 @@ namespace CLFitness.WpfAdmin
         }
 
 
+        // Methode om de oefening op te slaan in de database.
 
         public string Save()
         {
@@ -226,9 +234,12 @@ namespace CLFitness.WpfAdmin
             }
         }
 
+        // Methoden om een nieuwe oefening op te slaan.
 
         public string SaveNew()
         {
+            // Probeert een nieuwe oefening in de database in te voegen.
+
             try
             {
                 using (SqlConnection connection = new SqlConnection(connString))
@@ -259,8 +270,12 @@ namespace CLFitness.WpfAdmin
             }
         }
 
+        // Methode om een oefening te verwijderen.
+
         public string Delete()
         {
+            // Probeert een oefening te verwijderen en roept DeleteAssociatedWorkouts aan.
+
             try
             {
                 DeleteAssociatedWorkouts();
@@ -288,9 +303,12 @@ namespace CLFitness.WpfAdmin
             }
         }
 
+        // Hulpfunctie om gerelateerde workouts te verwijderen.
 
         private void DeleteAssociatedWorkouts()
         {
+            // Verwijdert alle workouts die geassocieerd zijn met de oefening.
+
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 connection.Open();
@@ -302,6 +320,8 @@ namespace CLFitness.WpfAdmin
             }
         }
 
+        // Virtuele methoden die overschreven kunnen worden in afgeleide klassen.
+
         protected virtual string GetInstruction() => null;
         protected virtual string GetBodyPart() => null;
         protected virtual string GetPose() => null;
@@ -309,6 +329,7 @@ namespace CLFitness.WpfAdmin
     }
 
 
+    // Enumeratie voor verschillende soorten oefeningen.
 
     public enum ExerciseType
     {
@@ -316,4 +337,9 @@ namespace CLFitness.WpfAdmin
         Dumbbell = 2,
         Yoga = 3
     }
+    // https://www.jbvigneron.fr/parlons-dev/csharp-interagir-avec-une-base-de-donnees-sql/
+    // https://learn.microsoft.com/nl-nl/dotnet/framework/data/adonet/retrieving-data-using-a-datareader
+    // https://stackoverflow.com/questions/6003480/reading-values-from-sql-database-in-c-sharp
+    // https://stackoverflow.com/questions/57448296/how-to-insert-data-to-a-database-in-c-sharp
+    // https://stackoverflow.com/questions/72334966/how-to-delete-a-data-in-database-table
 }
