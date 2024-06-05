@@ -8,12 +8,12 @@ namespace CLFitness.Connection_data
 {
     public static class Connection
     {
-        private static readonly string connString = "Data Source=DESKTOP-0G52L1T\\SQLEXPRESS;Initial Catalog=FitnessDB;Integrated Security=True;";
+        // Deze string wordt gebruikt om een verbinding met de SQL Server-database tot stand te brengen
+        private static readonly string connString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=FitnessDB;Integrated Security=True\r\n";
 
         public static string GetConnectionString()
         {
             return connString;
         }
     }
-
 }

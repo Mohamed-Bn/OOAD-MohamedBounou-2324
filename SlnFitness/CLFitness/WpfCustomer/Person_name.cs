@@ -1,26 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Data.SqlClient;
-using CLFitness.Connection_data;
-
 
 namespace CLFitness.WpfCustomer
 {
     public class Person_name
     {
-        private static string connString= Connection.GetConnectionString();
+        // Utilisez la chaîne de connexion correcte ici
+        private static readonly string connString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=FitnessDB;Integrated Security=True";
 
         public Person_name()
         {
-
         }
+
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -35,7 +27,7 @@ namespace CLFitness.WpfCustomer
                 {
                     connection.Open();
 
-                    using (SqlCommand command = new SqlCommand("SELECT id ,firstName, lastName FROM Person", connection))
+                    using (SqlCommand command = new SqlCommand("SELECT id, firstName, lastName FROM Person", connection))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
@@ -46,7 +38,6 @@ namespace CLFitness.WpfCustomer
                                     Id = reader.GetInt32(reader.GetOrdinal("id")),
                                     FirstName = reader.GetString(reader.GetOrdinal("firstName")),
                                     LastName = reader.GetString(reader.GetOrdinal("lastName")),
-                                  
                                 };
 
                                 people.Add(person);
