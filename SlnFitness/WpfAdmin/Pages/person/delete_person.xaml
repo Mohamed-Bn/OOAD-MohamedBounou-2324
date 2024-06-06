@@ -18,15 +18,15 @@
         <!-- Person Name -->
         <Label Content="Person name" Grid.Row="0" Margin="5" VerticalAlignment="Center"/>
 
-        <TextBlock x:Name="name" Text="{Binding Name}" Grid.Row="0" Margin="138,5,348,5"/>
+        <TextBlock x:Name="name" Text="{Binding Name}" Grid.Row="0" Margin="140,5,350,5"/>
 
         <!-- Prompt Message -->
         <TextBlock Text="Are you sure you want to delete the person? This will lead to delete all workout record also !" Grid.Row="1" Margin="5"/>
 
         <!-- Action Buttons -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
-            <Button Content="Cancel" Width="100" Margin="5" Click="CancelButton_Click" Height="47"/>
-            <Button Content="Delete" Width="100" Margin="5" Click="DeleteButton_Click" Height="51"/>
+            <Button Content="Cancel" Width="100" Margin="5" Click="CancelButton_Click" Height="50"/>
+            <Button Content="Delete" Width="100" Margin="5" Click="DeleteButton_Click" Height="50"/>
         </StackPanel>
     </Grid>
 </Page>

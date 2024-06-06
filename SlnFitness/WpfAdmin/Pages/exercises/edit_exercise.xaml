@@ -52,14 +52,14 @@
         </ScrollViewer>
 
         <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="7" Margin="5" VerticalAlignment="Top">
-            <Image x:Name="img" Width="114" Height="178" Margin="5"/>
+            <Image x:Name="img" Width="115" Height="180" Margin="5"/>
             <Button x:Name="change_photo_btn" Content="Change" HorizontalAlignment="Center" Margin="5" Click="ChangePhotoButton_Click"/>
         </StackPanel>
 
         <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
-            <Button x:Name="Opslaan_btn" Content="Opslaan" Width="68" Height="30" Margin="5" Click="SaveButton_Click"/>
-            <Button x:Name="Annuleren_btn" Content="Annuleren" Width="69" Height="30" Margin="5"/>
+            <Button x:Name="Opslaan_btn" Content="Opslaan" Width="70" Height="30" Margin="5" Click="SaveButton_Click"/>
+            <Button x:Name="Annuleren_btn" Content="Annuleren" Width="70" Height="30" Margin="5"/>
         </StackPanel>
-        <TextBox x:Name="nickname_box" Grid.Row="6" Grid.Column="1" VerticalAlignment="Top" Margin="46,0,101,0" Height="21" Width="Auto" TextChanged="nickname_box_TextChanged"/>
+        <TextBox x:Name="nickname_box" Grid.Row="6" Grid.Column="1" VerticalAlignment="Top" Margin="45,0,100,0" Height="20" Width="Auto" TextChanged="nickname_box_TextChanged"/>
     </Grid>
 </Page>

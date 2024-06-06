@@ -13,6 +13,7 @@ namespace WpfAdmin.Pages.exercises
     {
         private Button[] exerciseButtons;
 
+        // Constructor die de componenten initialiseert en knoppen toevoegt.
         public exercises_overview()
         {
             InitializeComponent();
@@ -20,7 +21,7 @@ namespace WpfAdmin.Pages.exercises
             AddExerciseTypeButtons();
         }
 
-
+        // Methode om knoppen voor verschillende oefeningstypes toe te voegen.
         private void AddExerciseTypeButtons()
         {
             string[] exerciseTypes = { "Cardio", "Dumbbell", "Yoga" , "Add exercise" };
@@ -55,9 +56,11 @@ namespace WpfAdmin.Pages.exercises
             }
         }
 
-
+        // Event handler voor het klikken op een oefeningstype knop.
+        // chatgpt
         private void ExerciseTypeButton_Click(object sender, RoutedEventArgs e)
         {
+            // Toont oefeningen op basis van het geselecteerde type.
             Button clickedButton = sender as Button;
             string exerciseType = clickedButton.Tag.ToString();
 
@@ -69,16 +72,19 @@ namespace WpfAdmin.Pages.exercises
                 DisplayExercises(3);
         }
 
-
+        // Event handler voor het toevoegen van een nieuwe oefening
         private void add_exercise(object sender, RoutedEventArgs e)
         {
+            // Navigeert naar de pagina om een nieuwe oefening toe te voegen.
             add_exercise temp = new add_exercise();
             NavigationService.Navigate(temp);
         }
 
-
+        // Methode om oefeningen weer te geven op basis van het type.
+        // chatgpt
         private void DisplayExercises(int type)
         {
+            // Haalt oefeningen op en toont deze in een grid
             List<Exercise> exercises = Exercise.GetExercise(type);
 
             int numberOfRectangles = exercises.Count;
@@ -208,10 +214,7 @@ namespace WpfAdmin.Pages.exercises
             }
         }
 
-
-
-
-
+        // Hulpfunctie om een byte array om te zetten naar een BitmapImage.
         public static BitmapImage ByteArrayToBitmapImage(byte[] byteArray)
         {
             if (byteArray == null || byteArray.Length == 0)
@@ -228,7 +231,7 @@ namespace WpfAdmin.Pages.exercises
             }
         }
 
-
+        // Hulpfunctie om een bovenliggend element van een bepaald type te vinden.
         private T FindParent<T>(DependencyObject child) where T : DependencyObject
         {
             DependencyObject parentObject = VisualTreeHelper.GetParent(child);
@@ -248,9 +251,10 @@ namespace WpfAdmin.Pages.exercises
             }
         }
 
-        
+        // Event handler voor het verwijderen van een oefening
         private void delete_edit_page(object sender, RoutedEventArgs e)
         {
+            // Navigeert naar de 'delete_exercise' pagina met de geselecteerde oefening
             Button clickedButton = sender as Button;
             if (clickedButton != null)
             {
@@ -286,10 +290,10 @@ namespace WpfAdmin.Pages.exercises
             }
         }
 
-
-
+        // Event handler voor het laden van de bewerkingspagina van een oefening
         private void load_edit_page(object sender, RoutedEventArgs e)
         {
+            // Navigeert naar de 'edit_exercise' pagina met de geselecteerde oefening.
             Button clickedButton = sender as Button;
             if (clickedButton != null)
             {
@@ -325,12 +329,10 @@ namespace WpfAdmin.Pages.exercises
             }
         }
 
-
-
-
-
+        // Event handler voor het bekijken van een oefening.
         private void view_page(object sender, RoutedEventArgs e)
         {
+            // Navigeert naar een pagina om de geselecteerde oefening te bekijken
             Button clickedButton = sender as Button;
             if (clickedButton != null)
             {
@@ -365,6 +367,8 @@ namespace WpfAdmin.Pages.exercises
                 MessageBox.Show("Clicked element is not a button.");
             }
         }
-
     }
+
+    // https://stackoverflow.com/questions/71694403/c-sharp-how-to-add-button-to-array-and-set-text-of-all-buttons
+    // https://stackoverflow.com/questions/2096488/how-to-practically-use-events
 }

@@ -10,16 +10,12 @@ using System.IO;
 using System.Xml.Linq;
 using System.Drawing.Imaging;
 
-
-
 namespace WpfAdmin.Pages.person
 {
-
     public partial class persons_overview : Page
     {
         List<Person_name> persons;
         private Person selectedPerson;
-
 
         public persons_overview()
         {
@@ -68,7 +64,6 @@ namespace WpfAdmin.Pages.person
             }
         }
 
-
         public static BitmapImage ByteArrayToBitmapImage(byte[] byteArray)
         {
             if (byteArray == null || byteArray.Length == 0)
@@ -84,7 +79,6 @@ namespace WpfAdmin.Pages.person
                 return bitmapImage;
             }
         }
-
 
         private void btn_click_add_person(object sender, RoutedEventArgs e)
         {
@@ -125,7 +119,6 @@ namespace WpfAdmin.Pages.person
             return null;
         }
 
-
         private void btn_click_remove_person(object sender, RoutedEventArgs e)
         {
             if (selectedPerson == null)
@@ -138,4 +131,11 @@ namespace WpfAdmin.Pages.person
             NavigationService.Navigate(temp);
         }
     }
+
+    // https://stackoverflow.com/questions/75621952/c-sharp-code-for-moqs-setup-and-its-return-in-regards-to-mocking-a-dynamic-pro
+    // https://stackoverflow.com/questions/1769951/c-sharp-cancelbutton-closes-dialog
+    // https://stackoverflow.com/questions/9531270/change-button-image-after-clicking-it
+    // https://www.codeproject.com/Questions/5301504/How-to-make-a-save-and-load-buttons-to-save-and-lo
+    // https://stackoverflow.com/questions/13082007/how-should-i-clear-fields-in-generic-static-class
+    // chatgpt
 }

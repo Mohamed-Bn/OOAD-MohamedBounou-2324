@@ -44,17 +44,17 @@
         <TextBox x:Name="pose_box" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Margin="5" Width="150" IsReadOnly="True"/>
 
         <Label x:Name="instruction_label" Content="Instruction" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
-        <TextBox x:Name="instruction_box" Grid.Row="6" Grid.Column="1" VerticalAlignment="Top" Margin="5,42,129,0" Height="93" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="instruction_box" Grid.Row="6" Grid.Column="1" VerticalAlignment="Top" Margin="5,45,130,0" Height="90" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True" Grid.ColumnSpan="2"/>
 
         <Label x:Name="nickname" Content="Nickname" Grid.Row="7" Grid.Column="0" VerticalAlignment="Top" Margin="5"/>
-        <TextBox x:Name="nickname_box" Grid.Row="7" Grid.Column="1" VerticalAlignment="Top" Margin="5" Height="21" Width="Auto" IsReadOnly="True"/>
+        <TextBox x:Name="nickname_box" Grid.Row="7" Grid.Column="1" VerticalAlignment="Top" Margin="5" Height="20" Width="Auto" IsReadOnly="True"/>
 
         <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="7" Margin="5" VerticalAlignment="Top">
             <Image x:Name="img" Width="114" Height="178" Margin="5"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="6" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,116,5,5" RenderTransformOrigin="0.115,0.532">
-            <Button x:Name="Back" Content="Back" Width="69" Height="30" Click="move_back"/>
+        <StackPanel Grid.Row="6" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,115,5,5" RenderTransformOrigin="0.115,0.530">
+            <Button x:Name="Back" Content="Back" Width="70" Height="30" Click="move_back"/>
         </StackPanel>
     </Grid>
 </Page>

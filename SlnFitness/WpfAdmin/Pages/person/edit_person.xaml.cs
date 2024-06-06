@@ -13,6 +13,7 @@ namespace WpfAdmin.Pages.person
     {
         private Person person;
 
+        // Constructor die de huidige persoon initialiseert en de UI-elementen invult.
         public edit_person(Person person)
         {
             InitializeComponent();
@@ -20,6 +21,7 @@ namespace WpfAdmin.Pages.person
             PopulateUI();
         }
 
+        // Methode om de UI-elementen te vullen met de gegevens van de huidige persoon.
         private void PopulateUI()
         {
             voorname_box.Text = person.FirstName;
@@ -37,10 +39,12 @@ namespace WpfAdmin.Pages.person
                     imageSource.CacheOption = BitmapCacheOption.OnLoad;
                     imageSource.EndInit();
                 }
+
                 person_image.Source = imageSource;
             }
         }
 
+        // Event handler voor de 'Opslaan' knop
         private void Opslaan_btn_Click(object sender, RoutedEventArgs e)
         {
             person.FirstName = voorname_box.Text;
@@ -72,7 +76,7 @@ namespace WpfAdmin.Pages.person
             }
         }
 
-
+        // Hulpfunctie om een wachtwoord te hashen.
         private string HashPassword(string password)
         {
             using (SHA256 sha256Hash = SHA256.Create())
@@ -88,14 +92,14 @@ namespace WpfAdmin.Pages.person
             }
         }
 
-
+        // Event handler voor de 'Annuleren' knop.
         private void Annuleren_btn_Click(object sender, RoutedEventArgs e)
         {
             persons_overview temp = new persons_overview();
             NavigationService.Navigate(temp);
         }
 
-
+        // Event handler voor de 'Kies' knop.
         private void kies_btn_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -130,4 +134,9 @@ namespace WpfAdmin.Pages.person
             }
         }
     }
+
+    // https://stackoverflow.com/questions/75621952/c-sharp-code-for-moqs-setup-and-its-return-in-regards-to-mocking-a-dynamic-pro
+    // https://stackoverflow.com/questions/1769951/c-sharp-cancelbutton-closes-dialog
+    // https://stackoverflow.com/questions/9531270/change-button-image-after-clicking-it
+    // https://www.codeproject.com/Questions/5301504/How-to-make-a-save-and-load-buttons-to-save-and-lo
 }

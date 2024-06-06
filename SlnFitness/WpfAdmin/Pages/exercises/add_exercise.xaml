@@ -60,9 +60,9 @@
         </StackPanel>
 
         <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
-            <Button x:Name="Opslaan_btn" Content="Save" Width="68" Height="30" Margin="5" Click="SaveButton_Click"/>
-            <Button x:Name="Annuleren_btn" Content="Cancel" Width="69" Height="30" Margin="5"/>
+            <Button x:Name="Opslaan_btn" Content="Save" Width="70" Height="30" Margin="5" Click="SaveButton_Click"/>
+            <Button x:Name="Annuleren_btn" Content="Cancel" Width="70" Height="30" Margin="5"/>
         </StackPanel>
-        <TextBox x:Name="nickname_box" Grid.Row="6" Grid.Column="1" VerticalAlignment="Top" Margin="0,20,101,0" Height="21" Width="183" TextChanged="nickname_box_TextChanged" HorizontalAlignment="Right"/>
+        <TextBox x:Name="nickname_box" Grid.Row="6" Grid.Column="1" VerticalAlignment="Top" Margin="0,20,100,0" Height="20" Width="185" TextChanged="nickname_box_TextChanged" HorizontalAlignment="Right"/>
     </Grid>
 </Page>

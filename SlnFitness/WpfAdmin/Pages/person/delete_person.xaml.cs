@@ -7,8 +7,10 @@ namespace WpfAdmin.Pages.person
 {
     public partial class delete_person : Page
     {
+        // Eigenschap om de te verwijderen persoon op te slaan.
         public Person Person { get; set; }
 
+        // Constructor die de huidige persoon initialiseert en de UI-elementen invult
         public delete_person(Person person)
         {
             InitializeComponent();
@@ -17,13 +19,16 @@ namespace WpfAdmin.Pages.person
             name.Text=person.FirstName+" "+person.LastName;
         }
 
+        // Event handler voor de 'Annuleren' knop.
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
         }
 
+        // Event handler voor de 'Verwijderen' knop
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
+            // Verwijdert de workouts van de persoon en vervolgens de persoon zelf
             string deleteWorkoutResult = Person.DeleteWorkoutsForPerson(Person.Id);
             if (deleteWorkoutResult != "true")
             {
@@ -44,4 +49,8 @@ namespace WpfAdmin.Pages.person
             }
         }
     }
+    // https://stackoverflow.com/questions/75621952/c-sharp-code-for-moqs-setup-and-its-return-in-regards-to-mocking-a-dynamic-pro
+    // https://stackoverflow.com/questions/1769951/c-sharp-cancelbutton-closes-dialog
+    // https://stackoverflow.com/questions/9531270/change-button-image-after-clicking-it
+    // https://www.codeproject.com/Questions/5301504/How-to-make-a-save-and-load-buttons-to-save-and-lo
 }

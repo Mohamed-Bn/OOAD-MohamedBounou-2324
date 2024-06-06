@@ -9,9 +9,10 @@ namespace WpfAdmin.Pages.exercises
     {
         private Exercise currentExercise;
 
-
+        // Constructor die de huidige oefening initialiseert en de UI-elementen invult
         public view(Exercise exercise)
         {
+            // Vult de UI-elementen met de gegevens van de huidige oefening.
             InitializeComponent();
             currentExercise = exercise;
 
@@ -75,9 +76,10 @@ namespace WpfAdmin.Pages.exercises
             }
         }
 
-
+        // Hulpfunctie om de UI aan te passen op basis van het type oefening.
         private void setUI(int type)
         {
+            // Verbergt of toont UI-elementen afhankelijk van het type oefening.
             instruction_box.Visibility = Visibility.Collapsed;
             instruction_label.Visibility = Visibility.Collapsed;
             body_part.Visibility = Visibility.Collapsed;
@@ -110,9 +112,10 @@ namespace WpfAdmin.Pages.exercises
             }
         }
 
-
+        // Hulpfunctie om een byte array om te zetten naar een BitmapImage.
         private BitmapImage ByteArrayToBitmapImage(byte[] byteArray)
         {
+            // Converteert een byte array naar een BitmapImage voor weergave in de UI
             using (var stream = new System.IO.MemoryStream(byteArray))
             {
                 var image = new BitmapImage();
@@ -124,9 +127,12 @@ namespace WpfAdmin.Pages.exercises
             }
         }
 
+        // Event handler voor de 'Terug' knop.
         private void move_back(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
         }
     }
+
+    // https://stackoverflow.com/questions/70004518/c-sharp-back-button-on-visual-studio
 }

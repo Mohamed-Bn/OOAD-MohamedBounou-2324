@@ -8,22 +8,27 @@ using System.IO;
 
 namespace WpfAdmin.Pages.exercises
 {
+    // De 'add_exercise' klasse is een WPF-pagina die gebruikt wordt om nieuwe oefeningen toe te voegen.
     public partial class add_exercise : Page
     {
+        // Constructor die de componenten initialiseert wanneer de pagina wordt geladen.
         public add_exercise()
         {
             InitializeComponent();
         }
 
+        // Event handler die wordt aangeroepen wanneer de pagina wordt geladen.
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             type_exercise.Items.Add("Cardio");
             type_exercise.Items.Add("Dumbbell");
             type_exercise.Items.Add("Yoga");
 
+            // Verbergt bepaalde velden bij het laden van de pagina.
             ToggleFieldsVisibility(false, false, false);
         }
 
+        // Event handler die wordt aangeroepen wanneer een ander oefeningstype wordt geselecteerd.
         private void TypeExercise_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string selectedType = type_exercise.SelectedItem?.ToString();
@@ -47,6 +52,7 @@ namespace WpfAdmin.Pages.exercises
             }
         }
 
+        // Een methode om de zichtbaarheid van velden te schakelen op basis van het geselecteerde oefeningstype.
         private void ToggleFieldsVisibility(bool bodyPartVisible, bool poseVisible, bool instructionVisible)
         {
             body_part.Visibility = bodyPartVisible ? Visibility.Visible : Visibility.Collapsed;
@@ -65,8 +71,10 @@ namespace WpfAdmin.Pages.exercises
             nickname_box.IsEnabled = poseVisible;
         }
 
+        // Event handler voor de 'Opslaan' knop.
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            // Valideert de invoer en maakt een nieuw 'Exercise' object aan op basis van het geselecteerde type.
             if (string.IsNullOrWhiteSpace(exercise_name.Text))
             {
                 MessageBox.Show("Name must be provided.");
@@ -138,7 +146,6 @@ namespace WpfAdmin.Pages.exercises
                         newExercise.Points = int.Parse(points_box.Text);
                         newExercise.Type = exerciseType;
 
-                        
                         byte[] imageData;
                         BitmapEncoder encoder = new PngBitmapEncoder();
                         encoder.Frames.Add(BitmapFrame.Create((BitmapSource)img.Source));
@@ -180,12 +187,11 @@ namespace WpfAdmin.Pages.exercises
 
         private void nickname_box_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
         }
 
+        // Event handler voor het wijzigen van de foto.
         private void ChangePhotoButton_Click(object sender, RoutedEventArgs e)
         {
-            
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.png)|*.jpg;*.jpeg;*.png";
             if (openFileDialog.ShowDialog() == true)

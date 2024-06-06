@@ -16,11 +16,13 @@ namespace WpfAdmin.Pages.exercises
     {
         private Exercise currentExercise;
 
+        // Constructor die de huidige oefening initialiseert en de UI-elementen invult.
         public edit_exercise(Exercise exercise)
         {
             InitializeComponent();
             currentExercise = exercise;
 
+            // Vult de UI-elementen met de gegevens van de huidige oefening.
             exercise_name.Text = exercise.Name;
             points_box.Text = exercise.Points.ToString();
             description_box.Text = exercise.Description;
@@ -89,9 +91,10 @@ namespace WpfAdmin.Pages.exercises
 
         }
 
-
+        // Hulpfunctie om de UI aan te passen op basis van het type oefening.
         private void setUI(int type)
-        {           
+        {
+            // Verbergt of toont UI-elementen afhankelijk van het type oefening.
             switch (type)
             {
                 case 1:
@@ -121,14 +124,17 @@ namespace WpfAdmin.Pages.exercises
             }
         }
 
+        // Event handler voor de 'Annuleren' knop.
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
         }
 
 
+        // Event handler voor de 'Foto wijzigen' knop.
         private void ChangePhotoButton_Click(object sender, RoutedEventArgs e)
         {
+            // Stelt de gebruiker in staat om een nieuwe foto te kiezen en bij te werken.
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 Filter = "Image files (*.jpg, *.jpeg, *.png)|*.jpg;*.jpeg;*.png",
@@ -143,8 +149,11 @@ namespace WpfAdmin.Pages.exercises
                 currentExercise.Photo = File.ReadAllBytes(selectedFileName);
             }
         }
+
+        // Event handler voor de 'Opslaan' knop.
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            // Creëert een nieuw Exercise object en slaat de wijzigingen op.
             Exercise newExercise = null;
             string selectedType = type_exercise.SelectedItem?.ToString();
             ExerciseType exerciseType;
@@ -217,10 +226,10 @@ namespace WpfAdmin.Pages.exercises
             }
         }
 
-
-
+        // Hulpfunctie om een byte array om te zetten naar een BitmapImage.
         private BitmapImage ByteArrayToBitmapImage(byte[] byteArray)
         {
+            // Converteert een byte array naar een BitmapImage voor weergave in de UI.
             using (var stream = new System.IO.MemoryStream(byteArray))
             {
                 var image = new BitmapImage();
@@ -232,9 +241,14 @@ namespace WpfAdmin.Pages.exercises
             }
         }
 
+        // Event handler voor tekstwijzigingen in de 'nickname' box.
         private void nickname_box_TextChanged(object sender, TextChangedEventArgs e)
         {
-
         }
     }
+
+    // https://stackoverflow.com/questions/75621952/c-sharp-code-for-moqs-setup-and-its-return-in-regards-to-mocking-a-dynamic-pro
+    // https://stackoverflow.com/questions/1769951/c-sharp-cancelbutton-closes-dialog
+    // https://stackoverflow.com/questions/9531270/change-button-image-after-clicking-it
+    // https://www.codeproject.com/Questions/5301504/How-to-make-a-save-and-load-buttons-to-save-and-lo
 }

@@ -96,7 +96,7 @@ namespace WpfAdmin.Pages.person
             return true;
         }
 
-
+        // Hulpfunctie om te controleren of een e-mailadres geldig is.
         private bool IsValidEmail(string email)
         {
             try
@@ -125,6 +125,7 @@ namespace WpfAdmin.Pages.person
             }
         }
 
+        // Hulpfunctie om de invoervelden te wissen.
         private void ClearFields()
         {
             voorname_box.Clear();
@@ -141,4 +142,10 @@ namespace WpfAdmin.Pages.person
             NavigationService.Navigate(temp);
         }
     }
+
+    // https://stackoverflow.com/questions/75621952/c-sharp-code-for-moqs-setup-and-its-return-in-regards-to-mocking-a-dynamic-pro
+    // https://stackoverflow.com/questions/1769951/c-sharp-cancelbutton-closes-dialog
+    // https://stackoverflow.com/questions/9531270/change-button-image-after-clicking-it
+    // https://www.codeproject.com/Questions/5301504/How-to-make-a-save-and-load-buttons-to-save-and-lo
+    // https://stackoverflow.com/questions/13082007/how-should-i-clear-fields-in-generic-static-class
 }

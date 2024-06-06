@@ -15,7 +15,6 @@ using WpfAdmin.Pages;
 
 namespace WpfAdmin
 {
-
     public partial class LoginWindow : Window
     {
         private bool isPasswordSet;
@@ -30,17 +29,12 @@ namespace WpfAdmin
             password_textbox.Password = password;
             isPasswordSet = true;
         }
-     
+
         private void login_button_click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();
-
-
         }
-
-
-
     }
 }

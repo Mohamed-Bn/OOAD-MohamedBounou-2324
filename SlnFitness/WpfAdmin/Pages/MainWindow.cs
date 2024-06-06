@@ -17,10 +17,8 @@ using CLFitness.WpfAdmin;
 using CLFitness.WpfCustomer;
 using System.Windows.Navigation;
 
-
 namespace WpfAdmin.Pages
 {
-    
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -31,9 +29,7 @@ namespace WpfAdmin.Pages
 
         private void Main_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
-
         }
-
 
         private void default_load()
         {
@@ -47,13 +43,10 @@ namespace WpfAdmin.Pages
             frame.NavigationService.Navigate(person);
         }
 
-
-
         private void exercise_btn_Click(object sender, RoutedEventArgs e)
         {
              exercises_overview exercises = new exercises_overview();
             frame.NavigationService.Navigate(exercises);
-
         }
 
         private void back_btn_Click(object sender , RoutedEventArgs e)
