@@ -10,11 +10,11 @@
 
     <Grid Margin="10">
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Selecteer een periode: " VerticalAlignment="Top" FontSize="16" />
-        <DatePicker x:Name="StartDatePicker" HorizontalAlignment="Left" Margin="150,7,0,0" VerticalAlignment="Top" Height="28" Width="136" />
-        <TextBlock HorizontalAlignment="Left" Margin="300,10,0,0" TextWrapping="Wrap" Text="van" VerticalAlignment="Top" Width="36" Height="22"/>
-        <DatePicker x:Name="EndDatePicker" HorizontalAlignment="Left" Margin="340,7,0,0" VerticalAlignment="Top" Height="28" Width="136" />
-        <TextBlock HorizontalAlignment="Left" Margin="490,10,0,0" TextWrapping="Wrap" Text="tot" VerticalAlignment="Top" Width="37" Height="22"/>
-        <Button Content="Toon Statistieken" HorizontalAlignment="Left" Margin="540,7,0,0" VerticalAlignment="Top" Width="120" Click="ShowStatisticsButton_Click" />
+        <DatePicker x:Name="StartDatePicker" HorizontalAlignment="Left" Margin="150,5,0,0" VerticalAlignment="Top" Height="30" Width="135" />
+        <TextBlock HorizontalAlignment="Left" Margin="300,10,0,0" TextWrapping="Wrap" Text="van" VerticalAlignment="Top" Width="35" Height="25"/>
+        <DatePicker x:Name="EndDatePicker" HorizontalAlignment="Left" Margin="340,5,0,0" VerticalAlignment="Top" Height="30" Width="135" />
+        <TextBlock HorizontalAlignment="Left" Margin="490,10,0,0" TextWrapping="Wrap" Text="tot" VerticalAlignment="Top" Width="35" Height="25"/>
+        <Button Content="Toon Statistieken" HorizontalAlignment="Left" Margin="540,5,0,0" VerticalAlignment="Top" Width="120" Click="ShowStatisticsButton_Click" />
 
         <lvc:CartesianChart x:Name="CustomerBarChart" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="500" Height="300">
             <lvc:CartesianChart.AxisX>

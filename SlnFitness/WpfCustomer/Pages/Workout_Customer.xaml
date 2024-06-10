@@ -10,12 +10,12 @@
 
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
         <Grid>
-            <TextBox TextWrapping="Wrap" Text="kies een datum om je workouts van dag te zien" Margin="9,9,527,415"/>
-            <Calendar HorizontalAlignment="Left" Margin="9,40,0,0" VerticalAlignment="Top" SelectedDatesChanged="Calendar_SelectedDatesChanged"/>
-            <Button Content="Voeg workout toe..." HorizontalAlignment="Left" Margin="215,186,0,0" VerticalAlignment="Top" Width="131" Height="22" Click="OnAddButtonClicked"/>
-            <TextBox Name="workoutNum" TextWrapping="Wrap" Text="3 " Margin="9,225,1042,199"/>
-            <TextBox TextWrapping="Wrap" Text="workouts gevonden op " Margin="30,225,910,199"/>
-            <TextBox Name="date" TextWrapping="Wrap" Text="03 april 2024" Margin="167,225,799,199"/>
+            <TextBox TextWrapping="Wrap" Text="kies een datum om je workouts van dag te zien" Margin="10,10,525,415"/>
+            <Calendar HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" SelectedDatesChanged="Calendar_SelectedDatesChanged"/>
+            <Button Content="Voeg workout toe..." HorizontalAlignment="Left" Margin="215,185,0,0" VerticalAlignment="Top" Width="130" Height="25" Click="OnAddButtonClicked"/>
+            <TextBox Name="workoutNum" TextWrapping="Wrap" Text="3 " Margin="10,225,1040,200"/>
+            <TextBox TextWrapping="Wrap" Text="workouts gevonden op " Margin="30,225,910,200"/>
+            <TextBox Name="date" TextWrapping="Wrap" Text="03 april 2024" Margin="165,225,800,200"/>
             <Grid Name="MainGrid">
 
             </Grid>

@@ -14,6 +14,7 @@ namespace WpfCustomer.Pages
         private List<Workout> workouts;
         private Person loggedInPerson;
 
+        // Constructor die de workouts laadt voor de ingelogde persoon.
         public Statistics_Customer(Person loggedInVal)
         {
             InitializeComponent();
@@ -21,8 +22,10 @@ namespace WpfCustomer.Pages
             workouts = Workout.GetPersonWorkout(loggedInPerson.Id);
         }
 
+        // Event handler voor de 'Toon Statistieken' knop.
         private void ShowStatisticsButton_Click(object sender, RoutedEventArgs e)
         {
+            // Filtert de workouts op basis van de geselecteerde datums en toont de statistieken.
             DateTime? startDate = StartDatePicker.SelectedDate;
             DateTime? endDate = EndDatePicker.SelectedDate;
 
@@ -48,6 +51,7 @@ namespace WpfCustomer.Pages
             DisplayStatistics(filteredWorkouts, weeklyPoints);
         }
 
+        // Hulpfunctie om de wekelijkse punten te berekenen.
         private Dictionary<DateTime, int> CalculateWeeklyPoints(List<Workout> workouts)
         {
             Dictionary<DateTime, int> weeklyPoints = new Dictionary<DateTime, int>();
@@ -68,12 +72,14 @@ namespace WpfCustomer.Pages
             return weeklyPoints;
         }
 
+        // Hulpfunctie om het begin van de week te bepalen.
         private DateTime StartOfWeek(DateTime date, DayOfWeek startOfWeek)
         {
             int diff = (7 + (date.DayOfWeek - startOfWeek)) % 7;
             return date.AddDays(-1 * diff).Date;
         }
 
+        // Hulpfunctie om de grafiek weer te geven.
         private void DisplayChart(Dictionary<DateTime, int> weeklyPoints)
         {
             var values = weeklyPoints.Values.Select(v => (double)v).ToArray();
@@ -92,6 +98,7 @@ namespace WpfCustomer.Pages
             CustomerBarChart.AxisX[0].Labels = labels;
         }
 
+        // Hulpfunctie om de statistieken weer te geven
         private void DisplayStatistics(List<Workout> workouts, Dictionary<DateTime, int> weeklyPoints)
         {
             int totalPoints = workouts.Sum(w => w.Exercise.Points);
@@ -103,6 +110,7 @@ namespace WpfCustomer.Pages
                                         $"Langste streak: {longestStreak} weken\n";
         }
 
+        // Hulpfunctie om de langste streak te berekenen
         private int CalculateLongestStreak(List<Workout> workouts)
         {
             var weeks = workouts
@@ -133,4 +141,14 @@ namespace WpfCustomer.Pages
             return Math.Max(longestStreak, currentStreak);
         }
     }
+
+    // https://stackoverflow.com/questions/75621952/c-sharp-code-for-moqs-setup-and-its-return-in-regards-to-mocking-a-dynamic-pro
+    // https://stackoverflow.com/questions/1769951/c-sharp-cancelbutton-closes-dialog
+    // https://stackoverflow.com/questions/9531270/change-button-image-after-clicking-it
+    // https://www.codeproject.com/Questions/5301504/How-to-make-a-save-and-load-buttons-to-save-and-lo
+    // https://stackoverflow.com/questions/13082007/how-should-i-clear-fields-in-generic-static-class
+    // https://stackoverflow.com/questions/662379/calculate-date-from-week-number
+    // https://stackoverflow.com/questions/10622674/chart-creating-dynamically-in-net-c-sharp
+    // https://stackoverflow.com/questions/12912873/how-can-i-use-linq-to-calculate-the-longest-streak
+    // chatgpt
 }

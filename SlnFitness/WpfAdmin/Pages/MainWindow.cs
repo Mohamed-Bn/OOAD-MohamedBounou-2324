@@ -59,8 +59,8 @@ namespace WpfAdmin.Pages
         private void Ultoggen_btn_Click(object sender, RoutedEventArgs e)
         {
            LoginWindow  temp = new LoginWindow();
-            temp.Show();
-            this.Close();
+           temp.Show();
+           this.Close();
         }
     }
 }
