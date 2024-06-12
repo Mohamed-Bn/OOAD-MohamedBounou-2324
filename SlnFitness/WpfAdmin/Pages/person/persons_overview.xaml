@@ -45,7 +45,7 @@
         <!-- Buttons -->
             <Button x:Name="bewerk_btn" Content="Bewerk" HorizontalAlignment="Left" Margin="463,370,0,0" VerticalAlignment="Top" Click="btn_click_edit_person" Height="30" Width="100" BorderThickness="2" BorderBrush="Black"/>
         <Button x:Name="verwijder_btn" Content="Verwijder" HorizontalAlignment="Left" Margin="579,370,0,0" VerticalAlignment="Top" Click="btn_click_remove_person" Height="30" Width="100" BorderThickness="2" BorderBrush="Black"/>
-            <Button x:Name="NileView_btn" Content="Nileuw" HorizontalAlignment="Left" Margin="341,370,0,0" VerticalAlignment="Top" Click="btn_click_add_person" Height="30" Width="100" BorderThickness="2" BorderBrush="Black"/>
+            <Button x:Name="NileView_btn" Content="Nieuw" HorizontalAlignment="Left" Margin="341,370,0,0" VerticalAlignment="Top" Click="btn_click_add_person" Height="30" Width="100" BorderThickness="2" BorderBrush="Black"/>
 
     </Grid>
     </Border>

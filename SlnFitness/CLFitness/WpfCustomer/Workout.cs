@@ -117,7 +117,7 @@ namespace CLFitness.WpfCustomer
         }
 
         // Methode om een nieuwe workout toe te voegen.
-        //chatgpt
+        // chatgpt
 
         public static void AddWorkout(Workout workout)
         {
@@ -209,6 +209,7 @@ namespace CLFitness.WpfCustomer
             return false;
         }
     }
+
     // https://www.jbvigneron.fr/parlons-dev/csharp-interagir-avec-une-base-de-donnees-sql/
     // https://learn.microsoft.com/nl-nl/dotnet/framework/data/adonet/retrieving-data-using-a-datareader
     // https://stackoverflow.com/questions/6003480/reading-values-from-sql-database-in-c-sharp

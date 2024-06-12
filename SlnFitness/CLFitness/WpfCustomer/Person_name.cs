@@ -64,5 +64,6 @@ namespace CLFitness.WpfCustomer
             return people;
         }
     }
+
     // https://stackoverflow.com/questions/1345508/how-do-i-connect-to-a-sql-database-from-c
 }

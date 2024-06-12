@@ -17,7 +17,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- Title Label -->
-        <Label x:Name="Title_Label" Content="Welcome to WpfAdmin" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="20" FontSize="24" FontWeight="Bold"/>
+        <Label x:Name="Title_Label" Content="Welcome to Admin" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="20" FontSize="24" FontWeight="Bold"/>
 
         <!-- Login Form -->
         <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">

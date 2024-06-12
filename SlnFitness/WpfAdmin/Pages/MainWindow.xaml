@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAdmin.Pages"
         mc:Ignorable="d"
-        Title="WPF Admin - Welcome Regular von der Linde" Height="550" Width="900">
+        Title="WPF Admin - welkom Rogeir van der Linde" Height="550" Width="900">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -15,14 +15,14 @@
 
         <!-- Header -->
         <StackPanel Grid.Row="0" Margin="10">
-            <Label Content="WPF Admin - Welcome Regular von der Linde" FontSize="18" FontFamily="Bahnschrift SemiBold SemiCondensed"/>
+            <Label Content="WPF Admin - welkom Rogeir van der Linde" FontSize="18" FontFamily="Bahnschrift SemiBold SemiCondensed"/>
         </StackPanel>
 
         <!-- Navigation Buttons -->
         <StackPanel Grid.Row="1" Orientation="Vertical" Margin="2" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Button x:Name="Personeon_btn" Content="Personeon" Width="100" Height="30" Margin="5" FontWeight="Bold" FontStyle="Italic" Click="Personeon_btn_Click"/>
+            <Button x:Name="Personeon_btn" Content="Personen" Width="100" Height="30" Margin="5" FontWeight="Bold" FontStyle="Italic" Click="Personeon_btn_Click"/>
             <Button x:Name="Oefeningen_btn" Content="Oefeningen" Width="100" Height="30" Margin="5" FontWeight="Bold" FontStyle="Italic" Click="exercise_btn_Click" />
-            <Button x:Name="Ultoggen_btn" Content="Ultoggen" Width="100" Height="30" Margin="5" FontWeight="Bold" FontStyle="Italic" Click="Ultoggen_btn_Click"/>
+            <Button x:Name="Ultoggen_btn" Content="Uitloggen" Width="100" Height="30" Margin="5" FontWeight="Bold" FontStyle="Italic" Click="Ultoggen_btn_Click"/>
         </StackPanel>
 
         <!-- Content Frame -->
