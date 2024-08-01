@@ -1,0 +1,28 @@
+﻿<Page x:Class="WpfAdmin.PersoonPage.PersoonVerwijderenPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfAdmin.PersoonPage"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="800"
+      Title="PersoonVerwijderenPage">
+
+    <Grid>
+        <StackPanel Grid.Column="1" Background="PaleGoldenrod">
+            <Label Content="Voornaam:" Padding="0"/>
+            <TextBox Name="TxtVoornaam"  Margin="5" IsEnabled="False"/>
+            <Label Content="Achternaam:" Padding="0"/>
+            <TextBox Name="TxtAchternaam"  Margin="5" IsEnabled="False"/>
+            <Label Content="Login:" Padding="0"/>
+            <TextBox Name="TxtLogin" Margin="5" IsEnabled="False"/>
+            <CheckBox Name="ChkIsAdmin" Content="is admin" Margin="5" IsEnabled="False"/>
+            <Image Name="ImgPersoonFoto" HorizontalAlignment="Left"  Height="75" Width="75" Margin="5"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                <Button Name="BtnVerwijderen" Content="Verwijderen" Width="75" Margin="5" Click="BtnVerwijderen_Click"/>
+                <Button Name="BtnAnnuleren" Content="Annuleren" Width="75" Margin="5" Click="BtnAnnuleren_Click"/>
+            </StackPanel>
+            <Label Foreground="Red" Name="LblError"/>
+        </StackPanel>
+    </Grid>
+</Page>
