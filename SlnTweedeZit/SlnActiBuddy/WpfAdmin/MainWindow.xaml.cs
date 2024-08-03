@@ -1,13 +1,10 @@
-﻿using System.Text;
+﻿using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using CLActiBuddy;
+using WpfAdmin.ActiviteitPage;
+using WpfAdmin.PersoonPage;
 
 namespace WpfAdmin
 {
@@ -19,6 +16,45 @@ namespace WpfAdmin
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Persoon? persoon = (Persoon?)Application.Current.Properties["persoon"];
+            if (persoon != null)
+            {
+                imgFoto.Source = ByteToImage(persoon.Profielfoto);
+                MainFrame.Content = new PersonenOverzichtPage();
+            }
+        }
+
+        // https://stackoverflow.com/questions/22065815/how-to-convert-byte-array-to-imagesource-for-windows-8-0-store-application
+        public static ImageSource ByteToImage(byte[] imageData)
+        {
+            BitmapImage biImg = new BitmapImage();
+            MemoryStream ms = new MemoryStream(imageData);
+            biImg.BeginInit();
+            biImg.StreamSource = ms;
+            biImg.EndInit();
+
+            ImageSource imgSrc = biImg;
+
+            return imgSrc;
+        }
+
+        private void BtnPersonen_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new PersonenOverzichtPage();
+        }
+
+        private void BtnActiviteiten_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new ActiviteitenOverzichtPage();
+        }
+
+        private void BtnUitloggen_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
