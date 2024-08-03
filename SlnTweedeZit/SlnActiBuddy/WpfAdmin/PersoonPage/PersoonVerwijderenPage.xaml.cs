@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using CLActiBuddy;
 
 namespace WpfAdmin.PersoonPage
 {
@@ -20,9 +10,40 @@ namespace WpfAdmin.PersoonPage
     /// </summary>
     public partial class PersoonVerwijderenPage : Page
     {
-        public PersoonVerwijderenPage()
+        Persoon persoon = null;
+        public PersoonVerwijderenPage(Persoon persoon)
         {
             InitializeComponent();
+            if (persoon == null)
+            {
+                NavigationService.Navigate(new PersonenOverzichtPage());
+                return;
+            }
+
+            this.persoon = persoon;
+            TxtVoornaam.Text = persoon.Voornaam;
+            TxtAchternaam.Text = persoon.Achternaam;
+            TxtLogin.Text = persoon.Login;
+            ChkIsAdmin.IsChecked = persoon.IsAdmin;
+            ImgPersoonFoto.Source = MainWindow.ByteToImage(persoon.Profielfoto);
+        }
+
+        private void BtnAnnuleren_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new PersonenOverzichtPage());
+        }
+
+        private void BtnVerwijderen_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                persoon.DeleteFromDb();
+                NavigationService.Navigate(new PersonenOverzichtPage());
+            }
+            catch (Exception ex)
+            {
+                LblError.Content = $"Error: {ex.Message}";
+            }
         }
     }
 }
