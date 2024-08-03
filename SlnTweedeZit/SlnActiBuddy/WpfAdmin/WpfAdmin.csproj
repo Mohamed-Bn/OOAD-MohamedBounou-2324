@@ -25,6 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CLActiBuddy\CLActiBuddy.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Assets\Iconen\cultuur.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
