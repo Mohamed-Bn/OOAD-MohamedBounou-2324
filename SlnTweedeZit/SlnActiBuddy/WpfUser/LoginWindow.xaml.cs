@@ -51,11 +51,6 @@ namespace WpfUser
                 {
                     Application.Current.Properties.Add("persoon", persoon);
 
-                    if (Application.Current.Properties.Contains("loginPagina"))
-                    {
-                        Application.Current.Properties.Remove("loginPagina");
-                    }
-
                     MainWindow mainWindow = new MainWindow()
                     {
                         Title = $"WPF Klant - welkom {persoon.Voornaam} {persoon.Achternaam}"
