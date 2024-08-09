@@ -1,0 +1,22 @@
+﻿<Window x:Class="WpfUser.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfUser"
+        mc:Ignorable="d"
+            Title="Login ActiBuddy" Height="300" Width="400" Background="PaleGoldenrod">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="Gebruikersnaam:"/>
+            <TextBox x:Name="TxtGebruikersnaam" Width="200" Text="abdel"/>
+
+            <TextBlock Text="Wachtwoord:"/>
+            <PasswordBox x:Name="TxtWachtwoord" Width="200" Password="test3"/>
+
+            <Button x:Name="BtnInloggen" Padding="15" Margin="10" Content="Inloggen" Width="100" Click="BtnInloggen_Click"/>
+
+            <Label Name="LblErrorMessage" Foreground="Red"/>
+        </StackPanel>
+    </Grid>
+</Window>
