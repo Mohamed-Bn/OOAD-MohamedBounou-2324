@@ -10,7 +10,7 @@ namespace WpfAdmin.ActiviteitPage
     /// </summary>
     public partial class ActiviteitVerwijderenPage : Page
     {
-        Activiteit activiteit = null;
+        Activiteit? activiteit = null;
         public ActiviteitVerwijderenPage(Activiteit activiteit)
         {
             InitializeComponent();

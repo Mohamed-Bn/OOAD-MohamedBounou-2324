@@ -21,8 +21,14 @@ namespace CLActiBuddy
         public ActiviteitSoort Soort { get; set; }
         public int Leeftijdsgroep { get; set; }
         public int OrganisatorId { get; set; }
-        public Persoon Organisator { get { return Persoon.GetById(OrganisatorId); } }
-        public List<Persoon> Deelnemers { get { return Deelname.GetDeelnemersByActiviteitId(Id); } }
+        public Persoon Organisator
+        {
+            get { return Persoon.GetById(OrganisatorId); }
+        }
+        public List<Persoon> Deelnemers
+        {
+            get { return Deelname.GetDeelnemersByActiviteitId(Id); }
+        }
 
         private static string connString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
 

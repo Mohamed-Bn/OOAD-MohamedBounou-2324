@@ -13,7 +13,7 @@ namespace WpfAdmin.PersoonPage
     /// </summary>
     public partial class PersoonBewerkenPage : Page
     {
-        Persoon persoon = null;
+        Persoon? persoon = null;
         public PersoonBewerkenPage(Persoon persoon)
         {
             InitializeComponent();

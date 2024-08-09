@@ -138,7 +138,8 @@ namespace CLActiBuddy
                 conn.Open();
 
                 // voer SQL commando uit
-                SqlCommand comm = new SqlCommand(@"INSERT INTO Persoon(voornaam, achternaam, login, paswoord, profielfoto, regdatum, isadmin) 
+                SqlCommand comm = new SqlCommand(
+                    @"INSERT INTO Persoon(voornaam, achternaam, login, paswoord, profielfoto, regdatum, isadmin) 
                                                     output INSERTED.ID VALUES(@voornaam, @achternaam, @login, @paswoord, @profielfoto, @regdatum, @isadmin)", conn);
                 comm.Parameters.AddWithValue("@voornaam", Voornaam);
                 comm.Parameters.AddWithValue("@achternaam", Achternaam);
@@ -172,10 +173,11 @@ namespace CLActiBuddy
             {
                 conn.Open();
                 SqlCommand comm =
-                    new SqlCommand("DELETE FROM Deelname " +
+                    new SqlCommand(
+                        "DELETE FROM Deelname " +
                                     "WHERE persoon_id = @parID " +
                                     "OR activiteit_id IN (SELECT id FROM Activiteit WHERE organisator_id = @parID)",
-                                    conn);
+                        conn);
 
                 comm.Parameters.AddWithValue("@parID", Id);
                 comm.ExecuteNonQuery();

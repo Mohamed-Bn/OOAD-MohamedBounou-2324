@@ -8,7 +8,10 @@ namespace CLActiBuddy
         public int Id { get; set; }
         public int PersoonId { get; set; }
         public int ActiviteitId { get; set; }
-        public Persoon Persoon { get { return Persoon.GetById(PersoonId); } }
+        public Persoon Persoon
+        {
+            get { return Persoon.GetById(PersoonId); }
+        }
 
         private static string connString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
 
@@ -55,7 +58,8 @@ namespace CLActiBuddy
                 conn.Open();
 
                 // voer SQL commando uit
-                SqlCommand comm = new SqlCommand(@"INSERT INTO deelname(persoon_id, activiteit_id) 
+                SqlCommand comm = new SqlCommand(
+                    @"INSERT INTO deelname(persoon_id, activiteit_id) 
                                                     output INSERTED.ID VALUES(@persoonId, @activiteitId)", conn);
                 comm.Parameters.AddWithValue("@persoonId", PersoonId);
                 comm.Parameters.AddWithValue("@activiteitId", ActiviteitId);

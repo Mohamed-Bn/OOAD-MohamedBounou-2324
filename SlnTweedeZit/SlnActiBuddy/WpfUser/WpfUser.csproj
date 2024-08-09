@@ -9,16 +9,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Remove="Assets\noIcon.png" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Content Include="Assets\noIcon.png">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="GMap.NET.Core" Version="2.1.7" />
 		<PackageReference Include="GMap.NET.WinPresentation" Version="2.1.7" />
 		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">

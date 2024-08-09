@@ -17,8 +17,8 @@ namespace WpfUser
     {
         List<Activiteit> activiteiten = new List<Activiteit>();
         List<Activiteit> filteredActiviteiten = new List<Activiteit>();
-        Activiteit selectedActiviteit = null;
-        Persoon persoon = null;
+        Activiteit? selectedActiviteit = null;
+        Persoon? persoon = null;
         bool isIngeschreven = false;
 
         public ActiviteitenKaartPage()
