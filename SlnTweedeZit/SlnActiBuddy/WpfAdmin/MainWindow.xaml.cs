@@ -31,8 +31,8 @@ namespace WpfAdmin
         // https://stackoverflow.com/questions/22065815/how-to-convert-byte-array-to-imagesource-for-windows-8-0-store-application
         public static ImageSource ByteToImage(byte[] imageData)
         {
-            BitmapImage biImg = new BitmapImage();
-            MemoryStream ms = new MemoryStream(imageData);
+            BitmapImage biImg = new ();
+            MemoryStream ms = new (imageData);
             biImg.BeginInit();
             biImg.StreamSource = ms;
             biImg.EndInit();

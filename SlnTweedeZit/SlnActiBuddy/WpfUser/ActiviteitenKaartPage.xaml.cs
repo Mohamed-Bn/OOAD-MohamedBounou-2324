@@ -15,8 +15,8 @@ namespace WpfUser
     /// </summary>
     public partial class ActiviteitenKaartPage : Page
     {
-        List<Activiteit> activiteiten = new List<Activiteit>();
-        List<Activiteit> filteredActiviteiten = new List<Activiteit>();
+        List<Activiteit> activiteiten = new ();
+        List<Activiteit> filteredActiviteiten = new ();
         Activiteit selectedActiviteit = null;
         Persoon persoon = null;
         bool isIngeschreven = false;
@@ -32,11 +32,11 @@ namespace WpfUser
             {
                 LblError.Content = $"Error: {ex.Message}";
                 throw;
-            }
+            }            
             InitializeMap();
             persoon = (Persoon)Application.Current.Properties["persoon"];
 
-            List<int> leeftijden = new List<int>();
+            List<int> leeftijden = new ();
 
             foreach (Activiteit activiteit in activiteiten)
             {
@@ -45,7 +45,7 @@ namespace WpfUser
                     leeftijden.Add(activiteit.Leeftijdsgroep);
                 }
             }
-
+            
             leeftijden.Sort();
 
             CboLeeftijdscategorie.Items.Add("All");
@@ -103,12 +103,12 @@ namespace WpfUser
         private void AddMarker(Activiteit activiteit)
         {
             // Maak een nieuwe marker
-            GMapMarker marker = new GMapMarker(new PointLatLng((double)activiteit.Latitude, (double)activiteit.Longitude));
+            GMapMarker marker = new (new PointLatLng((double)activiteit.Latitude, (double)activiteit.Longitude));
 
             // Creëer een image element voor het icoon
-            Image icon = new Image
+            Image icon = new ()
             {
-                Width = 30,
+                Width = 30, 
                 Height = 30,
                 Source = MainWindow.ByteToImage(activiteit.Icoon) ?? MainWindow.ByteToImage(LoadImage("Assets/noIcon.png")),
                 Tag = activiteit
@@ -284,7 +284,7 @@ namespace WpfUser
         {
             if (selectedActiviteit != null)
             {
-                Deelname deelname = new Deelname()
+                Deelname deelname = new ()
                 {
                     ActiviteitId = selectedActiviteit.Id,
                     PersoonId = persoon.Id,

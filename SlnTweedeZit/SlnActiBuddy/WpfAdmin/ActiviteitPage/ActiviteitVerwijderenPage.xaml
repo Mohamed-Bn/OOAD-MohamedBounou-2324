@@ -18,7 +18,7 @@
             <TextBox Name="TxtTitel"  Margin="5" IsEnabled="False"/>
             <Label Content="Beschrijving:" Padding="0"/>
             <TextBlock Name="TxtBeschrijving" TextWrapping="Wrap" Margin="5" IsEnabled="False"/>
-            <Label Content="Datum:" Padding="0"/>
+            <Label Content="Datum:" Padding="0"/> 
             <TextBox Name="TxtDatum" Margin="5" IsEnabled="False"/>
             <Label Content="Longitude:" Padding="0"/>
             <TextBox Name="TxtLongitude" Margin="5" IsEnabled="False"/>

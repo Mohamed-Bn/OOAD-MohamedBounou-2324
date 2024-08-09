@@ -1,5 +1,4 @@
-﻿using System.Data.SqlClient;
-using System.Globalization;
+﻿using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,7 +15,7 @@ namespace WpfUser
     public partial class ActiviteitAanmakenPage : Page
     {
         ActiviteitSoort activiteitSoort = ActiviteitSoort.Sport;
-
+        
         // ik heb surpress gedaan want []? zegt dat ik spatie moet zetten, en [] ? zegt dat er geen spatie mag
 #pragma warning disable SA1011 // Closing square brackets should be spaced correctly
         byte[]? fotoBytes = null;
@@ -180,9 +179,9 @@ namespace WpfUser
             }
 
             // omdat Activiteit abstract is kan ik geen = new Activiteit() doen. daarom afhankelijk van de huidige activiteitsoort, maak ik juiste object aan.
-            Activiteit newActiviteit =
+            Activiteit newActiviteit = 
                 activiteitSoort == ActiviteitSoort.Sport ? new SportActiviteit() :
-                activiteitSoort == ActiviteitSoort.Hobby ? new HobbyActiviteit() :
+                activiteitSoort == ActiviteitSoort.Hobby ? new HobbyActiviteit() : 
                 new CultuurActiviteit();
 
             if (activiteitSoort == ActiviteitSoort.Sport)
@@ -244,7 +243,7 @@ namespace WpfUser
 
         private void BtnKiesFoto_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog
+            OpenFileDialog openFileDialog = new ()
             {
                 Multiselect = false,
                 Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*"
@@ -256,8 +255,8 @@ namespace WpfUser
             {
                 try
                 {
-                    Uri fileUri = new Uri(openFileDialog.FileName);
-                    BitmapImage bitmapImage = new BitmapImage();
+                    Uri fileUri = new (openFileDialog.FileName);
+                    BitmapImage bitmapImage = new ();
 
                     bitmapImage.BeginInit();
                     bitmapImage.UriSource = fileUri;

@@ -9,7 +9,7 @@ namespace CLActiBuddy
         private static string connString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
 
         // lijst van personen en activiteiten om te vullen in db
-        private static List<Persoon> personen = new()
+        private static List<Persoon> personen = new ()
         {
                 new Persoon { Voornaam = "Rogier", Achternaam = "van der Linde", Login = "rogier", Paswoord = "1b4f0e9851971998e732078544c96b36c3d01cedf7caa332359d6f1d83567014", Profielfoto = LoadImage("Assets/Profielfotos/m1.jpg"), RegDatum = new DateTime(2020, 12, 23), IsAdmin = true },
                 new Persoon { Voornaam = "Frank", Achternaam = "Salliau", Login = "frank", Paswoord = "60303ae22b998861bce3b28f33eec1be758a213c86c93c076dbe9f558c11c752", Profielfoto = LoadImage("Assets/Profielfotos/m2.jpg"), RegDatum = new DateTime(2021, 3, 3), IsAdmin = true },
@@ -24,7 +24,7 @@ namespace CLActiBuddy
                 new Persoon { Voornaam = "Soo", Achternaam = "Wang", Login = "soo", Paswoord = "744ea9ec6fa0a83e9764b4e323d5be6b55a5accfc7fe4c08eab6a8de1fca4855", Profielfoto = LoadImage("Assets/Profielfotos/f4.jpg"), RegDatum = new DateTime(2023, 4, 21), IsAdmin = false },
                 new Persoon { Voornaam = "Sophie", Achternaam = "Laethem", Login = "sophie", Paswoord = "a98ec5c5044800c88e862f007b98d89815fc40ca155d6ce7909530d792e909ce", Profielfoto = LoadImage("Assets/Profielfotos/f5.jpg"), RegDatum = new DateTime(2023, 8, 8), IsAdmin = false }
             };
-        private static List<Activiteit> activiteiten = new()
+        private static List<Activiteit> activiteiten = new ()
         {
                 // Sportactiviteiten
                 new SportActiviteit
@@ -819,12 +819,12 @@ namespace CLActiBuddy
 
         public static void InitializeData()
         {
-            using SqlConnection conn = new(connString);
+            using SqlConnection conn = new (connString);
             // open connectie
             conn.Open();
 
             // voer SQL commando uit
-            SqlCommand comm = new("SELECT * FROM Persoon", conn);
+            SqlCommand comm = new ("SELECT * FROM Persoon", conn);
 
             SqlDataReader reader = comm.ExecuteReader();
 
@@ -840,15 +840,15 @@ namespace CLActiBuddy
         private static void FillDeelnamen()
         {
             var personen = GetPersonen();
-            var activiteiten = GetActiviteiten();
+            var activiteiten = GetActiviteiten();  
 
             // Randomizer initialiseren
-            Random random = new();
+            Random random = new ();
 
             // Houdt bij welke combinaties al zijn toegevoegd (voor het geval je geen dubbele deelnames wilt)
-            HashSet<(int persoonId, int activiteitId)> bestaandeDeelnamen = new();
+            HashSet<(int persoonId, int activiteitId)> bestaandeDeelnamen = new ();
 
-            using SqlConnection conn = new(connString);
+            using SqlConnection conn = new (connString);
             conn.Open();
 
             for (int i = 0; i < 50; i++) // Aantal deelnames
@@ -867,7 +867,7 @@ namespace CLActiBuddy
                 bestaandeDeelnamen.Add((persoonId, activiteitId));
 
                 // SQL Command voor het toevoegen van een deelname
-                using SqlCommand cmd = new("INSERT INTO Deelname (Persoon_Id, Activiteit_Id) VALUES (@PersoonId, @ActiviteitId)", conn);
+                using SqlCommand cmd = new ("INSERT INTO Deelname (Persoon_Id, Activiteit_Id) VALUES (@PersoonId, @ActiviteitId)", conn);
                 cmd.Parameters.AddWithValue("@PersoonId", persoonId);
                 cmd.Parameters.AddWithValue("@ActiviteitId", activiteitId);
 
@@ -878,19 +878,19 @@ namespace CLActiBuddy
         private static void FillActiviteiten()
         {
             var personen = GetPersonen();  // dit doe ik om juiste id's te krijgen. moet ook dynamisch zijn
-            Random random = new();
+            Random random = new ();
             foreach (var activiteit in activiteiten)
             {
-                using SqlConnection conn = new(connString);
+                using SqlConnection conn = new (connString);
                 string sql = "INSERT INTO Activiteit (Titel, Beschrijving, DatumTijd, Icoon, Longitude, Latitude, MaxPersonen, Soort, Leeftijdsgroep, Organisator_Id, Sector) VALUES (@Titel, @Beschrijving, @DatumTijd, @Icoon, @Longitude, @Latitude, @MaxPersonen, @Soort, @Leeftijdsgroep, @OrganisatorId, @Sector)";
 
-                using SqlCommand cmd = new(sql, conn);
+                using SqlCommand cmd = new (sql, conn);
                 cmd.Parameters.AddWithValue("@Titel", activiteit.Titel);
                 cmd.Parameters.AddWithValue("@Beschrijving", activiteit.Beschrijving);
                 cmd.Parameters.AddWithValue("@DatumTijd", activiteit.DatumTijd);
                 if (activiteit.Icoon == null)
                 {
-                    SqlParameter imageParameter = new("@Icoon", SqlDbType.Image)
+                    SqlParameter imageParameter = new ("@Icoon", SqlDbType.Image)
                     {
                         Value = DBNull.Value
                     };
@@ -937,8 +937,8 @@ namespace CLActiBuddy
         {
             foreach (var persoon in personen)
             {
-                using SqlConnection conn = new(connString);
-                using SqlCommand cmd = new("INSERT INTO Persoon (voornaam, achternaam, login, paswoord, regdatum, isadmin, profielfoto) VALUES (@Voornaam, @Achternaam, @Login, @Paswoord, @RegDatum, @IsAdmin, @Profielfoto)", conn);
+                using SqlConnection conn = new (connString);
+                using SqlCommand cmd = new ("INSERT INTO Persoon (voornaam, achternaam, login, paswoord, regdatum, isadmin, profielfoto) VALUES (@Voornaam, @Achternaam, @Login, @Paswoord, @RegDatum, @IsAdmin, @Profielfoto)", conn);
                 cmd.Parameters.AddWithValue("@Voornaam", persoon.Voornaam);
                 cmd.Parameters.AddWithValue("@Achternaam", persoon.Achternaam);
                 cmd.Parameters.AddWithValue("@Login", persoon.Login);
@@ -955,10 +955,10 @@ namespace CLActiBuddy
         private static List<Persoon> GetPersonen()
         {
             var personen = new List<Persoon>();
-            using (SqlConnection conn = new(connString))
+            using (SqlConnection conn = new (connString))
             {
                 conn.Open();
-                using SqlCommand cmd = new("SELECT Id FROM Persoon", conn);
+                using SqlCommand cmd = new ("SELECT Id FROM Persoon", conn);
                 using SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -971,10 +971,10 @@ namespace CLActiBuddy
         private static List<Activiteit> GetActiviteiten()
         {
             var activiteiten = new List<Activiteit>();
-            using (SqlConnection conn = new(connString))
+            using (SqlConnection conn = new (connString))
             {
                 conn.Open();
-                using SqlCommand cmd = new("SELECT * FROM Activiteit", conn);
+                using SqlCommand cmd = new ("SELECT * FROM Activiteit", conn);
                 using SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Data.SqlClient;
 
 namespace CLActiBuddy
@@ -16,15 +15,15 @@ namespace CLActiBuddy
         // alle deelnemers opvragen van een activiteit
         public static List<Persoon> GetDeelnemersByActiviteitId(int id)
         {
-            List<Persoon> personen = new();
-            List<Deelname> deelnames = new();
-            using (SqlConnection conn = new(connString))
+            List<Persoon> personen = new ();
+            List<Deelname> deelnames = new ();
+            using (SqlConnection conn = new (connString))
             {
                 // open connectie
                 conn.Open();
 
                 // voer SQL commando uit
-                SqlCommand comm = new("SELECT * FROM Deelname WHERE activiteit_id = @id", conn);
+                SqlCommand comm = new ("SELECT * FROM Deelname WHERE activiteit_id = @id", conn);
                 comm.Parameters.AddWithValue("@id", id);
                 SqlDataReader reader = comm.ExecuteReader();
 
@@ -50,12 +49,12 @@ namespace CLActiBuddy
 
         public int InsertInDb()
         {
-            using SqlConnection conn = new(connString);
+            using SqlConnection conn = new (connString);
             // open connectie
             conn.Open();
 
             // voer SQL commando uit
-            SqlCommand comm = new(@"INSERT INTO deelname(persoon_id, activiteit_id) 
+            SqlCommand comm = new (@"INSERT INTO deelname(persoon_id, activiteit_id) 
                                                     output INSERTED.ID VALUES(@persoonId, @activiteitId)", conn);
             comm.Parameters.AddWithValue("@persoonId", PersoonId);
             comm.Parameters.AddWithValue("@activiteitId", ActiviteitId);
@@ -68,9 +67,9 @@ namespace CLActiBuddy
         public void DeleteFromDb()
         {
             // verwijder gerelateerde deelnames
-            using SqlConnection conn = new(connString);
+            using SqlConnection conn = new (connString);
             conn.Open();
-            SqlCommand comm = new("DELETE FROM deelname WHERE persoon_id = @persoonId AND activiteit_id = @activiteitId", conn);
+            SqlCommand comm = new ("DELETE FROM deelname WHERE persoon_id = @persoonId AND activiteit_id = @activiteitId", conn);
             comm.Parameters.AddWithValue("@persoonId", PersoonId);
             comm.Parameters.AddWithValue("@activiteitId", ActiviteitId);
             comm.ExecuteNonQuery();

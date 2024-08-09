@@ -1,5 +1,4 @@
-﻿using System.Data.SqlClient;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using CLActiBuddy;
 
 namespace WpfAdmin.PersoonPage
@@ -9,7 +8,7 @@ namespace WpfAdmin.PersoonPage
     /// </summary>
     public partial class PersonenOverzichtPage : Page
     {
-        private List<Persoon> personen = new List<Persoon>();
+        private List<Persoon> personen = new ();
         public PersonenOverzichtPage()
         {
             InitializeComponent();

@@ -51,12 +51,7 @@ namespace WpfAdmin
                 {
                     Application.Current.Properties.Add("persoon", persoon);
 
-                    if (Application.Current.Properties.Contains("loginPagina"))
-                    {
-                        Application.Current.Properties.Remove("loginPagina");
-                    }
-
-                    MainWindow mainWindow = new MainWindow()
+                    MainWindow mainWindow = new ()
                     {
                         Title = $"WPF Admin - welkom {persoon.Voornaam} {persoon.Achternaam}"
                     };

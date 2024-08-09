@@ -12,8 +12,8 @@ namespace WpfAdmin.ActiviteitPage
     /// </summary>
     public partial class ActiviteitenOverzichtPage : Page
     {
-        List<Activiteit> allActiviteiten = new List<Activiteit>();
-        List<Activiteit> filteredActiviteiten = new List<Activiteit>();
+        List<Activiteit> allActiviteiten = new ();
+        List<Activiteit> filteredActiviteiten = new ();
         private bool alreadyFiltered = false;
         public ActiviteitenOverzichtPage()
         {
@@ -30,7 +30,7 @@ namespace WpfAdmin.ActiviteitPage
         private void AddBorder(Activiteit activiteit)
         {
             // Create Border
-            Border border = new Border
+            Border border = new ()
             {
                 Background = Brushes.PaleGoldenrod,
                 Width = 250,
@@ -41,19 +41,19 @@ namespace WpfAdmin.ActiviteitPage
             };
 
             // Create Grid
-            Grid grid = new Grid();
+            Grid grid = new ();
             grid.RowDefinitions.Add(new RowDefinition());
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(0.5, GridUnitType.Star) });
             grid.RowDefinitions.Add(new RowDefinition());
 
             // Create Inner Grid
-            Grid innerGrid = new Grid();
+            Grid innerGrid = new ();
             innerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1.2, GridUnitType.Star) });
             innerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(3, GridUnitType.Star) });
             innerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
 
             // Create Image
-            Image imgActiviteitIcon = new Image();
+            Image imgActiviteitIcon = new ();
             if (activiteit.Icoon != null)
             {
                 imgActiviteitIcon.Source = MainWindow.ByteToImage(activiteit.Icoon);
@@ -61,13 +61,13 @@ namespace WpfAdmin.ActiviteitPage
             innerGrid.Children.Add(imgActiviteitIcon);
 
             // Create StackPanel for Labels
-            StackPanel stackPanel1 = new StackPanel();
+            StackPanel stackPanel1 = new ();
             Grid.SetColumn(stackPanel1, 1);
             try
             {
-                Label lblDatum = new Label { Name = "LblDatum", Padding = new Thickness(0), Content = activiteit.DatumTijd.ToLongDateString() };
-                Label lblOrganiser = new Label { Name = "LblOrganiser", Padding = new Thickness(0), Content = $"georganiseerd door {activiteit.Organisator.Voornaam}" };
-                Label lblDeelnemers = new Label { Name = "LblDeelnemers", Padding = new Thickness(0), Content = $"{activiteit.Deelnemers.Count}/{activiteit.MaxPersonen}" };
+                Label lblDatum = new () { Name = "LblDatum", Padding = new Thickness(0), Content = activiteit.DatumTijd.ToLongDateString() };
+                Label lblOrganiser = new () { Name = "LblOrganiser", Padding = new Thickness(0), Content = $"georganiseerd door {activiteit.Organisator.Voornaam}" };
+                Label lblDeelnemers = new () { Name = "LblDeelnemers", Padding = new Thickness(0), Content = $"{activiteit.Deelnemers.Count}/{activiteit.MaxPersonen}" };
                 stackPanel1.Children.Add(lblDatum);
                 stackPanel1.Children.Add(lblOrganiser);
                 stackPanel1.Children.Add(lblDeelnemers);
@@ -80,24 +80,24 @@ namespace WpfAdmin.ActiviteitPage
             }
 
             // Create StackPanel for Buttons
-            StackPanel stackPanel2 = new StackPanel();
+            StackPanel stackPanel2 = new ();
             Grid.SetColumn(stackPanel2, 2);
-            Button btnDetails = new Button
-            {
-                Content = "📑",
-                Width = 25,
-                Margin = new Thickness(0, 0, 0, 5),
-                Background = Brushes.Transparent,
-                BorderBrush = Brushes.Black,
+            Button btnDetails = new ()
+            { 
+                Content = "📑", 
+                Width = 25, 
+                Margin = new Thickness(0, 0, 0, 5), 
+                Background = Brushes.Transparent, 
+                BorderBrush = Brushes.Black, 
                 BorderThickness = new Thickness(1),
                 Tag = activiteit
             };
-            Button btnDelete = new Button
-            {
-                Content = "🗑️",
-                Width = 25,
-                Background = Brushes.Transparent,
-                BorderBrush = Brushes.Black,
+            Button btnDelete = new ()
+            { 
+                Content = "🗑️", 
+                Width = 25, 
+                Background = Brushes.Transparent, 
+                BorderBrush = Brushes.Black, 
                 BorderThickness = new Thickness(1),
                 Tag = activiteit
             };
@@ -113,12 +113,12 @@ namespace WpfAdmin.ActiviteitPage
             grid.Children.Add(innerGrid);
 
             // Create and Add Title Label
-            Label lblTitel = new Label { Name = "LblTitel", Content = activiteit.Titel };
+            Label lblTitel = new () { Name = "LblTitel", Content = activiteit.Titel };
             Grid.SetRow(lblTitel, 1);
             grid.Children.Add(lblTitel);
 
             // Create and Add Description TextBlock
-            TextBlock txtBeschrijving = new TextBlock { Name = "TxtBeschrijving", Text = activiteit.Beschrijving, TextWrapping = TextWrapping.Wrap, IsEnabled = false };
+            TextBlock txtBeschrijving = new () { Name = "TxtBeschrijving", Text = activiteit.Beschrijving, TextWrapping = TextWrapping.Wrap, IsEnabled = false };
             Grid.SetRow(txtBeschrijving, 2);
             grid.Children.Add(txtBeschrijving);
 
@@ -200,7 +200,7 @@ namespace WpfAdmin.ActiviteitPage
                             }
                         }
                     }
-                }
+                }                
             }
 
             WrapActiviteiten.Children.Clear();
@@ -233,7 +233,7 @@ namespace WpfAdmin.ActiviteitPage
             // dit om te voorkomen dat we dubbel filteren. want de bovenstaande aanpassing vuren al de changed events af, behalve de checkboxes. waardoor er al gefilterd wordt.
             // Bij checkboxes werkte dit niet, omdat de checkbox een 'click' event heeft. Dus als je enkel Checkbox aanduid en wis filter, dan gebeurde er niets.
             // vandaar nog eens ApplyFilters() oproepen voor de zekerheid. (maar niet zomaar, als er al gefilterd is dan wordt het hier niet nog eens gefilterd)
-            if (!alreadyFiltered)
+            if (!alreadyFiltered) 
             {
                 ApplyFilters();
             }

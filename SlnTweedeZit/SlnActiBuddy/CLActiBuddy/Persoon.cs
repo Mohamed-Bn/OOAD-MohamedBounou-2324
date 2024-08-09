@@ -24,12 +24,12 @@ namespace CLActiBuddy
         // wordt gebruikt in Activiteit en Deelname klasses
         public static Persoon GetById(int organisatorId)
         {
-            using SqlConnection conn = new(connString);
+            using SqlConnection conn = new (connString);
             conn.Open();
 
             string sql = "SELECT * FROM Persoon WHERE id = @organisatorId";
 
-            using SqlCommand comm = new(sql, conn);
+            using SqlCommand comm = new (sql, conn);
             comm.Parameters.AddWithValue("@organisatorId", organisatorId);
 
             using SqlDataReader reader = comm.ExecuteReader();
@@ -56,12 +56,12 @@ namespace CLActiBuddy
         // voor login
         public static Persoon GetByGebruikersnaamEnPaswoord(string gebruikersnaam, string paswoord)
         {
-            using SqlConnection conn = new(connString);
+            using SqlConnection conn = new (connString);
             conn.Open();
 
             string sql = "SELECT * FROM Persoon WHERE login = @parGebruikersnaam AND paswoord = @parPaswoord";
 
-            using SqlCommand comm = new(sql, conn);
+            using SqlCommand comm = new (sql, conn);
             comm.Parameters.AddWithValue("@parGebruikersnaam", gebruikersnaam);
             comm.Parameters.AddWithValue("@parPaswoord", paswoord);
 
@@ -89,14 +89,14 @@ namespace CLActiBuddy
         // personen overzicht page
         public static List<Persoon> GetAllPersonen()
         {
-            List<Persoon> personen = new();
-            using (SqlConnection conn = new(connString))
+            List<Persoon> personen = new ();
+            using (SqlConnection conn = new (connString))
             {
                 // open connectie
                 conn.Open();
 
                 // voer SQL commando uit
-                SqlCommand comm = new("SELECT * FROM Persoon", conn);
+                SqlCommand comm = new ("SELECT * FROM Persoon", conn);
                 SqlDataReader reader = comm.ExecuteReader();
 
                 // lees en verwerk resultaten
@@ -120,12 +120,12 @@ namespace CLActiBuddy
 
         public int InsertInDb()
         {
-            using SqlConnection conn = new(connString);
+            using SqlConnection conn = new (connString);
             // open connectie
             conn.Open();
 
             // voer SQL commando uit
-            SqlCommand comm = new(@"INSERT INTO Persoon(voornaam, achternaam, login, paswoord, profielfoto, regdatum, isadmin) 
+            SqlCommand comm = new (@"INSERT INTO Persoon(voornaam, achternaam, login, paswoord, profielfoto, regdatum, isadmin) 
                                                     output INSERTED.ID VALUES(@voornaam, @achternaam, @login, @paswoord, @profielfoto, @regdatum, @isadmin)", conn);
             comm.Parameters.AddWithValue("@voornaam", Voornaam);
             comm.Parameters.AddWithValue("@achternaam", Achternaam);
@@ -137,7 +137,7 @@ namespace CLActiBuddy
             // https://www.codeproject.com/Questions/327665/Operand-type-clash-nvarchar-is-incompatible-with-i
             if (Profielfoto == null)
             {
-                SqlParameter imageParameter = new("@profielfoto", SqlDbType.Image)
+                SqlParameter imageParameter = new ("@profielfoto", SqlDbType.Image)
                 {
                     Value = DBNull.Value
                 };
@@ -156,11 +156,11 @@ namespace CLActiBuddy
         public void DeleteFromDb()
         {
             // verwijder uit Deelname
-            using (SqlConnection conn = new(connString))
+            using (SqlConnection conn = new (connString))
             {
                 conn.Open();
-                SqlCommand comm =
-                    new("DELETE FROM Deelname " +
+                SqlCommand comm = 
+                    new ("DELETE FROM Deelname " +
                                     "WHERE persoon_id = @parID " +
                                     "OR activiteit_id IN (SELECT id FROM Activiteit WHERE organisator_id = @parID)",
                                     conn);
@@ -170,19 +170,19 @@ namespace CLActiBuddy
             }
 
             // verwijder uit Activiteit
-            using (SqlConnection conn = new(connString))
+            using (SqlConnection conn = new (connString))
             {
                 conn.Open();
-                SqlCommand comm = new("DELETE FROM Activiteit WHERE organisator_id = @parID", conn);
+                SqlCommand comm = new ("DELETE FROM Activiteit WHERE organisator_id = @parID", conn);
                 comm.Parameters.AddWithValue("@parID", Id);
                 comm.ExecuteNonQuery();
             }
 
             // verwijder Persoon
-            using (SqlConnection conn = new(connString))
+            using (SqlConnection conn = new (connString))
             {
                 conn.Open();
-                SqlCommand comm = new("DELETE FROM Persoon WHERE id = @parID", conn);
+                SqlCommand comm = new ("DELETE FROM Persoon WHERE id = @parID", conn);
                 comm.Parameters.AddWithValue("@parID", Id);
                 comm.ExecuteNonQuery();
             }
@@ -190,12 +190,12 @@ namespace CLActiBuddy
 
         public void UpdateInDb()
         {
-            using SqlConnection conn = new(connString);
+            using SqlConnection conn = new (connString);
             // open connectie
             conn.Open();
 
             // voer SQL commando uit
-            SqlCommand comm = new(
+            SqlCommand comm = new (
                @"UPDATE Persoon
                        SET voornaam = @voornaam,
                             achternaam = @achternaam,
@@ -210,7 +210,7 @@ namespace CLActiBuddy
             comm.Parameters.AddWithValue("@paswoord", Paswoord);
             if (Profielfoto == null)
             {
-                SqlParameter imageParameter = new("@profielfoto", SqlDbType.Image)
+                SqlParameter imageParameter = new ("@profielfoto", SqlDbType.Image)
                 {
                     Value = DBNull.Value
                 };

@@ -1,5 +1,4 @@
-﻿using System.Data.SqlClient;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Navigation;
@@ -13,8 +12,8 @@ namespace WpfUser
     public partial class OrganiseerPage : Page
     {
         // 1 lijst bevat alles, 1 lijst enkel gefilterde. alles moetik houden als vertrekpunt altijd.
-        List<Activiteit> allActiviteiten = new List<Activiteit>();
-        List<Activiteit> filteredActiviteiten = new List<Activiteit>();
+        List<Activiteit> allActiviteiten = new ();
+        List<Activiteit> filteredActiviteiten = new ();
         private bool alreadyFiltered = false;
         public OrganiseerPage()
         {
@@ -39,7 +38,7 @@ namespace WpfUser
         private void AddBorder(Activiteit activiteit)
         {
             // Create Border
-            Border border = new Border
+            Border border = new ()
             {
                 Background = Brushes.PaleGoldenrod,
                 Width = 250,
@@ -50,19 +49,19 @@ namespace WpfUser
             };
 
             // Create Grid
-            Grid grid = new Grid();
+            Grid grid = new ();
             grid.RowDefinitions.Add(new RowDefinition());
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(0.5, GridUnitType.Star) });
             grid.RowDefinitions.Add(new RowDefinition());
 
             // Create Inner Grid
-            Grid innerGrid = new Grid();
+            Grid innerGrid = new ();
             innerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1.2, GridUnitType.Star) });
             innerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(3, GridUnitType.Star) });
             innerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
 
             // Create Image
-            Image imgActiviteitIcon = new Image();
+            Image imgActiviteitIcon = new ();
             if (activiteit.Icoon != null)
             {
                 imgActiviteitIcon.Source = MainWindow.ByteToImage(activiteit.Icoon);
@@ -70,13 +69,13 @@ namespace WpfUser
             innerGrid.Children.Add(imgActiviteitIcon);
 
             // Create StackPanel for Labels
-            StackPanel stackPanel1 = new StackPanel();
+            StackPanel stackPanel1 = new ();
             Grid.SetColumn(stackPanel1, 1);
-            Label lblDatum = new Label { Name = "LblDatum", Padding = new Thickness(0), Content = activiteit.DatumTijd.ToLongDateString() };
+            Label lblDatum = new () { Name = "LblDatum", Padding = new Thickness(0), Content = activiteit.DatumTijd.ToLongDateString() };
             try
             {
-                Label lblOrganiser = new Label { Name = "LblOrganiser", Padding = new Thickness(0), Content = $"georganiseerd door {activiteit.Organisator.Voornaam}" };
-                Label lblDeelnemers = new Label { Name = "LblDeelnemers", Padding = new Thickness(0), Content = $"{activiteit.Deelnemers.Count}/{activiteit.MaxPersonen}" };
+                Label lblOrganiser = new () { Name = "LblOrganiser", Padding = new Thickness(0), Content = $"georganiseerd door {activiteit.Organisator.Voornaam}" };
+                Label lblDeelnemers = new () { Name = "LblDeelnemers", Padding = new Thickness(0), Content = $"{activiteit.Deelnemers.Count}/{activiteit.MaxPersonen}" };
                 stackPanel1.Children.Add(lblDatum);
                 stackPanel1.Children.Add(lblOrganiser);
                 stackPanel1.Children.Add(lblDeelnemers);
@@ -89,9 +88,9 @@ namespace WpfUser
             }
 
             // Create StackPanel for Buttons
-            StackPanel stackPanel2 = new StackPanel();
+            StackPanel stackPanel2 = new ();
             Grid.SetColumn(stackPanel2, 2);
-            Button btnDetails = new Button
+            Button btnDetails = new ()
             {
                 Content = "📑",
                 Width = 25,
@@ -101,7 +100,7 @@ namespace WpfUser
                 BorderThickness = new Thickness(1),
                 Tag = activiteit
             };
-            Button btnDelete = new Button
+            Button btnDelete = new ()
             {
                 Content = "🗑️",
                 Width = 25,
@@ -122,12 +121,12 @@ namespace WpfUser
             grid.Children.Add(innerGrid);
 
             // Create and Add Title Label
-            Label lblTitel = new Label { Name = "LblTitel", Content = activiteit.Titel };
+            Label lblTitel = new () { Name = "LblTitel", Content = activiteit.Titel };
             Grid.SetRow(lblTitel, 1);
             grid.Children.Add(lblTitel);
 
             // Create and Add Description TextBlock
-            TextBlock txtBeschrijving = new TextBlock { Name = "TxtBeschrijving", Text = activiteit.Beschrijving, TextWrapping = TextWrapping.Wrap, IsEnabled = false };
+            TextBlock txtBeschrijving = new () { Name = "TxtBeschrijving", Text = activiteit.Beschrijving, TextWrapping = TextWrapping.Wrap, IsEnabled = false };
             Grid.SetRow(txtBeschrijving, 2);
             grid.Children.Add(txtBeschrijving);
 

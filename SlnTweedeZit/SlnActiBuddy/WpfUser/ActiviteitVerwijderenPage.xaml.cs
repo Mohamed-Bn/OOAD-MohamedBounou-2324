@@ -1,5 +1,4 @@
-﻿using System.Data.SqlClient;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using CLActiBuddy;

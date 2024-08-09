@@ -35,7 +35,7 @@
             <Label Content="Soort:" Padding="0"/>
 
             <ComboBox x:Name="CboSoort" Margin="5" SelectionChanged="CboSoort_SelectionChanged"/>
-
+            
             <Label Content="" Name="LblSpecifiek" Padding="0"/>
             <ComboBox Name="CboSpecifiek" Margin="5" />
 

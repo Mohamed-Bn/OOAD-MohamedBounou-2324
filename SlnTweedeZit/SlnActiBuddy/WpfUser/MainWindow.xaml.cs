@@ -1,15 +1,8 @@
-﻿using CLActiBuddy;
-using System.IO;
-using System.Text;
+﻿using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using CLActiBuddy;
 
 namespace WpfUser
 {
@@ -40,8 +33,8 @@ namespace WpfUser
             {
                 return null;
             }
-            BitmapImage biImg = new BitmapImage();
-            MemoryStream ms = new MemoryStream(imageData);
+            BitmapImage biImg = new ();
+            MemoryStream ms = new (imageData);
             biImg.BeginInit();
             biImg.StreamSource = ms;
             biImg.EndInit();

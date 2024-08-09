@@ -1,5 +1,4 @@
-﻿using System.Data.SqlClient;
-using System.IO;
+﻿using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -34,7 +33,7 @@ namespace WpfAdmin.PersoonPage
 
         private void BtnKiesFoto_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog
+            OpenFileDialog openFileDialog = new ()
             {
                 Multiselect = false,
                 Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*"
@@ -46,8 +45,8 @@ namespace WpfAdmin.PersoonPage
             {
                 try
                 {
-                    Uri fileUri = new Uri(openFileDialog.FileName);
-                    BitmapImage bitmapImage = new BitmapImage();
+                    Uri fileUri = new (openFileDialog.FileName);
+                    BitmapImage bitmapImage = new ();
 
                     bitmapImage.BeginInit();
                     bitmapImage.UriSource = fileUri;

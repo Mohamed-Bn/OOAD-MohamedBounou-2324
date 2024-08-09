@@ -30,10 +30,10 @@ namespace CLActiBuddy
         public static List<Activiteit> GetActiviteitenByPersoonId(int personId)
         {
             var activiteiten = new List<Activiteit>();
-            using (SqlConnection conn = new(ConnString))
+            using (SqlConnection conn = new (ConnString))
             {
                 conn.Open();
-                using SqlCommand cmd = new("SELECT * FROM Activiteit WHERE organisator_id = @id", conn);
+                using SqlCommand cmd = new ("SELECT * FROM Activiteit WHERE organisator_id = @id", conn);
                 cmd.Parameters.AddWithValue("@id", personId);
                 using SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -104,10 +104,10 @@ namespace CLActiBuddy
         public static List<Activiteit> GetAllActiviteiten()
         {
             var activiteiten = new List<Activiteit>();
-            using (SqlConnection conn = new(ConnString))
+            using (SqlConnection conn = new (ConnString))
             {
                 conn.Open();
-                using SqlCommand cmd = new("SELECT * FROM Activiteit", conn);
+                using SqlCommand cmd = new ("SELECT * FROM Activiteit", conn);
                 using SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -177,20 +177,20 @@ namespace CLActiBuddy
         public void DeleteFromDb()
         {
             // verwijder uit Deelname
-            using (SqlConnection conn = new(ConnString))
+            using (SqlConnection conn = new (ConnString))
             {
                 conn.Open();
-                SqlCommand comm = new("DELETE FROM Deelname WHERE activiteit_id = @parID ", conn);
+                SqlCommand comm = new ("DELETE FROM Deelname WHERE activiteit_id = @parID ", conn);
 
                 comm.Parameters.AddWithValue("@parID", Id);
                 comm.ExecuteNonQuery();
             }
 
             // verwijder uit Activiteit
-            using (SqlConnection conn = new(ConnString))
+            using (SqlConnection conn = new (ConnString))
             {
                 conn.Open();
-                SqlCommand comm = new("DELETE FROM Activiteit WHERE id = @parID", conn);
+                SqlCommand comm = new ("DELETE FROM Activiteit WHERE id = @parID", conn);
                 comm.Parameters.AddWithValue("@parID", Id);
                 comm.ExecuteNonQuery();
             }
@@ -198,7 +198,7 @@ namespace CLActiBuddy
 
         public void InsertInDb()
         {
-            using SqlConnection conn = new(ConnString);
+            using SqlConnection conn = new (ConnString);
             conn.Open();
             string sql = "";
 
@@ -206,13 +206,13 @@ namespace CLActiBuddy
             {
                 sql = "INSERT INTO activiteit (Titel, Beschrijving, DatumTijd, Icoon, Longitude, Latitude, MaxPersonen, Soort, Leeftijdsgroep, Organisator_Id, Sector) " +
                       "VALUES (@Titel, @Beschrijving, @DatumTijd, @Icoon, @Longitude, @Latitude, @MaxPersonen, @Soort, @Leeftijdsgroep, @OrganisatorId, @Sector)";
-                using SqlCommand cmd = new(sql, conn);
+                using SqlCommand cmd = new (sql, conn);
                 cmd.Parameters.AddWithValue("@Titel", cultuurActiviteit.Titel);
                 cmd.Parameters.AddWithValue("@Beschrijving", cultuurActiviteit.Beschrijving);
                 cmd.Parameters.AddWithValue("@DatumTijd", cultuurActiviteit.DatumTijd);
                 if (cultuurActiviteit.Icoon == null)
                 {
-                    SqlParameter imageParameter = new("@Icoon", SqlDbType.Image)
+                    SqlParameter imageParameter = new ("@Icoon", SqlDbType.Image)
                     {
                         Value = DBNull.Value
                     };
@@ -235,13 +235,13 @@ namespace CLActiBuddy
             {
                 sql = "INSERT INTO activiteit (Titel, Beschrijving, DatumTijd, Icoon, Longitude, Latitude, MaxPersonen, Soort, Leeftijdsgroep, Organisator_Id, Moeilijkheid) " +
                       "VALUES (@Titel, @Beschrijving, @DatumTijd, @Icoon, @Longitude, @Latitude, @MaxPersonen, @Soort, @Leeftijdsgroep, @OrganisatorId, @Moeilijkheid)";
-                using SqlCommand cmd = new(sql, conn);
+                using SqlCommand cmd = new (sql, conn);
                 cmd.Parameters.AddWithValue("@Titel", sportActiviteit.Titel);
                 cmd.Parameters.AddWithValue("@Beschrijving", sportActiviteit.Beschrijving);
                 cmd.Parameters.AddWithValue("@DatumTijd", sportActiviteit.DatumTijd);
                 if (sportActiviteit.Icoon == null)
                 {
-                    SqlParameter imageParameter = new("@Icoon", SqlDbType.Image)
+                    SqlParameter imageParameter = new ("@Icoon", SqlDbType.Image)
                     {
                         Value = DBNull.Value
                     };
@@ -264,13 +264,13 @@ namespace CLActiBuddy
             {
                 sql = "INSERT INTO activiteit (Titel, Beschrijving, DatumTijd, Icoon, Longitude, Latitude, MaxPersonen, Soort, Leeftijdsgroep, Organisator_Id, Niveau) " +
                       "VALUES (@Titel, @Beschrijving, @DatumTijd, @Icoon, @Longitude, @Latitude, @MaxPersonen, @Soort, @Leeftijdsgroep, @OrganisatorId, @Niveau)";
-                using SqlCommand cmd = new(sql, conn);
+                using SqlCommand cmd = new (sql, conn);
                 cmd.Parameters.AddWithValue("@Titel", hobbyActiviteit.Titel);
                 cmd.Parameters.AddWithValue("@Beschrijving", hobbyActiviteit.Beschrijving);
                 cmd.Parameters.AddWithValue("@DatumTijd", hobbyActiviteit.DatumTijd);
                 if (hobbyActiviteit.Icoon == null)
                 {
-                    SqlParameter imageParameter = new("@Icoon", SqlDbType.Image)
+                    SqlParameter imageParameter = new ("@Icoon", SqlDbType.Image)
                     {
                         Value = DBNull.Value
                     };
