@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Data.SqlClient;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using CLActiBuddy;
@@ -10,7 +11,7 @@ namespace WpfAdmin.PersoonPage
     /// </summary>
     public partial class PersoonVerwijderenPage : Page
     {
-        Persoon? persoon = null;
+        Persoon persoon = null;
         public PersoonVerwijderenPage(Persoon persoon)
         {
             InitializeComponent();

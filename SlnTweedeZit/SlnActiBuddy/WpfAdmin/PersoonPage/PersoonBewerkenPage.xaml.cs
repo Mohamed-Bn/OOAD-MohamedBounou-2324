@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Data.SqlClient;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -13,7 +14,7 @@ namespace WpfAdmin.PersoonPage
     /// </summary>
     public partial class PersoonBewerkenPage : Page
     {
-        Persoon? persoon = null;
+        Persoon persoon = null;
         public PersoonBewerkenPage(Persoon persoon)
         {
             InitializeComponent();

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Data.SqlClient;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using CLActiBuddy;
@@ -10,7 +11,7 @@ namespace WpfAdmin.ActiviteitPage
     /// </summary>
     public partial class ActiviteitVerwijderenPage : Page
     {
-        Activiteit? activiteit = null;
+        Activiteit activiteit = null;
         public ActiviteitVerwijderenPage(Activiteit activiteit)
         {
             InitializeComponent();

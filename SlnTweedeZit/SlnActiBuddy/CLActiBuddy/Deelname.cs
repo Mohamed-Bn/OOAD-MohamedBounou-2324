@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Data.SqlClient;
 
 namespace CLActiBuddy
@@ -8,25 +9,22 @@ namespace CLActiBuddy
         public int Id { get; set; }
         public int PersoonId { get; set; }
         public int ActiviteitId { get; set; }
-        public Persoon Persoon
-        {
-            get { return Persoon.GetById(PersoonId); }
-        }
+        public Persoon Persoon { get { return Persoon.GetById(PersoonId); } }
 
         private static string connString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
 
         // alle deelnemers opvragen van een activiteit
         public static List<Persoon> GetDeelnemersByActiviteitId(int id)
         {
-            List<Persoon> personen = new List<Persoon>();
-            List<Deelname> deelnames = new List<Deelname>();
-            using (SqlConnection conn = new SqlConnection(connString))
+            List<Persoon> personen = new();
+            List<Deelname> deelnames = new();
+            using (SqlConnection conn = new(connString))
             {
                 // open connectie
                 conn.Open();
 
                 // voer SQL commando uit
-                SqlCommand comm = new SqlCommand("SELECT * FROM Deelname WHERE activiteit_id = @id", conn);
+                SqlCommand comm = new("SELECT * FROM Deelname WHERE activiteit_id = @id", conn);
                 comm.Parameters.AddWithValue("@id", id);
                 SqlDataReader reader = comm.ExecuteReader();
 
@@ -52,35 +50,30 @@ namespace CLActiBuddy
 
         public int InsertInDb()
         {
-            using (SqlConnection conn = new SqlConnection(connString))
-            {
-                // open connectie
-                conn.Open();
+            using SqlConnection conn = new(connString);
+            // open connectie
+            conn.Open();
 
-                // voer SQL commando uit
-                SqlCommand comm = new SqlCommand(
-                    @"INSERT INTO deelname(persoon_id, activiteit_id) 
+            // voer SQL commando uit
+            SqlCommand comm = new(@"INSERT INTO deelname(persoon_id, activiteit_id) 
                                                     output INSERTED.ID VALUES(@persoonId, @activiteitId)", conn);
-                comm.Parameters.AddWithValue("@persoonId", PersoonId);
-                comm.Parameters.AddWithValue("@activiteitId", ActiviteitId);
+            comm.Parameters.AddWithValue("@persoonId", PersoonId);
+            comm.Parameters.AddWithValue("@activiteitId", ActiviteitId);
 
-                // return de id van het nieuwe record
-                Id = (int)comm.ExecuteScalar();
-                return Id;
-            }
+            // return de id van het nieuwe record
+            Id = (int)comm.ExecuteScalar();
+            return Id;
         }
 
         public void DeleteFromDb()
         {
             // verwijder gerelateerde deelnames
-            using (SqlConnection conn = new SqlConnection(connString))
-            {
-                conn.Open();
-                SqlCommand comm = new SqlCommand("DELETE FROM deelname WHERE persoon_id = @persoonId AND activiteit_id = @activiteitId", conn);
-                comm.Parameters.AddWithValue("@persoonId", PersoonId);
-                comm.Parameters.AddWithValue("@activiteitId", ActiviteitId);
-                comm.ExecuteNonQuery();
-            }
+            using SqlConnection conn = new(connString);
+            conn.Open();
+            SqlCommand comm = new("DELETE FROM deelname WHERE persoon_id = @persoonId AND activiteit_id = @activiteitId", conn);
+            comm.Parameters.AddWithValue("@persoonId", PersoonId);
+            comm.Parameters.AddWithValue("@activiteitId", ActiviteitId);
+            comm.ExecuteNonQuery();
         }
     }
 }

@@ -9,8 +9,8 @@ namespace CLActiBuddy
         private static string connString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
 
         // lijst van personen en activiteiten om te vullen in db
-        private static List<Persoon> personen = new List<Persoon>
-            {
+        private static List<Persoon> personen = new()
+        {
                 new Persoon { Voornaam = "Rogier", Achternaam = "van der Linde", Login = "rogier", Paswoord = "1b4f0e9851971998e732078544c96b36c3d01cedf7caa332359d6f1d83567014", Profielfoto = LoadImage("Assets/Profielfotos/m1.jpg"), RegDatum = new DateTime(2020, 12, 23), IsAdmin = true },
                 new Persoon { Voornaam = "Frank", Achternaam = "Salliau", Login = "frank", Paswoord = "60303ae22b998861bce3b28f33eec1be758a213c86c93c076dbe9f558c11c752", Profielfoto = LoadImage("Assets/Profielfotos/m2.jpg"), RegDatum = new DateTime(2021, 3, 3), IsAdmin = true },
                 new Persoon { Voornaam = "Abdelkarim", Achternaam = "Chouikh", Login = "abdel", Paswoord = "fd61a03af4f77d870fc21e05e7e80678095c92d808cfb3b5c279ee04c74aca13", Profielfoto = LoadImage("Assets/Profielfotos/m3.jpg"), RegDatum = new DateTime(2023, 11, 11), IsAdmin = false },
@@ -24,8 +24,8 @@ namespace CLActiBuddy
                 new Persoon { Voornaam = "Soo", Achternaam = "Wang", Login = "soo", Paswoord = "744ea9ec6fa0a83e9764b4e323d5be6b55a5accfc7fe4c08eab6a8de1fca4855", Profielfoto = LoadImage("Assets/Profielfotos/f4.jpg"), RegDatum = new DateTime(2023, 4, 21), IsAdmin = false },
                 new Persoon { Voornaam = "Sophie", Achternaam = "Laethem", Login = "sophie", Paswoord = "a98ec5c5044800c88e862f007b98d89815fc40ca155d6ce7909530d792e909ce", Profielfoto = LoadImage("Assets/Profielfotos/f5.jpg"), RegDatum = new DateTime(2023, 8, 8), IsAdmin = false }
             };
-        private static List<Activiteit> activiteiten = new List<Activiteit>
-            {
+        private static List<Activiteit> activiteiten = new()
+        {
                 // Sportactiviteiten
                 new SportActiviteit
                 {
@@ -819,23 +819,21 @@ namespace CLActiBuddy
 
         public static void InitializeData()
         {
-            using (SqlConnection conn = new SqlConnection(connString))
+            using SqlConnection conn = new(connString);
+            // open connectie
+            conn.Open();
+
+            // voer SQL commando uit
+            SqlCommand comm = new("SELECT * FROM Persoon", conn);
+
+            SqlDataReader reader = comm.ExecuteReader();
+
+            // hier kijk ik eerst of er al data bestaat. als er niks bestaat enkel dan maken we aan (ervanuitgaand dat als personen leeg is, dat de hele db leeg is)
+            if (!reader.Read())
             {
-                // open connectie
-                conn.Open();
-
-                // voer SQL commando uit
-                SqlCommand comm = new SqlCommand("SELECT * FROM Persoon", conn);
-
-                SqlDataReader reader = comm.ExecuteReader();
-
-                // hier kijk ik eerst of er al data bestaat. als er niks bestaat enkel dan maken we aan (ervanuitgaand dat als personen leeg is, dat de hele db leeg is)
-                if (!reader.Read())
-                {
-                    FillPersons();
-                    FillActiviteiten();
-                    FillDeelnamen();
-                }
+                FillPersons();
+                FillActiviteiten();
+                FillDeelnamen();
             }
         }
 
@@ -845,98 +843,92 @@ namespace CLActiBuddy
             var activiteiten = GetActiviteiten();
 
             // Randomizer initialiseren
-            Random random = new Random();
+            Random random = new();
 
             // Houdt bij welke combinaties al zijn toegevoegd (voor het geval je geen dubbele deelnames wilt)
-            HashSet<(int persoonId, int activiteitId)> bestaandeDeelnamen = new HashSet<(int, int)>();
+            HashSet<(int persoonId, int activiteitId)> bestaandeDeelnamen = new();
 
-            using (SqlConnection conn = new SqlConnection(connString))
+            using SqlConnection conn = new(connString);
+            conn.Open();
+
+            for (int i = 0; i < 50; i++) // Aantal deelnames
             {
-                conn.Open();
+                int persoonId;
+                int activiteitId;
 
-                for (int i = 0; i < 50; i++) // Aantal deelnames
+                // Kies willekeurig een persoon en een activiteit
+                do
                 {
-                    int persoonId;
-                    int activiteitId;
-
-                    // Kies willekeurig een persoon en een activiteit
-                    do
-                    {
-                        persoonId = personen[random.Next(personen.Count)].Id;
-                        activiteitId = activiteiten[random.Next(activiteiten.Count)].Id;
-                    }
-                    while (bestaandeDeelnamen.Contains((persoonId, activiteitId))); // Voorkom dubbele deelnames
-
-                    bestaandeDeelnamen.Add((persoonId, activiteitId));
-
-                    // SQL Command voor het toevoegen van een deelname
-                    using (SqlCommand cmd = new SqlCommand("INSERT INTO Deelname (Persoon_Id, Activiteit_Id) VALUES (@PersoonId, @ActiviteitId)", conn))
-                    {
-                        cmd.Parameters.AddWithValue("@PersoonId", persoonId);
-                        cmd.Parameters.AddWithValue("@ActiviteitId", activiteitId);
-
-                        cmd.ExecuteNonQuery();
-                    }
+                    persoonId = personen[random.Next(personen.Count)].Id;
+                    activiteitId = activiteiten[random.Next(activiteiten.Count)].Id;
                 }
+                while (bestaandeDeelnamen.Contains((persoonId, activiteitId))); // Voorkom dubbele deelnames
+
+                bestaandeDeelnamen.Add((persoonId, activiteitId));
+
+                // SQL Command voor het toevoegen van een deelname
+                using SqlCommand cmd = new("INSERT INTO Deelname (Persoon_Id, Activiteit_Id) VALUES (@PersoonId, @ActiviteitId)", conn);
+                cmd.Parameters.AddWithValue("@PersoonId", persoonId);
+                cmd.Parameters.AddWithValue("@ActiviteitId", activiteitId);
+
+                cmd.ExecuteNonQuery();
             }
         }
 
         private static void FillActiviteiten()
         {
             var personen = GetPersonen();  // dit doe ik om juiste id's te krijgen. moet ook dynamisch zijn
-            Random random = new Random();
+            Random random = new();
             foreach (var activiteit in activiteiten)
             {
-                using (SqlConnection conn = new SqlConnection(connString))
+                using SqlConnection conn = new(connString);
+                string sql = "INSERT INTO Activiteit (Titel, Beschrijving, DatumTijd, Icoon, Longitude, Latitude, MaxPersonen, Soort, Leeftijdsgroep, Organisator_Id, Sector) VALUES (@Titel, @Beschrijving, @DatumTijd, @Icoon, @Longitude, @Latitude, @MaxPersonen, @Soort, @Leeftijdsgroep, @OrganisatorId, @Sector)";
+
+                using SqlCommand cmd = new(sql, conn);
+                cmd.Parameters.AddWithValue("@Titel", activiteit.Titel);
+                cmd.Parameters.AddWithValue("@Beschrijving", activiteit.Beschrijving);
+                cmd.Parameters.AddWithValue("@DatumTijd", activiteit.DatumTijd);
+                if (activiteit.Icoon == null)
                 {
-                    string sql = "INSERT INTO Activiteit (Titel, Beschrijving, DatumTijd, Icoon, Longitude, Latitude, MaxPersonen, Soort, Leeftijdsgroep, Organisator_Id, Sector) VALUES (@Titel, @Beschrijving, @DatumTijd, @Icoon, @Longitude, @Latitude, @MaxPersonen, @Soort, @Leeftijdsgroep, @OrganisatorId, @Sector)";
-
-                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    SqlParameter imageParameter = new("@Icoon", SqlDbType.Image)
                     {
-                        cmd.Parameters.AddWithValue("@Titel", activiteit.Titel);
-                        cmd.Parameters.AddWithValue("@Beschrijving", activiteit.Beschrijving);
-                        cmd.Parameters.AddWithValue("@DatumTijd", activiteit.DatumTijd);
-                        if (activiteit.Icoon == null)
-                        {
-                            SqlParameter imageParameter = new SqlParameter("@Icoon", SqlDbType.Image);
-                            imageParameter.Value = DBNull.Value;
-                            cmd.Parameters.Add(imageParameter);
-                        }
-                        else
-                        {
-                            cmd.Parameters.AddWithValue("@Icoon", activiteit.Icoon);
-                        }
-                        cmd.Parameters.AddWithValue("@Longitude", activiteit.Longitude);
-                        cmd.Parameters.AddWithValue("@Latitude", activiteit.Latitude);
-                        cmd.Parameters.AddWithValue("@MaxPersonen", activiteit.MaxPersonen);
-                        cmd.Parameters.AddWithValue("@Soort", activiteit.Soort);
-                        cmd.Parameters.AddWithValue("@Leeftijdsgroep", activiteit.Leeftijdsgroep);
-                        cmd.Parameters.AddWithValue("@OrganisatorId", personen[random.Next(personen.Count)].Id);
-
-                        // Voeg type-specifieke parameters toe
-                        if (activiteit is CultuurActiviteit cultuurActiviteit)
-                        {
-                            cmd.Parameters.AddWithValue("@Sector", cultuurActiviteit.Sector);
-                            cmd.Parameters.AddWithValue("@Moeilijkheid", DBNull.Value);
-                            cmd.Parameters.AddWithValue("@Niveau", DBNull.Value);
-                        }
-                        else if (activiteit is SportActiviteit sportActiviteit)
-                        {
-                            cmd.Parameters.AddWithValue("@Moeilijkheid", sportActiviteit.Moeilijkheid);
-                            cmd.Parameters.AddWithValue("@Sector", DBNull.Value);
-                            cmd.Parameters.AddWithValue("@Niveau", DBNull.Value);
-                        }
-                        else if (activiteit is HobbyActiviteit hobbyActiviteit)
-                        {
-                            cmd.Parameters.AddWithValue("@Niveau", hobbyActiviteit.Niveau);
-                            cmd.Parameters.AddWithValue("@Sector", DBNull.Value);
-                            cmd.Parameters.AddWithValue("@Moeilijkheid", DBNull.Value);
-                        }
-
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
-                    }
+                        Value = DBNull.Value
+                    };
+                    cmd.Parameters.Add(imageParameter);
                 }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@Icoon", activiteit.Icoon);
+                }
+                cmd.Parameters.AddWithValue("@Longitude", activiteit.Longitude);
+                cmd.Parameters.AddWithValue("@Latitude", activiteit.Latitude);
+                cmd.Parameters.AddWithValue("@MaxPersonen", activiteit.MaxPersonen);
+                cmd.Parameters.AddWithValue("@Soort", activiteit.Soort);
+                cmd.Parameters.AddWithValue("@Leeftijdsgroep", activiteit.Leeftijdsgroep);
+                cmd.Parameters.AddWithValue("@OrganisatorId", personen[random.Next(personen.Count)].Id);
+
+                // Voeg type-specifieke parameters toe
+                if (activiteit is CultuurActiviteit cultuurActiviteit)
+                {
+                    cmd.Parameters.AddWithValue("@Sector", cultuurActiviteit.Sector);
+                    cmd.Parameters.AddWithValue("@Moeilijkheid", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Niveau", DBNull.Value);
+                }
+                else if (activiteit is SportActiviteit sportActiviteit)
+                {
+                    cmd.Parameters.AddWithValue("@Moeilijkheid", sportActiviteit.Moeilijkheid);
+                    cmd.Parameters.AddWithValue("@Sector", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Niveau", DBNull.Value);
+                }
+                else if (activiteit is HobbyActiviteit hobbyActiviteit)
+                {
+                    cmd.Parameters.AddWithValue("@Niveau", hobbyActiviteit.Niveau);
+                    cmd.Parameters.AddWithValue("@Sector", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Moeilijkheid", DBNull.Value);
+                }
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
             }
         }
 
@@ -945,40 +937,32 @@ namespace CLActiBuddy
         {
             foreach (var persoon in personen)
             {
-                using (SqlConnection conn = new SqlConnection(connString))
-                {
-                    using (SqlCommand cmd = new SqlCommand("INSERT INTO Persoon (voornaam, achternaam, login, paswoord, regdatum, isadmin, profielfoto) VALUES (@Voornaam, @Achternaam, @Login, @Paswoord, @RegDatum, @IsAdmin, @Profielfoto)", conn))
-                    {
-                        cmd.Parameters.AddWithValue("@Voornaam", persoon.Voornaam);
-                        cmd.Parameters.AddWithValue("@Achternaam", persoon.Achternaam);
-                        cmd.Parameters.AddWithValue("@Login", persoon.Login);
-                        cmd.Parameters.AddWithValue("@Paswoord", persoon.Paswoord);
-                        cmd.Parameters.AddWithValue("@RegDatum", persoon.RegDatum);
-                        cmd.Parameters.AddWithValue("@IsAdmin", persoon.IsAdmin);
-                        cmd.Parameters.AddWithValue("@Profielfoto", persoon.Profielfoto ?? (object)DBNull.Value);
+                using SqlConnection conn = new(connString);
+                using SqlCommand cmd = new("INSERT INTO Persoon (voornaam, achternaam, login, paswoord, regdatum, isadmin, profielfoto) VALUES (@Voornaam, @Achternaam, @Login, @Paswoord, @RegDatum, @IsAdmin, @Profielfoto)", conn);
+                cmd.Parameters.AddWithValue("@Voornaam", persoon.Voornaam);
+                cmd.Parameters.AddWithValue("@Achternaam", persoon.Achternaam);
+                cmd.Parameters.AddWithValue("@Login", persoon.Login);
+                cmd.Parameters.AddWithValue("@Paswoord", persoon.Paswoord);
+                cmd.Parameters.AddWithValue("@RegDatum", persoon.RegDatum);
+                cmd.Parameters.AddWithValue("@IsAdmin", persoon.IsAdmin);
+                cmd.Parameters.AddWithValue("@Profielfoto", persoon.Profielfoto ?? (object)DBNull.Value);
 
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
-                    }
-                }
+                conn.Open();
+                cmd.ExecuteNonQuery();
             }
         }
 
         private static List<Persoon> GetPersonen()
         {
             var personen = new List<Persoon>();
-            using (SqlConnection conn = new SqlConnection(connString))
+            using (SqlConnection conn = new(connString))
             {
                 conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT Id FROM Persoon", conn))
+                using SqlCommand cmd = new("SELECT Id FROM Persoon", conn);
+                using SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
                 {
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            personen.Add(new Persoon { Id = reader.GetInt32(0) });
-                        }
-                    }
+                    personen.Add(new Persoon { Id = reader.GetInt32(0) });
                 }
             }
             return personen;
@@ -987,29 +971,25 @@ namespace CLActiBuddy
         private static List<Activiteit> GetActiviteiten()
         {
             var activiteiten = new List<Activiteit>();
-            using (SqlConnection conn = new SqlConnection(connString))
+            using (SqlConnection conn = new(connString))
             {
                 conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM Activiteit", conn))
+                using SqlCommand cmd = new("SELECT * FROM Activiteit", conn);
+                using SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
                 {
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    ActiviteitSoort soort = (ActiviteitSoort)(int)reader["soort"];
+                    if (soort == ActiviteitSoort.Sport)
                     {
-                        while (reader.Read())
-                        {
-                            ActiviteitSoort soort = (ActiviteitSoort)(int)reader["soort"];
-                            if (soort == ActiviteitSoort.Sport)
-                            {
-                                activiteiten.Add(new SportActiviteit { Id = reader.GetInt32(0) });
-                            }
-                            else if (soort == ActiviteitSoort.Hobby)
-                            {
-                                activiteiten.Add(new HobbyActiviteit { Id = reader.GetInt32(0) });
-                            }
-                            else if (soort == ActiviteitSoort.Cultuur)
-                            {
-                                activiteiten.Add(new CultuurActiviteit { Id = reader.GetInt32(0) });
-                            }
-                        }
+                        activiteiten.Add(new SportActiviteit { Id = reader.GetInt32(0) });
+                    }
+                    else if (soort == ActiviteitSoort.Hobby)
+                    {
+                        activiteiten.Add(new HobbyActiviteit { Id = reader.GetInt32(0) });
+                    }
+                    else if (soort == ActiviteitSoort.Cultuur)
+                    {
+                        activiteiten.Add(new CultuurActiviteit { Id = reader.GetInt32(0) });
                     }
                 }
             }

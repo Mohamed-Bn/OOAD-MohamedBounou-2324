@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Data.SqlClient;
+using System.Windows.Controls;
 using CLActiBuddy;
 
 namespace WpfAdmin.PersoonPage
