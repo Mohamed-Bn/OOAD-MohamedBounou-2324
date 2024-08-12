@@ -121,6 +121,7 @@ namespace CLActiBuddy
         public int InsertInDb()
         {
             using SqlConnection conn = new (connString);
+
             // open connectie
             conn.Open();
 
@@ -191,6 +192,7 @@ namespace CLActiBuddy
         public void UpdateInDb()
         {
             using SqlConnection conn = new (connString);
+
             // open connectie
             conn.Open();
 

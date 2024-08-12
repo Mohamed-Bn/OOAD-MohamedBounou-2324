@@ -23,7 +23,7 @@ namespace CLActiBuddy
                 new Persoon { Voornaam = "Sandra", Achternaam = "Lauer", Login = "sandra", Paswoord = "ec2738feb2bbb0bc783eb4667903391416372ba6ed8b8dddbebbdb37e5102473", Profielfoto = LoadImage("Assets/Profielfotos/f3.jpg"), RegDatum = new DateTime(2024, 2, 13), IsAdmin = false },
                 new Persoon { Voornaam = "Soo", Achternaam = "Wang", Login = "soo", Paswoord = "744ea9ec6fa0a83e9764b4e323d5be6b55a5accfc7fe4c08eab6a8de1fca4855", Profielfoto = LoadImage("Assets/Profielfotos/f4.jpg"), RegDatum = new DateTime(2023, 4, 21), IsAdmin = false },
                 new Persoon { Voornaam = "Sophie", Achternaam = "Laethem", Login = "sophie", Paswoord = "a98ec5c5044800c88e862f007b98d89815fc40ca155d6ce7909530d792e909ce", Profielfoto = LoadImage("Assets/Profielfotos/f5.jpg"), RegDatum = new DateTime(2023, 8, 8), IsAdmin = false }
-            };
+        };
         private static List<Activiteit> activiteiten = new ()
         {
                 // Sportactiviteiten
@@ -815,11 +815,12 @@ namespace CLActiBuddy
                     Leeftijdsgroep = 12,
                     Niveau = ActiviteitNiveau.Halfgevorderd
                 }
-            };
+        };
 
         public static void InitializeData()
         {
             using SqlConnection conn = new (connString);
+
             // open connectie
             conn.Open();
 

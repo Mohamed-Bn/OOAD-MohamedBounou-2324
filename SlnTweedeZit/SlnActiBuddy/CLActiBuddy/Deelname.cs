@@ -50,6 +50,7 @@ namespace CLActiBuddy
         public int InsertInDb()
         {
             using SqlConnection conn = new (connString);
+
             // open connectie
             conn.Open();
 
